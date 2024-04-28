@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7212958B-43D9-4F97-A01B-3551F8C96D07}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SuperbetBeclean</RootNamespace>
+    <AssemblyName>SuperbetBeclean</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Components\ChallengePanel.xaml.cs">
+      <DependentUpon>ChallengePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ChallengePanelSymbols.xaml.cs">
+      <DependentUpon>ChallengePanelSymbols.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\OwnedItemComponent.xaml.cs">
+      <DependentUpon>OwnedItemComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ShopItemComponent.xaml.cs">
+      <DependentUpon>ShopItemComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainViewModel.cs" />
+    <Compile Include="Models\ProfileViewModel.cs" />
+    <Compile Include="Model\ShopItem.cs" />
+    <Compile Include="HandRankCalculator.cs" />
+    <Compile Include="Model\Card.cs" />
+    <Compile Include="Model\Challenge.cs" />
+    <Compile Include="Model\Deck.cs" />
+    <Compile Include="Model\Font.cs" />
+    <Compile Include="Model\Icon.cs" />
+    <Compile Include="Model\Table.cs" />
+    <Compile Include="Model\Title.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Pages\GameTablePage.xaml.cs">
+      <DependentUpon>GameTablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LeaderboardPage.xaml.cs">
+      <DependentUpon>LeaderboardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LobbyPage.xaml.cs">
+      <DependentUpon>LobbyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShopPage.xaml.cs">
+      <DependentUpon>ShopPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ChatService.cs" />
+    <Compile Include="Services\DBService.cs" />
+    <Compile Include="Services\MainService.cs" />
+    <Compile Include="Services\TableService.cs" />
+    <Compile Include="Windows\ChallengesWindow.xaml.cs">
+      <DependentUpon>ChallengesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MenuWindow.xaml.cs">
+      <DependentUpon>MenuWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RequestsWindow.xaml.cs">
+      <DependentUpon>RequestsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RulesWindow.xaml.cs">
+      <DependentUpon>RulesWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Components\ChallengePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ChallengePanelSymbols.xaml" />
+    <Page Include="Components\OwnedItemComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ShopItemComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Pages\GameTablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LeaderboardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LobbyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShopPage.xaml" />
+    <Page Include="Pages\ProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChallengesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RequestsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\RulesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config.example" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\cards\10C.png" />
+    <Resource Include="assets\cards\10D.png" />
+    <Resource Include="assets\cards\10H.png" />
+    <Resource Include="assets\cards\10S.png" />
+    <Resource Include="assets\cards\2C.png" />
+    <Resource Include="assets\cards\2D.png" />
+    <Resource Include="assets\cards\2H.png" />
+    <Resource Include="assets\cards\2S.png" />
+    <Resource Include="assets\cards\3C.png" />
+    <Resource Include="assets\cards\3D.png" />
+    <Resource Include="assets\cards\3H.png" />
+    <Resource Include="assets\cards\3S.png" />
+    <Resource Include="assets\cards\4C.png" />
+    <Resource Include="assets\cards\4D.png" />
+    <Resource Include="assets\cards\4H.png" />
+    <Resource Include="assets\cards\4S.png" />
+    <Resource Include="assets\cards\5C.png" />
+    <Resource Include="assets\cards\5D.png" />
+    <Resource Include="assets\cards\5H.png" />
+    <Resource Include="assets\cards\5S.png" />
+    <Resource Include="assets\cards\6C.png" />
+    <Resource Include="assets\cards\6D.png" />
+    <Resource Include="assets\cards\6H.png" />
+    <Resource Include="assets\cards\6S.png" />
+    <Resource Include="assets\cards\7C.png" />
+    <Resource Include="assets\cards\7D.png" />
+    <Resource Include="assets\cards\7H.png" />
+    <Resource Include="assets\cards\7S.png" />
+    <Resource Include="assets\cards\8C.png" />
+    <Resource Include="assets\cards\8D.png" />
+    <Resource Include="assets\cards\8H.png" />
+    <Resource Include="assets\cards\8S.png" />
+    <Resource Include="assets\cards\9C.png" />
+    <Resource Include="assets\cards\9D.png" />
+    <Resource Include="assets\cards\9H.png" />
+    <Resource Include="assets\cards\9S.png" />
+    <Resource Include="assets\cards\AC.png" />
+    <Resource Include="assets\cards\AD.png" />
+    <Resource Include="assets\cards\AH.png" />
+    <Resource Include="assets\cards\AS.png" />
+    <Resource Include="assets\cards\back.jpg" />
+    <Resource Include="assets\cards\downCard.jpg" />
+    <Resource Include="assets\cards\JC.png" />
+    <Resource Include="assets\cards\JD.png" />
+    <Resource Include="assets\cards\JH.png" />
+    <Resource Include="assets\cards\JS.png" />
+    <Resource Include="assets\cards\KC.png" />
+    <Resource Include="assets\cards\KD.png" />
+    <Resource Include="assets\cards\KH.png" />
+    <Resource Include="assets\cards\KS.png" />
+    <Resource Include="assets\cards\QC.png" />
+    <Resource Include="assets\cards\QD.png" />
+    <Resource Include="assets\cards\QH.png" />
+    <Resource Include="assets\cards\QS.png" />
+    <Resource Include="cards\10C.png" />
+    <Resource Include="cards\10D.png" />
+    <Resource Include="cards\10H.png" />
+    <Resource Include="cards\10S.png" />
+    <Resource Include="cards\2C.png" />
+    <Resource Include="cards\2D.png" />
+    <Resource Include="cards\2H.png" />
+    <Resource Include="cards\2S.png" />
+    <Resource Include="cards\3C.png" />
+    <Resource Include="cards\3D.png" />
+    <Resource Include="cards\3H.png" />
+    <Resource Include="cards\3S.png" />
+    <Resource Include="cards\4C.png" />
+    <Resource Include="cards\4D.png" />
+    <Resource Include="cards\4H.png" />
+    <Resource Include="cards\4S.png" />
+    <Resource Include="cards\5C.png" />
+    <Resource Include="cards\5D.png" />
+    <Resource Include="cards\5H.png" />
+    <Resource Include="cards\5S.png" />
+    <Resource Include="cards\6C.png" />
+    <Resource Include="cards\6D.png" />
+    <Resource Include="cards\6H.png" />
+    <Resource Include="cards\6S.png" />
+    <Resource Include="cards\7C.png" />
+    <Resource Include="cards\7D.png" />
+    <Resource Include="cards\7H.png" />
+    <Resource Include="cards\7S.png" />
+    <Resource Include="cards\8C.png" />
+    <Resource Include="cards\8D.png" />
+    <Resource Include="cards\8H.png" />
+    <Resource Include="cards\8S.png" />
+    <Resource Include="cards\9C.png" />
+    <Resource Include="cards\9D.png" />
+    <Resource Include="cards\9H.png" />
+    <Resource Include="cards\9S.png" />
+    <Resource Include="cards\AC.png" />
+    <Resource Include="cards\AD.png" />
+    <Resource Include="cards\AH.png" />
+    <Resource Include="cards\AS.png" />
+    <Resource Include="cards\back.jpg" />
+    <Resource Include="cards\downCard.jpg" />
+    <Resource Include="cards\JC.png" />
+    <Resource Include="cards\JD.png" />
+    <Resource Include="cards\JH.png" />
+    <Resource Include="cards\JS.png" />
+    <Resource Include="cards\KC.png" />
+    <Resource Include="cards\KD.png" />
+    <Resource Include="cards\KH.png" />
+    <Resource Include="cards\KS.png" />
+    <Resource Include="cards\QC.png" />
+    <Resource Include="cards\QD.png" />
+    <Resource Include="cards\QH.png" />
+    <Resource Include="cards\QS.png" />
+    <Content Include="db\models\Challenge.sql" />
+    <Content Include="db\models\Font.sql" />
+    <Content Include="db\models\Icon.sql" />
+    <Content Include="db\models\Request.sql" />
+    <Content Include="db\models\Table.sql" />
+    <Content Include="db\models\Title.sql" />
+    <Content Include="db\models\User.sql" />
+    <Content Include="db\models\UserFonts.sql" />
+    <Content Include="db\models\UserIcons.sql" />
+    <Content Include="db\models\UserTitles.sql" />
+    <Content Include="db\queries\challenge.sql" />
+    <Content Include="db\queries\font.sql" />
+    <Content Include="db\queries\icon.sql" />
+    <Content Include="db\queries\request.sql" />
+    <Content Include="db\queries\table.sql" />
+    <Content Include="db\queries\title.sql" />
+    <Content Include="db\queries\user.sql" />
+    <Content Include="db\queries\userfonts.sql" />
+    <Content Include="db\queries\usericons.sql" />
+    <Content Include="db\queries\usertitle.sql" />
+    <Resource Include="assets\messageicons.png" />
+    <Resource Include="assets\gametableBG.jpg" />
+    <Resource Include="assets\challengesicon.png" />
+    <Resource Include="assets\demo_avatar.jpg" />
+    <Resource Include="assets\greenchip.png" />
+    <Resource Include="assets\backarrow.png" />
+    <Content Include="assets\index.html" />
+    <Resource Include="assets\money_bag.png" />
+    <Resource Include="assets\challengeCards.png" />
+    <Resource Include="assets\lightgreenbackgroundimg.png" />
+    <Resource Include="assets\greenbackgroundimg.jpg" />
+    <Resource Include="assets\interntable.png" />
+    <Resource Include="assets\juniortable.jpg" />
+    <Resource Include="assets\output-onlinepngtools.png" />
+    <Resource Include="assets\profilepict.png" />
+    <Resource Include="assets\RedBackground.jpg" />
+    <Resource Include="assets\seniortable.jpg" />
+    <Resource Include="assets\shopping-cart-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\leaderboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\pear.jpeg" />
+    <Resource Include="assets\redchip.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
