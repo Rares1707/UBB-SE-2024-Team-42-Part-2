@@ -395,7 +395,6 @@ namespace SuperbetBeclean.Services
             return requests;
         }
 
-
         public List<Tuple<int, int>> GetAllRequestsByToUserIDSimplified(int toUser)
         {
             List<Tuple<int, int>> requests = new List<Tuple<int, int>>();

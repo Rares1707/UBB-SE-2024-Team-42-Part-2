@@ -1,10 +1,10 @@
-﻿using SuperbetBeclean.Model;
-using SuperbetBeclean.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
+using SuperbetBeclean.Model;
+using SuperbetBeclean.Windows;
 
 namespace SuperbetBeclean.Services
 {
@@ -88,7 +88,7 @@ namespace SuperbetBeclean.Services
                 {
                     reader.Read();
                     int userID = reader.IsDBNull(reader.GetOrdinal("user_id")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_id"));
-                    string userName = reader.IsDBNull(reader.GetOrdinal("user_username")) ? "" : reader.GetString(reader.GetOrdinal("user_username"));
+                    string userName = reader.IsDBNull(reader.GetOrdinal("user_username")) ? string.Empty : reader.GetString(reader.GetOrdinal("user_username"));
                     int currentFont = reader.IsDBNull(reader.GetOrdinal("user_currentFont")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_currentFont"));
                     int currentTitle = reader.IsDBNull(reader.GetOrdinal("user_currentTitle")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_currentTitle"));
                     string currentIconPath = reader.IsDBNull(reader.GetOrdinal("user_currentIcon")) ? ConfigurationManager.AppSettings["DEFAULT_ICON_PATH"] : dbService.GetIconPath(reader.GetInt32(reader.GetOrdinal("user_currentIcon")));

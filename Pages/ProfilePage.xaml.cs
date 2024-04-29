@@ -37,10 +37,10 @@ namespace SuperbetBeclean.Pages
                 profilePageUserAvatar.ImageSource = new BitmapImage(new Uri(player.UserCurrentIconPath, UriKind.Absolute));
             }
 
-            profilePageUsernameTextBlock.Text = mainWindow.userName();
-            profilePageChipsTextBlock.Text = mainWindow.userChips().ToString();
-            profilePageDailyStreakTextBlock.Text = mainWindow.userStreak().ToString();
-            profilePageLevelTextBlock.Text = mainWindow.userLevel().ToString() + ": ";
+            profilePageUsernameTextBlock.Text = mainWindow.UserName();
+            profilePageChipsTextBlock.Text = mainWindow.UserChips().ToString();
+            profilePageDailyStreakTextBlock.Text = mainWindow.UserStreak().ToString();
+            profilePageLevelTextBlock.Text = mainWindow.UserLevel().ToString() + ": ";
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

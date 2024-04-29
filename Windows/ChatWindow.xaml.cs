@@ -1,5 +1,4 @@
-﻿using SuperbetBeclean.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SuperbetBeclean.Services;
 
 namespace SuperbetBeclean.Windows
 {
@@ -20,43 +20,43 @@ namespace SuperbetBeclean.Windows
     /// </summary>
     public partial class ChatWindow : Window
     {
-        ChatService _chatService;
-    
+        private ChatService chatService;
         public ChatWindow(ChatService chatService)
         {
             InitializeComponent();
-            _chatService = chatService;
+            this.chatService = chatService;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private void  Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
-            {   
-                if (e.GetPosition(this).Y < 60) // Assuming the height of the upper part is 60 (adjust as needed)
+            {
+                // Assuming the height of the upper part is 60 (adjust as needed)
+                if (e.GetPosition(this).Y < 60)
                 {
                     DragMove();
                 }
             }
-            catch { };
+            catch
+            {
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            _chatService.NewMessage(chatInputTextBox.Text + "\n",this);
+            chatService.NewMessage(chatInputTextBox.Text + "\n", this);
         }
 
-        private void messagingBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void MessagingBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
     }
 }

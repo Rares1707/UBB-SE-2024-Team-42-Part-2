@@ -41,11 +41,11 @@ namespace SuperbetBeclean.Pages
             this.mainWindow = mainWindow;
             this.service = service;
             this.mainFrame = mainFrame;
-            PlayerNameTextBox.Text = this.mainWindow.userName();
-            Uri uri = new Uri(this.mainWindow.userIcon(), UriKind.Absolute);
+            PlayerNameTextBox.Text = this.mainWindow.UserName();
+            Uri uri = new Uri(this.mainWindow.UserIcon(), UriKind.Absolute);
             PlayerIconImg.Source = new BitmapImage(uri);
-            PlayerLvlTextBox.Text = "Level: " + this.mainWindow.userLevel().ToString();
-            PlayerChipsTextBox.Text = "Chips: " + this.mainWindow.userChips().ToString();
+            PlayerLvlTextBox.Text = "Level: " + this.mainWindow.UserLevel().ToString();
+            PlayerChipsTextBox.Text = "Chips: " + this.mainWindow.UserChips().ToString();
             this.tableType = tableType;
              chatService = new ChatService();
         }
@@ -70,7 +70,7 @@ namespace SuperbetBeclean.Pages
             chatService.CloseChat(mainWindow);
             mainFrame.NavigationService.GoBack();
             action = "Fold";
-            mainWindow.disconnectUser(sender, e);
+            mainWindow.DisconnectUser(sender, e);
         }
 
         public void EndTimer()
@@ -236,7 +236,6 @@ namespace SuperbetBeclean.Pages
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-
                 Border playerBorder = FindName("Player" + player.UserTablePlace + "Border") as Border;
                 TextBlock playerName = FindName("Player" + player.UserTablePlace + "NameTextBox") as TextBlock;
                 TextBlock playerLevel = FindName("Player" + player.UserTablePlace + "LvlTextBox") as TextBlock;

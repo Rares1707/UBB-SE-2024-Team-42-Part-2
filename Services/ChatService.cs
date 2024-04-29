@@ -38,7 +38,7 @@ public class ChatService
                     chatWindow.Owner = menuWindow;
                     chatWindow.Closed += (s, args) => menuWindowChatWindowMap.Remove(key); // Remove from dictionary when closed
                     menuWindowChatWindowMap.Add(key, chatWindow); // Add to dictionary
-                    chatWindow.messagingBox.Text = mainWindow.userName();
+                    chatWindow.messagingBox.Text = mainWindow.UserName();
                     chatWindow.Show();
                 }
                 else
@@ -61,7 +61,7 @@ public class ChatService
         {
             if (entry.Value == thisWindow)
             {
-                userName = entry.Key.Item1.userName();
+                userName = entry.Key.Item1.UserName();
                 tableType = entry.Key.Item2;
                 break;
             }

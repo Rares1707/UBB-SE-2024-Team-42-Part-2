@@ -27,20 +27,20 @@ namespace SuperbetBeclean.Windows
         {
             try
             {
-
-
-                if (e.GetPosition(this).Y < 60) // Assuming the height of the upper part is 60 (adjust as needed)
+                // Assuming the height of the upper part is 60 (adjust as needed)
+                if (e.GetPosition(this).Y < 60)
                 {
                     // Drag the window
                     DragMove();
                 }
             }
-            catch { };  
+            catch
+            {
+            }
     }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close(); // Close the window when the button is clicked
         }
     }
-    
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using Microsoft.Win32;
 
 namespace SuperbetBeclean.Windows
 {
     using System;
     using System.IO;
     using System.Windows;
+
     /// <summary>
     /// Interaction logic for RulesWindow.xaml
     /// </summary>
@@ -32,7 +33,7 @@ namespace SuperbetBeclean.Windows
             LoadHtmlContent();
         }
 
-        private void closeButtonRulesWindow_Click(object sender, RoutedEventArgs e)
+        private void CloseButtonRulesWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -42,8 +43,6 @@ namespace SuperbetBeclean.Windows
 
             // Combine the solution directory with the relative HTML file path
             string htmlFilePath = Path.Combine(solutionDirectory, HtmlFilePath);
-
-
 
             if (File.Exists(htmlFilePath))
             {
