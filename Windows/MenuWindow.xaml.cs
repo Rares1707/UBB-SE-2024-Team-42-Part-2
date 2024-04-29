@@ -42,7 +42,7 @@ namespace SuperbetBeclean.Windows
         }
         public void disconnectUser(object sender, System.EventArgs e)
         {
-            service.disconnectUser(this);
+            service.DisconnectUser(this);
         }
 
         async public Task < int > startTime(string table, int minBet, int maxBet)

@@ -20,7 +20,7 @@ namespace SuperbetBeclean
         }
         public void OpenNewWindow(string username)
         {
-            service.addWindow(username);
+            service.AddWindow(username);
         }
     }
 }

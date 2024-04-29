@@ -15,13 +15,19 @@ namespace SuperbetBeclean.Services
         private List<MenuWindow> openedUsersWindows;
         private SqlConnection sqlConnection;
         private DBService dbService;
-        const int FULL = 8, EMPTY = 0;
-        const int INACTIVE = 0, WAITING = 1, PLAYING = 2;
-        public ChatWindow chatWindowIntern, chatWindowJuniorm, chatWindowSenior;
-        private TableService internTable, juniorTable, seniorTable;
-        string connectionString;
+        private const int FULL = 8;
+        private const int EMPTY = 0;
+        private const int INACTIVE = 0;
+        private const int WAITING = 1;
+        private const int PLAYING = 2;
+        private ChatWindow chatWindowIntern;
+        private ChatWindow chatWindowJuniorm;
+        private ChatWindow chatWindowSenior;
+        private TableService internTable;
+        private TableService juniorTable;
+        private TableService seniorTable;
+        private string connectionString;
         // Task internTask, juniorTask, seniorTask;
-
         public MainService()
         {
             connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
@@ -31,27 +37,27 @@ namespace SuperbetBeclean.Services
             internTable = new TableService(5000, 50, 100, "intern", dbService);
             juniorTable = new TableService(50000, 500, 1000, "junior", dbService);
             seniorTable = new TableService(500000, 5000, 10000, "senior", dbService);
-            //chatWindowIntern = new ChatWindow();
-            //chatWindowJuniorm = new ChatWindow();
-            //chatWindowSenior = new ChatWindow();
+            // chatWindowIntern = new ChatWindow();
+            // chatWindowJuniorm = new ChatWindow();
+            // chatWindowSenior = new ChatWindow();
         }
 
-        public int occupiedIntern()
+        public int OccupiedIntern()
         {
             return internTable.occupied();
         }
 
-        public int occupiedJunior()
+        public int OccupiedJunior()
         {
             return juniorTable.occupied();
         }
 
-        public int occupiedSenior()
+        public int OccupiedSenior()
         {
             return seniorTable.occupied();
         }
 
-        public void newUserLogin(User newUser)
+        public void NewUserLogin(User newUser)
         {
             if (DateTime.Now.Date != newUser.UserLastLogin.Date)
             {
@@ -73,7 +79,7 @@ namespace SuperbetBeclean.Services
         }
 
 
-        public void addWindow(string username)
+        public void AddWindow(string username)
         {
             sqlConnection.Open();
             SqlCommand command = new SqlCommand("EXEC getUser @username", sqlConnection);
@@ -100,7 +106,7 @@ namespace SuperbetBeclean.Services
                     MenuWindow menuWindow = new MenuWindow(newUser, this);
                     reader.Close();
                     menuWindow.Show();
-                    newUserLogin(newUser);
+                    NewUserLogin(newUser);
                     openedUsersWindows.Add(menuWindow);
                 }
                 else
@@ -114,7 +120,7 @@ namespace SuperbetBeclean.Services
             }
             sqlConnection.Close();
         }
-        public void disconnectUser(MenuWindow window)
+        public void DisconnectUser(MenuWindow window)
         {
             User player = window.Player();
             player.UserStatus = INACTIVE;
@@ -128,17 +134,17 @@ namespace SuperbetBeclean.Services
             player.UserStack = EMPTY;
             dbService.UpdateUserStack(player.UserID, player.UserStack);
         }
-        public int joinInternTable(MenuWindow window)
+        public int JoinInternTable(MenuWindow window)
         {
             return internTable.joinTable(window, ref sqlConnection);
         }
 
-        public int joinJuniorTable(MenuWindow window)
+        public int JoinJuniorTable(MenuWindow window)
         {
             return juniorTable.joinTable(window, ref sqlConnection);
         }
 
-        public int joinSeniorTable(MenuWindow window)
+        public int JoinSeniorTable(MenuWindow window)
         {
             return seniorTable.joinTable(window, ref sqlConnection);
         }

@@ -51,7 +51,8 @@ namespace SuperbetBeclean.Pages
         }
         public void UpdateChips(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 PlayerChipsTextBox.Text = player.UserChips.ToString();
             });
         }
@@ -75,7 +76,7 @@ namespace SuperbetBeclean.Pages
         public void EndTimer()
         {
             timer = -1;
-            Application.Current.Dispatcher.Invoke(() => 
+            Application.Current.Dispatcher.Invoke(() =>
             {
                 PlayerTimer.Text = string.Empty;
                 SliderBet.Maximum = 0;
@@ -233,7 +234,8 @@ namespace SuperbetBeclean.Pages
 
         public void HidePlayer(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
 
                 Border playerBorder = FindName("Player" + player.UserTablePlace + "Border") as Border;
                 TextBlock playerName = FindName("Player" + player.UserTablePlace + "NameTextBox") as TextBlock;

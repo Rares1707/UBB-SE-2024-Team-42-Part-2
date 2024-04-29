@@ -12,7 +12,6 @@ namespace SuperbetBeclean.Services
 {
     public class TableService
     {
-
         private string tableType;
         private static Mutex mutex;
         const int FULL = 8, EMPTY = 0;

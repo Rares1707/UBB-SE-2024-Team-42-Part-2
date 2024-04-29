@@ -21,17 +21,17 @@ namespace SuperbetBeclean.Pages
     /// </summary>
     public partial class ShopPage : Page
     {
-        private Frame _mainFrame;
-        public ShopPage(Frame mainFrame, MenuWindow _menuWindow)
+        private Frame mainFrame;
+        public ShopPage(Frame mainFrame, MenuWindow menuWindow)
         {
             InitializeComponent();
-            DataContext = new MainViewModel(_menuWindow.userChips(), _menuWindow.userId());
-            _mainFrame = mainFrame;
+            DataContext = new MainViewModel(menuWindow.userChips(), menuWindow.userId());
+            this.mainFrame = mainFrame;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _mainFrame.NavigationService.GoBack();
+            mainFrame.NavigationService.GoBack();
         }
 
         public static readonly DependencyProperty BalanceProperty = DependencyProperty.Register(

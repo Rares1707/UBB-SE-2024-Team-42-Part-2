@@ -1,13 +1,13 @@
-﻿using SuperbetBeclean.Model;
-using SuperbetBeclean.Services;
-using SuperbetBeclean.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using SuperbetBeclean.Model;
+using SuperbetBeclean.Services;
+using SuperbetBeclean.Windows;
 
 namespace SuperbetBeclean.Pages
 {
@@ -16,13 +16,13 @@ namespace SuperbetBeclean.Pages
     /// </summary>
     public partial class LobbyPage : Page
     {
-        private Frame _mainFrame;
-        private MenuWindow _mainWindow;
-        private MainService _service;
+        private Frame mainFrame;
+        private MenuWindow mainWindow;
+        private MainService service;
         private SqlConnection sqlConnection;
-        DBService dbService;
-        string connectionString;
-        private User _user;
+        private DBService dbService;
+        private string connectionString;
+        private User user;
         public LobbyPage(Frame mainFrame, MenuWindow menuWindow, MainService service, User u)
         {
             connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
@@ -30,10 +30,10 @@ namespace SuperbetBeclean.Pages
             sqlConnection.Open();
             dbService = new DBService(new SqlConnection(connectionString));
             InitializeComponent();
-            _mainFrame = mainFrame;
-            _mainWindow = menuWindow;
-            _service = service;
-            _user = u;
+            this.mainFrame = mainFrame;
+            mainWindow = menuWindow;
+            this.service = service;
+            user = u;
             PlayerNameTextBox.Text = menuWindow.userName();
             PlayerLevelTextBox.Text = "Level: " + menuWindow.userLevel().ToString();
             PlayerChipsTextBox.Text = "Chips: " + menuWindow.userChips().ToString();
@@ -41,72 +41,90 @@ namespace SuperbetBeclean.Pages
             {
                 PlayerIconImg.Source = new BitmapImage(new Uri(u.UserCurrentIconPath, UriKind.Absolute));
             }
-            InternPlayerCount.Text = _service.occupiedIntern().ToString() + "/8";
-            JuniorPlayerCount.Text = _service.occupiedJunior().ToString() + "/8";
-            SeniorPlayerCount.Text = _service.occupiedSenior().ToString() + "/8";
+            InternPlayerCount.Text = this.service.OccupiedIntern().ToString() + "/8";
+            JuniorPlayerCount.Text = this.service.OccupiedJunior().ToString() + "/8";
+            SeniorPlayerCount.Text = this.service.OccupiedSenior().ToString() + "/8";
         }
 
         private void ButtonLobbyBack(object sender, System.Windows.RoutedEventArgs e)
         {
-            _mainFrame.NavigationService.GoBack();
+            mainFrame.NavigationService.GoBack();
         }
 
         private void OnClickLeaderboardButton(object sender, System.Windows.RoutedEventArgs e)
         {
             List<string> strings;
             strings = dbService.GetLeaderboard();
-            _mainFrame.Navigate(new LeaderboardPage(_mainFrame,strings));
+            mainFrame.Navigate(new LeaderboardPage(mainFrame, strings));
         }
         public string ReturnUserNameOfLobbyPage()
         {
-           return _mainWindow.userName();
+            return mainWindow.userName();
         }
         private void OnShopButtonClick(object sender, RoutedEventArgs e)
         {
-            _mainFrame.Navigate(new ShopPage(_mainFrame, _mainWindow));
+            mainFrame.Navigate(new ShopPage(mainFrame, mainWindow));
         }
 
-        private void onClickInternButton(object sender, System.Windows.RoutedEventArgs e)
+        private void OnClickInternButton(object sender, System.Windows.RoutedEventArgs e)
         {
-            int response = _service.joinInternTable(_mainWindow);
+            int response = service.JoinInternTable(mainWindow);
             if (response == 1)
-                _mainFrame.Navigate(_mainWindow.internPage());
+            {
+                mainFrame.Navigate(mainWindow.internPage());
+            }
             else if (response == 0)
+            {
                 MessageBox.Show("Sorry, this table is full.");
+            }
             else if (response == 1)
+            {
                 MessageBox.Show("Sorry, you don't have enough money.");
+            }
         }
 
-        private void onClickJuniorBttn(object sender, System.Windows.RoutedEventArgs e)
+        private void OnClickJuniorBttn(object sender, System.Windows.RoutedEventArgs e)
         {
-            int response = _service.joinJuniorTable(_mainWindow);
+            int response = service.JoinJuniorTable(mainWindow);
             if (response == 1)
-                _mainFrame.Navigate(_mainWindow.juniorPage());
+            {
+                mainFrame.Navigate(mainWindow.juniorPage());
+            }
             else if (response == 0)
+            {
                 MessageBox.Show("Sorry, this table is full.");
+            }
             else if (response == 1)
+            {
                 MessageBox.Show("Sorry, you don't have enough money.");
+            }
         }
 
-        private void onClickSeniorButton(object sender, System.Windows.RoutedEventArgs e)
+        private void OnClickSeniorButton(object sender, System.Windows.RoutedEventArgs e)
         {
-            int response = _service.joinSeniorTable(_mainWindow);
+            int response = service.JoinSeniorTable(mainWindow);
             if (response == 1)
-                _mainFrame.Navigate(_mainWindow.seniorPage());
+            {
+                mainFrame.Navigate(mainWindow.seniorPage());
+            }
             else if (response == 0)
+            {
                 MessageBox.Show("Sorry, this table is full.");
+            }
             else if (response == 1)
+            {
                 MessageBox.Show("Sorry, you don't have enough money.");
+            }
         }
         private void PlayerIconImg_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            _mainFrame.Navigate(new ProfilePage(_mainFrame, _mainWindow));
+            mainFrame.Navigate(new ProfilePage(mainFrame, mainWindow));
         }
 
         private void ShopBttn_Click(object sender, RoutedEventArgs e)
         {
-            string currentUserName = _mainWindow.userName();
-            RequestsWindow requestWindow=new RequestsWindow(currentUserName,this, _mainWindow.userName());
+            string currentUserName = mainWindow.userName();
+            RequestsWindow requestWindow = new RequestsWindow(currentUserName, this, mainWindow.userName());
             requestWindow.Show();
         }
     }
