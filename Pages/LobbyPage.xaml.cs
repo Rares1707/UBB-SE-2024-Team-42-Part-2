@@ -34,9 +34,9 @@ namespace SuperbetBeclean.Pages
             mainWindow = menuWindow;
             this.service = service;
             user = u;
-            PlayerNameTextBox.Text = menuWindow.userName();
-            PlayerLevelTextBox.Text = "Level: " + menuWindow.userLevel().ToString();
-            PlayerChipsTextBox.Text = "Chips: " + menuWindow.userChips().ToString();
+            PlayerNameTextBox.Text = menuWindow.UserName();
+            PlayerLevelTextBox.Text = "Level: " + menuWindow.UserLevel().ToString();
+            PlayerChipsTextBox.Text = "Chips: " + menuWindow.UserChips().ToString();
             if (!string.IsNullOrEmpty(u.UserCurrentIconPath))
             {
                 PlayerIconImg.Source = new BitmapImage(new Uri(u.UserCurrentIconPath, UriKind.Absolute));
@@ -59,7 +59,7 @@ namespace SuperbetBeclean.Pages
         }
         public string ReturnUserNameOfLobbyPage()
         {
-            return mainWindow.userName();
+            return mainWindow.UserName();
         }
         private void OnShopButtonClick(object sender, RoutedEventArgs e)
         {
@@ -71,7 +71,7 @@ namespace SuperbetBeclean.Pages
             int response = service.JoinInternTable(mainWindow);
             if (response == 1)
             {
-                mainFrame.Navigate(mainWindow.internPage());
+                mainFrame.Navigate(mainWindow.InternPage());
             }
             else if (response == 0)
             {
@@ -88,7 +88,7 @@ namespace SuperbetBeclean.Pages
             int response = service.JoinJuniorTable(mainWindow);
             if (response == 1)
             {
-                mainFrame.Navigate(mainWindow.juniorPage());
+                mainFrame.Navigate(mainWindow.JuniorPage());
             }
             else if (response == 0)
             {
@@ -105,7 +105,7 @@ namespace SuperbetBeclean.Pages
             int response = service.JoinSeniorTable(mainWindow);
             if (response == 1)
             {
-                mainFrame.Navigate(mainWindow.seniorPage());
+                mainFrame.Navigate(mainWindow.SeniorPage());
             }
             else if (response == 0)
             {
@@ -123,8 +123,8 @@ namespace SuperbetBeclean.Pages
 
         private void ShopBttn_Click(object sender, RoutedEventArgs e)
         {
-            string currentUserName = mainWindow.userName();
-            RequestsWindow requestWindow = new RequestsWindow(currentUserName, this, mainWindow.userName());
+            string currentUserName = mainWindow.UserName();
+            RequestsWindow requestWindow = new RequestsWindow(currentUserName, this, mainWindow.UserName());
             requestWindow.Show();
         }
     }

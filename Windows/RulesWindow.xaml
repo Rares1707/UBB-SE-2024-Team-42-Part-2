@@ -40,7 +40,7 @@
         <Border Margin="62,28,62,27" Background="LightGray" CornerRadius="10" Grid.RowSpan="2">
             <Grid>
                 <Button
-                Width="82"  Style="{StaticResource HorizontalButtonStyle}" x:Name="closeButtonRulesWindow" Margin="568,0,0,329" Height="24" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16" Content="Close" Click="closeButtonRulesWindow_Click" BorderBrush="White" Background="White"/>
+                Width="82"  Style="{StaticResource HorizontalButtonStyle}" x:Name="closeButtonRulesWindow" Margin="568,0,0,329" Height="24" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16" Content="Close" Click="CloseButtonRulesWindow_Click" BorderBrush="White" Background="White"/>
                 <!-- Adjusted the margin and alignment of the button -->
                 
                     <TextBlock TextWrapping="Wrap" Text="RULES:" Margin="272,0,272,380" TextAlignment="Center" Foreground="#FF545454" FontSize="36" FontWeight="Bold"/>

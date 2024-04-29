@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using SuperbetBeclean.Model;
 using SuperbetBeclean.Windows;
@@ -44,17 +42,17 @@ namespace SuperbetBeclean.Services
 
         public int OccupiedIntern()
         {
-            return internTable.occupied();
+            return internTable.Occupied();
         }
 
         public int OccupiedJunior()
         {
-            return juniorTable.occupied();
+            return juniorTable.Occupied();
         }
 
         public int OccupiedSenior()
         {
-            return seniorTable.occupied();
+            return seniorTable.Occupied();
         }
 
         public void NewUserLogin(User newUser)
@@ -78,7 +76,6 @@ namespace SuperbetBeclean.Services
             dbService.UpdateUserLastLogin(newUser.UserID, DateTime.Now);
         }
 
-
         public void AddWindow(string username)
         {
             sqlConnection.Open();
@@ -91,7 +88,7 @@ namespace SuperbetBeclean.Services
                 {
                     reader.Read();
                     int userID = reader.IsDBNull(reader.GetOrdinal("user_id")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_id"));
-                    string userName = reader.IsDBNull(reader.GetOrdinal("user_username")) ? "" : reader.GetString(reader.GetOrdinal("user_username"));
+                    string userName = reader.IsDBNull(reader.GetOrdinal("user_username")) ? string.Empty : reader.GetString(reader.GetOrdinal("user_username"));
                     int currentFont = reader.IsDBNull(reader.GetOrdinal("user_currentFont")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_currentFont"));
                     int currentTitle = reader.IsDBNull(reader.GetOrdinal("user_currentTitle")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_currentTitle"));
                     string currentIconPath = reader.IsDBNull(reader.GetOrdinal("user_currentIcon")) ? ConfigurationManager.AppSettings["DEFAULT_ICON_PATH"] : dbService.GetIconPath(reader.GetInt32(reader.GetOrdinal("user_currentIcon")));
@@ -125,9 +122,9 @@ namespace SuperbetBeclean.Services
             User player = window.Player();
             player.UserStatus = INACTIVE;
             player.UserBet = 0;
-            internTable.disconnectUser(window);
-            juniorTable.disconnectUser(window);
-            seniorTable.disconnectUser(window);
+            internTable.DisconnectUser(window);
+            juniorTable.DisconnectUser(window);
+            seniorTable.DisconnectUser(window);
 
             player.UserChips += player.UserStack;
             dbService.UpdateUserChips(player.UserID, player.UserChips);
@@ -136,17 +133,17 @@ namespace SuperbetBeclean.Services
         }
         public int JoinInternTable(MenuWindow window)
         {
-            return internTable.joinTable(window, ref sqlConnection);
+            return internTable.JoinTable(window, ref sqlConnection);
         }
 
         public int JoinJuniorTable(MenuWindow window)
         {
-            return juniorTable.joinTable(window, ref sqlConnection);
+            return juniorTable.JoinTable(window, ref sqlConnection);
         }
 
         public int JoinSeniorTable(MenuWindow window)
         {
-            return seniorTable.joinTable(window, ref sqlConnection);
+            return seniorTable.JoinTable(window, ref sqlConnection);
         }
     }
 }

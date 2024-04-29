@@ -1,5 +1,4 @@
-﻿using SuperbetBeclean.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
+using SuperbetBeclean.Pages;
 using SuperbetBeclean.Services;
 using SuperbetBeclean.Model;
-using System.Threading;
 
 namespace SuperbetBeclean.Windows
 {
@@ -25,7 +25,7 @@ namespace SuperbetBeclean.Windows
     {
         private User user;
         private MainService service;
-        Dictionary < string , GameTablePage > gamePages;
+        private Dictionary<string, GameTablePage> gamePages;
 
         public MenuWindow(User u, MainService serv)
         {
@@ -34,78 +34,78 @@ namespace SuperbetBeclean.Windows
             this.user = u;
             this.Title = user.UserName;
             MenuFrame.Navigate(new MainMenu(MenuFrame, this, serv, user));
-            gamePages = new Dictionary<string, GameTablePage> ();
+            gamePages = new Dictionary<string, GameTablePage>();
             gamePages.Add("intern", new GameTablePage(MenuFrame, this, service, "intern"));
             gamePages.Add("junior", new GameTablePage(MenuFrame, this, service, "junior"));
             gamePages.Add("senior", new GameTablePage(MenuFrame, this, service, "senior"));
-            Closed += disconnectUser;
+            Closed += DisconnectUser;
         }
-        public void disconnectUser(object sender, System.EventArgs e)
+        public void DisconnectUser(object sender, System.EventArgs e)
         {
             service.DisconnectUser(this);
         }
 
-        async public Task < int > startTime(string table, int minBet, int maxBet)
+        async public Task<int> StartTime(string table, int minBet, int maxBet)
         {
             int bet = 0;
             bet = await gamePages[table].RunTimer(minBet, maxBet);
             return bet;
         }
 
-        public void updateChips(string table, User player)
+        public void UpdateChips(string table, User player)
         {
             gamePages[table].UpdateChips(player);
         }
-        public void resetCards(string table)
+        public void ResetCards(string table)
         {
             gamePages[table].ResetCards();
         }
 
-        public void notifyUserCard(string table, User u, int card, string cardValue)
+        public void NotifyUserCard(string table, User u, int card, string cardValue)
         {
             gamePages[table].AddUserCard(u == user, u.UserTablePlace, card, cardValue);
         }
 
-        public void notifyTableCard(string table, int card, string cardValue)
+        public void NotifyTableCard(string table, int card, string cardValue)
         {
             gamePages[table].AddTableCard(card, cardValue);
         }
 
-        public void showCards(string table, User player)
+        public void ShowCards(string table, User player)
         {
             gamePages[table].ShowCards(player);
         }
-        public void notify(string table, User player, int tablePot)
+        public void Notify(string table, User player, int tablePot)
         {
             gamePages[table].UpdatePlayerMoney(player);
             gamePages[table].UpdatePot(tablePot);
         }
-        public void foldPlayer(string table, User player)
+        public void FoldPlayer(string table, User player)
         {
             gamePages[table].PlayerFold(player);
         }
-        public void showPlayer(string table, User player)
+        public void ShowPlayer(string table, User player)
         {
             gamePages[table].ShowPlayer(player);
         }
 
-        public void hidePlayer(string table, User player)
+        public void HidePlayer(string table, User player)
         {
             gamePages[table].HidePlayer(player);
         }
-        public void endTurn(string table, User player)
+        public void EndTurn(string table, User player)
         {
             gamePages[table].EndTurn(player);
         }
-        public void startRound(string table, User player)
+        public void StartRound(string table, User player)
         {
             gamePages[table].StartRound(player);
         }
-        public void resetPot(string table)
+        public void ResetPot(string table)
         {
             gamePages[table].ResetPot();
         }
-        public void displayWinner(string table, User player, bool status)
+        public void DisplayWinner(string table, User player, bool status)
         {
             gamePages[table].DisplayWinner(player, status);
         }
@@ -114,45 +114,43 @@ namespace SuperbetBeclean.Windows
             return user;
         }
 
-        public string userName()
+        public string UserName()
         {
             return user.UserName;
         }
 
-        public int userLevel()
+        public int UserLevel()
         {
             return user.UserLevel;
         }
 
-        public int userChips()
+        public int UserChips()
         {
             return user.UserChips;
         }
 
-        public int userStreak()
+        public int UserStreak()
         {
             return user.UserStreak;
         }
 
-        public string userIcon()
+        public string UserIcon()
         {
             return user.UserCurrentIconPath;
         }
-        public int userId()
+        public int UserId()
         {
             return user.UserID;
         }
-        public GameTablePage internPage()
+        public GameTablePage InternPage()
         {
             return gamePages["intern"];
         }
-        
-        public GameTablePage juniorPage()
+        public GameTablePage JuniorPage()
         {
             return gamePages["junior"];
         }
-        
-        public GameTablePage seniorPage()
+        public GameTablePage SeniorPage()
         {
             return gamePages["senior"];
         }

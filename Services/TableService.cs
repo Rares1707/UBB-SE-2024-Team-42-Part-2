@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using SuperbetBeclean.Model;
 using SuperbetBeclean.Windows;
 
@@ -14,16 +12,25 @@ namespace SuperbetBeclean.Services
     {
         private string tableType;
         private static Mutex mutex;
-        const int FULL = 8, EMPTY = 0;
-        const int PREFLOP = 0, FLOP = 1, TURN = 2, RIVER = 3;
-        const int INACTIVE = 0, WAITING = 1, FOLDED = 2, PLAYING = 3;
-        bool ended = false;
-        private int buyIn, smallBlind, bigBlind;
+        private const int FULL = 8;
+        private const int EMPTY = 0;
+        private const int PREFLOP = 0;
+        private const int FLOP = 1;
+        private const int TURN = 2;
+        private const int RIVER = 3;
+        private const int INACTIVE = 0;
+        private const int WAITING = 1;
+        private const int FOLDED = 2;
+        private const int PLAYING = 3;
+        private bool ended = false;
+        private int buyIn;
+        private int smallBlind;
+        private int bigBlind;
         private List<MenuWindow> users;
         private Deck deck; // all the cards that are not in the players hands
-        DBService dbService;
-        Random random;
-        HandRankCalculator rankCalculator;
+        private DBService dbService;
+        private Random random;
+        private HandRankCalculator rankCalculator;
 
         private Card[] communityCards;
         private int[] freeSpace;
@@ -41,16 +48,15 @@ namespace SuperbetBeclean.Services
             communityCards = new Card[6];
             freeSpace = new int[9];
 
-            Task.Run(() => runTable());
+            Task.Run(() => RunTable());
 
             mutex = new Mutex();
 
             random = new Random();
             this.dbService = dbService;
         }
-        
 
-        public Card getRandomCardAndRemoveIt()
+        public Card GetRandomCardAndRemoveIt()
         {
             int index = random.Next(0, deck.GetDeckSize());
             Card card = deck.GetCardFromIndex(index);
@@ -58,17 +64,20 @@ namespace SuperbetBeclean.Services
             return card;
         }
 
-        public Card generateCard()
+        public Card GenerateCard()
         {
-            return getRandomCardAndRemoveIt();
+            return GetRandomCardAndRemoveIt();
         }
 
-        public async void runTable()
+        public async void RunTable()
         {
             while (true)
             {
-                if (ended) break;
-                if (isEmpty())
+                if (ended)
+                {
+                    break;
+                }
+                if (IsEmpty())
                 {
                     await Task.Delay(3000);
                     continue;
@@ -87,7 +96,7 @@ namespace SuperbetBeclean.Services
                         if (player.UserChips < buyIn)
                         {
                             player.UserStatus = INACTIVE;
-                            disconnectUser(menuWindow);
+                            DisconnectUser(menuWindow);
                         }
                         else
                         {
@@ -95,7 +104,7 @@ namespace SuperbetBeclean.Services
                             dbService.UpdateUserChips(player.UserID, player.UserChips);
                             player.UserStack = buyIn;
                             dbService.UpdateUserStack(player.UserID, player.UserStack);
-                            menuWindow.updateChips(tableType, player);
+                            menuWindow.UpdateChips(tableType, player);
                         }
                     }
                 }
@@ -105,12 +114,12 @@ namespace SuperbetBeclean.Services
                     foreach (MenuWindow otherWindow in activePlayers)
                     {
                         User otherPlayer = otherWindow.Player();
-                        currentWindow.startRound(tableType, otherPlayer);
+                        currentWindow.StartRound(tableType, otherPlayer);
                     }
                 }
                 foreach (MenuWindow window in activePlayers)
                 {
-                    window.resetCards(tableType);
+                    window.ResetCards(tableType);
                 }
                 if (activePlayers.Count < 2)
                 {
@@ -118,36 +127,45 @@ namespace SuperbetBeclean.Services
                     continue;
                 }
                 deck = new Deck();
-                
+
                 await Task.Delay(1000);
                 /// give first card
                 foreach (MenuWindow playerWindow in activePlayers)
                 {
                     User player = playerWindow.Player();
-                    Card card = generateCard();
+                    Card card = GenerateCard();
                     player.UserCurrentHand[0] = card;
-                    foreach (MenuWindow window in activePlayers) { window.notifyUserCard(tableType, player, 1, card.Value + card.Suit); }
+                    foreach (MenuWindow window in activePlayers)
+                    {
+                        window.NotifyUserCard(tableType, player, 1, card.Value + card.Suit);
+                    }
                     await Task.Delay(400);
                 }
                 /// give second card
                 foreach (MenuWindow playerWindow in activePlayers)
                 {
                     User player = playerWindow.Player();
-                    Card card = generateCard();
+                    Card card = GenerateCard();
                     player.UserCurrentHand[1] = card;
-                    foreach (MenuWindow window in activePlayers) { window.notifyUserCard(tableType, player, 2, card.Value + card.Suit); }
+                    foreach (MenuWindow window in activePlayers)
+                    {
+                        window.NotifyUserCard(tableType, player, 2, card.Value + card.Suit);
+                    }
                     await Task.Delay(400);
                 }
-                for (int i=1;i<=5;i++)
+                for (int i = 1; i <= 5; i++)
                 {
-                    Card card = generateCard();
+                    Card card = GenerateCard();
                     communityCards[i] = card;
                 }
                 int tablePot = 0;
                 int canBetPlayers = activePlayers.Count;
                 for (int turn = 0; turn <= 3; turn++)
                 {
-                    if (activePlayers.Count < 2) break;
+                    if (activePlayers.Count < 2)
+                    {
+                        break;
+                    }
                     if (turn == PREFLOP)
                     {
                     }
@@ -155,18 +173,27 @@ namespace SuperbetBeclean.Services
                     {
                         for (int cardNumber = 1; cardNumber <= 3; cardNumber++)
                         {
-                            foreach (MenuWindow window in activePlayers) { window.notifyTableCard(tableType, cardNumber, communityCards[cardNumber].Info()); }
+                            foreach (MenuWindow window in activePlayers)
+                            {
+                                window.NotifyTableCard(tableType, cardNumber, communityCards[cardNumber].Info());
+                            }
                             await Task.Delay(400);
                         }
                     }
                     else if (turn == TURN)
                     {
-                        foreach (MenuWindow window in activePlayers) { window.notifyTableCard(tableType, 4, communityCards[4].Info()); }
+                        foreach (MenuWindow window in activePlayers)
+                        {
+                            window.NotifyTableCard(tableType, 4, communityCards[4].Info());
+                        }
                         await Task.Delay(400);
                     }
                     else if (turn == RIVER)
                     {
-                        foreach (MenuWindow window in activePlayers) { window.notifyTableCard(tableType, 5, communityCards[5].Info()); }
+                        foreach (MenuWindow window in activePlayers)
+                        {
+                            window.NotifyTableCard(tableType, 5, communityCards[5].Info());
+                        }
                         await Task.Delay(400);
                     }
                     bool turnEnded = false;
@@ -174,7 +201,10 @@ namespace SuperbetBeclean.Services
                     int currentBetPlayer = -1;
                     while (!turnEnded)
                     {
-                        if (canBetPlayers < 2) break;
+                        if (canBetPlayers < 2)
+                        {
+                            break;
+                        }
                         MenuWindow currentWindow = activePlayers.Peek();
                         User player = currentWindow.Player();
 
@@ -183,14 +213,17 @@ namespace SuperbetBeclean.Services
                             activePlayers.Dequeue();
                             continue;
                         }
-                        if (player.UserID == currentBetPlayer) break;
+                        if (player.UserID == currentBetPlayer)
+                        {
+                            break;
+                        }
                         if (player.UserStack == 0)
                         {
                             canBetPlayers--;
                             activePlayers.Enqueue(activePlayers.Dequeue());
                             continue;
                         }
-                        int playerBet = await currentWindow.startTime(tableType, Math.Min(currentBet, player.UserStack + player.UserBet), player.UserStack + player.UserBet);
+                        int playerBet = await currentWindow.StartTime(tableType, Math.Min(currentBet, player.UserStack + player.UserBet), player.UserStack + player.UserBet);
                         if (playerBet == -1)
                         {
                             activePlayers.Dequeue();
@@ -198,7 +231,10 @@ namespace SuperbetBeclean.Services
                             player.UserStatus = WAITING;
                             player.UserBet = 0;
                             canBetPlayers--;
-                            foreach (MenuWindow window in activePlayers) { window.foldPlayer(tableType, player); }
+                            foreach (MenuWindow window in activePlayers)
+                            {
+                                window.FoldPlayer(tableType, player);
+                            }
                         }
                         else
                         {
@@ -214,14 +250,18 @@ namespace SuperbetBeclean.Services
                                 currentBetPlayer = player.UserID;
                             }
                         }
-                        foreach (MenuWindow window in activePlayers) { window.notify(tableType, player, tablePot); }
+                        foreach (MenuWindow window in activePlayers)
+                        {
+                            window.Notify(tableType, player, tablePot);
+                        }
                     }
-                    foreach (MenuWindow currentWindow in activePlayers) {
+                    foreach (MenuWindow currentWindow in activePlayers)
+                    {
                         User currentPlayer = currentWindow.Player();
                         foreach (MenuWindow otherWindow in activePlayers)
                         {
                             User otherPlayer = otherWindow.Player();
-                            currentWindow.endTurn(tableType, otherPlayer);
+                            currentWindow.EndTurn(tableType, otherPlayer);
                         }
                         currentPlayer.UserBet = 0;
                     }
@@ -232,11 +272,11 @@ namespace SuperbetBeclean.Services
                     foreach (MenuWindow otherWindow in activePlayers)
                     {
                         User otherPlayer = otherWindow.Player();
-                        currentWindow.showCards(tableType, otherPlayer);
+                        currentWindow.ShowCards(tableType, otherPlayer);
                     }
                 }
-                List<User> winners = determineWinners(activePlayers);
-                foreach(User winner in winners)
+                List<User> winners = DetermineWinners(activePlayers);
+                foreach (User winner in winners)
                 {
                     Console.WriteLine("Winner: " + winner.UserName);
                     winner.UserStack += Convert.ToInt32(tablePot / winners.Count);
@@ -245,44 +285,53 @@ namespace SuperbetBeclean.Services
                     {
                         foreach (MenuWindow menuWindow in activePlayers)
                         {
-                            if (i%2 == 1)
-                                menuWindow.displayWinner(tableType, winner, true);
+                            if (i % 2 == 1)
+                            {
+                                menuWindow.DisplayWinner(tableType, winner, true);
+                            }
                             else
-                                menuWindow.displayWinner(tableType, winner, false);
+                            {
+                                menuWindow.DisplayWinner(tableType, winner, false);
+                            }
                         }
-                        if (i == 5) await Task.Delay(2000);
-                        else await Task.Delay(200);
+                        if (i == 5)
+                        {
+                            await Task.Delay(2000);
+                        }
+                        else
+                        {
+                            await Task.Delay(200);
+                        }
                     }
                 }
                 await Task.Delay(3000);
-                
             }
         }
 
-        private void generateHands(List < Card > currentHand, List<Card> possibleCards, int lastCard, int numberCards, List<List<Card>> allHands)
+        private void GenerateHands(List<Card> currentHand, List<Card> possibleCards, int lastCard, int numberCards, List<List<Card>> allHands)
         {
-            for (int i=lastCard+1; i<possibleCards.Count; i++)
+            for (int i = lastCard + 1; i < possibleCards.Count; i++)
             {
                 currentHand.Add(possibleCards[i]);
                 if (currentHand.Count == numberCards)
                 {
-                    List < Card > handCopy = new List<Card> (currentHand);
+                    List<Card> handCopy = new List<Card>(currentHand);
                     allHands.Add(handCopy);
                 }
                 else
                 {
-                    generateHands(currentHand, possibleCards, i, numberCards, allHands);
+                    GenerateHands(currentHand, possibleCards, i, numberCards, allHands);
                 }
                 currentHand.Remove(possibleCards[i]);
             }
         }
 
-        Tuple < int, int > determineMaxHand(List < Card > possibleCards)
+        public Tuple<int, int> DetermineMaxHand(List<Card> possibleCards)
         {
             Tuple<int, int> maxHandValue = new Tuple<int, int>(0, 0);
-            List < List < Card >> allHands = new List<List<Card>> ();
-            List < Card > currentHand = new List<Card> ();
-            generateHands(currentHand, possibleCards, -1, 5, allHands);
+            List<List<Card>> allHands = new List<List<Card>>();
+            List<Card> currentHand = new List<Card>();
+            GenerateHands(currentHand, possibleCards, -1, 5, allHands);
             // Console.WriteLine("Generated hands: " + allHands.Count);
             foreach (List<Card> hand in allHands)
             {
@@ -296,22 +345,22 @@ namespace SuperbetBeclean.Services
             return maxHandValue;
         }
 
-        public List < User > determineWinners(Queue < MenuWindow > activePlayers)
+        public List<User> DetermineWinners(Queue<MenuWindow> activePlayers)
         {
-            Tuple < int , int > maxHand = new Tuple<int, int> (0, 0);
+            Tuple<int, int> maxHand = new Tuple<int, int>(0, 0);
             List<User> winners = new List<User>();
             Dictionary<User, Tuple<int, int>> results = new Dictionary<User, Tuple<int, int>>();
             foreach (MenuWindow window in activePlayers)
             {
                 User player = window.Player();
-                List< Card > possibleCards = new List<Card>();
-                for (int i=1;i<=5;i++)
+                List<Card> possibleCards = new List<Card>();
+                for (int i = 1; i <= 5; i++)
                 {
                     possibleCards.Add(communityCards[i]);
                 }
                 possibleCards.Add(player.UserCurrentHand[0]);
                 possibleCards.Add(player.UserCurrentHand[1]);
-                Tuple <int, int > hand = determineMaxHand(possibleCards);
+                Tuple<int, int> hand = DetermineMaxHand(possibleCards);
                 if (hand.Item1 > maxHand.Item1 || (hand.Item1 == maxHand.Item1 && hand.Item2 > maxHand.Item2))
                 {
                     maxHand = hand;
@@ -326,27 +375,33 @@ namespace SuperbetBeclean.Services
             return winners;
         }
 
-    public void disconnectUser(MenuWindow window)
+        public void DisconnectUser(MenuWindow window)
         {
             User player = window.Player();
             freeSpace[player.UserTablePlace] = 0;
             mutex.WaitOne();
             foreach (MenuWindow windowUser in users)
             {
-                windowUser.foldPlayer(tableType, player);
-                windowUser.hidePlayer(tableType, player);
+                windowUser.FoldPlayer(tableType, player);
+                windowUser.HidePlayer(tableType, player);
             }
             users.Remove(window);
             mutex.ReleaseMutex();
         }
 
-        public int joinTable(MenuWindow window, ref SqlConnection sqlConnection)
+        public int JoinTable(MenuWindow window, ref SqlConnection sqlConnection)
         {
-            if (isFull()) return 0;
+            if (IsFull())
+            {
+                return 0;
+            }
 
             User player = window.Player();
 
-            if (player.UserChips < buyIn) return -1;
+            if (player.UserChips < buyIn)
+            {
+                return -1;
+            }
 
             player.UserChips -= buyIn;
             dbService.UpdateUserChips(player.UserID, player.UserChips);
@@ -355,7 +410,7 @@ namespace SuperbetBeclean.Services
             dbService.UpdateUserStack(player.UserID, player.UserStack);
 
             player.UserStatus = WAITING;
-            for (int i=1;i<=FULL;i++)
+            for (int i = 1; i <= FULL; i++)
             {
                 if (freeSpace[i] == 0)
                 {
@@ -368,25 +423,25 @@ namespace SuperbetBeclean.Services
             users.Add(window);
             foreach (MenuWindow windowUser in users)
             {
-                windowUser.showPlayer(tableType, player);
-                window.showPlayer(tableType, windowUser.Player());
+                windowUser.ShowPlayer(tableType, player);
+                window.ShowPlayer(tableType, windowUser.Player());
             }
             mutex.ReleaseMutex();
 
             return 1;
         }
 
-        public bool isFull()
+        public bool IsFull()
         {
             return users.Count == FULL;
         }
 
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             return users.Count == EMPTY;
         }
 
-        public int occupied()
+        public int Occupied()
         {
             return users.Count;
         }
