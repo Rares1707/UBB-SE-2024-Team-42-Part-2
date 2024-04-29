@@ -51,7 +51,7 @@ public class ChatService
         }
     }
 
-    public void newMessage(string _message, ChatWindow thisWindow)
+    public void NewMessage(string _message, ChatWindow thisWindow)
     {
         string userName = "";
         string tableType = "";

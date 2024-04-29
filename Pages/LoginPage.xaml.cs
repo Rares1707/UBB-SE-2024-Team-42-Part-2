@@ -2,30 +2,27 @@
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace SuperbetBeclean.Pages
 {
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    /// 
     public partial class LoginPage : Page
     {
-        private Frame _mainFrame;
-        private MainWindow _mainWindow;
+        private Frame mainFrame;
+        private MainWindow mainWindow;
 
         public LoginPage(Frame mainFrame, MainWindow mainWindow)
         {
             InitializeComponent();
-            _mainFrame = mainFrame;
-            _mainWindow = mainWindow;
+            this.mainFrame = mainFrame;
+            this.mainWindow = mainWindow;
         }
         private void OnTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             // Clear the text when the TextBox gets focus
             TextBox textBox = sender as TextBox;
-            textBox.Text = "";
-            
+            textBox.Text = string.Empty;
         }
 
         private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
@@ -38,10 +35,10 @@ namespace SuperbetBeclean.Pages
             }
         }
 
-        private void onClickLoginButton(object sender, RoutedEventArgs e)
+        private void OnClickLoginButton(object sender, RoutedEventArgs e)
         {
-            _mainWindow.OpenNewWindow(inputNameLoginFirstPage.Text);
-            inputNameLoginFirstPage.Text = "";
+            mainWindow.OpenNewWindow(inputNameLoginFirstPage.Text);
+            inputNameLoginFirstPage.Text = string.Empty;
         }
     }
 }

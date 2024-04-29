@@ -11,21 +11,21 @@
         <Grid.Background>
             <ImageBrush ImageSource="/assets/greenbackgroundimg.jpg" />
         </Grid.Background>
-        <Button x:Name="QuitButtonFirstPage" Content="Quit" HorizontalAlignment="Center" Margin="0,306,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="onClickQuitButton" >
+        <Button x:Name="QuitButtonFirstPage" Content="Quit" HorizontalAlignment="Center" Margin="0,306,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="OnClickQuitButton" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="PlayButtonFirstPage" Content="Play" HorizontalAlignment="Center" Margin="0,226,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="onClickPlayButton" >
+        <Button x:Name="PlayButtonFirstPage" Content="Play" HorizontalAlignment="Center" Margin="0,226,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="OnClickPlayButton" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="RulesButtonFirstPage" Content="Rules" HorizontalAlignment="Center" Margin="0,266,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="onClickRulesButton" >
+        <Button x:Name="RulesButtonFirstPage" Content="Rules" HorizontalAlignment="Center" Margin="0,266,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="OnClickRulesButton" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

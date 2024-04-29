@@ -33,7 +33,7 @@ namespace SuperbetBeclean.Pages
         {
             _mainFrame.NavigationService.GoBack();
         }
-        
+
         public static readonly DependencyProperty BalanceProperty = DependencyProperty.Register(
                        "Balance", typeof(int), typeof(ShopPage), new PropertyMetadata(default(int)));
 

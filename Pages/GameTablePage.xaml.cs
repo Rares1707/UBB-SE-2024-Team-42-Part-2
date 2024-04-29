@@ -34,7 +34,7 @@ namespace SuperbetBeclean.Pages
         private string tableType;
         private ChatWindow chatWindow;
         private ChatService chatService;
-        public GameTablePage(Frame mainFrame, MenuWindow mainWindow, MainService service,string tableType)
+        public GameTablePage(Frame mainFrame, MenuWindow mainWindow, MainService service, string tableType)
         {
             InitializeComponent();
             Loaded += GameTablePage_Loaded;

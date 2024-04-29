@@ -51,7 +51,7 @@ namespace SuperbetBeclean.Windows
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            _chatService.newMessage(chatInputTextBox.Text + "\n",this);
+            _chatService.NewMessage(chatInputTextBox.Text + "\n",this);
         }
 
         private void messagingBox_TextChanged(object sender, TextChangedEventArgs e)

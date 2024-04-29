@@ -11,34 +11,33 @@ namespace SuperbetBeclean.Pages
     /// </summary>
     public partial class MainMenu : Page
     {
-        private Frame _mainFrame;
-        private MenuWindow _menuWindow;
-        private User _user;
-        private MainService _service;
+        private Frame mainFrame;
+        private MenuWindow menuWindow;
+        private User user;
+        private MainService service;
         public MainMenu(Frame mainFrame, MenuWindow mainWindow, MainService serv, User user)
         {
             InitializeComponent();
-            _mainFrame = mainFrame;
-            _menuWindow = mainWindow;
-            _service = serv;
-            _user = user;
+            this.mainFrame = mainFrame;
+            menuWindow = mainWindow;
+            service = serv;
+            this.user = user;
         }
 
-        private void onClickRulesButton(object sender, RoutedEventArgs e)
+        private void OnClickRulesButton(object sender, RoutedEventArgs e)
         {
             RulesWindow rulesWindow = new RulesWindow();
             rulesWindow.Show();
         }
 
-        private void onClickPlayButton(object sender, RoutedEventArgs e)
+        private void OnClickPlayButton(object sender, RoutedEventArgs e)
         {
-            _mainFrame.Navigate(new LobbyPage(_mainFrame, _menuWindow, _service, _user));
+            mainFrame.Navigate(new LobbyPage(mainFrame, menuWindow, service, user));
         }
 
-        private void onClickQuitButton(object sender, RoutedEventArgs e)
+        private void OnClickQuitButton(object sender, RoutedEventArgs e)
         {
-            _menuWindow.Close();
+            menuWindow.Close();
         }
-
     }
 }

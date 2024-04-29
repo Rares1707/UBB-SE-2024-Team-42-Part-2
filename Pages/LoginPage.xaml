@@ -22,7 +22,7 @@
          TextAlignment="Center"
          GotFocus="OnTextBoxGotFocus"
          LostFocus="OnTextBoxLostFocus"/>
-        <Button x:Name="LoginButtonFirstPage" Content="LOGIN" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="onClickLoginButton" >
+        <Button x:Name="LoginButtonFirstPage" Content="LOGIN" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="35" Width="176" Background="#FFFF5E5E" Foreground="White" FontFamily="Franklin Gothic Book" Click="OnClickLoginButton" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

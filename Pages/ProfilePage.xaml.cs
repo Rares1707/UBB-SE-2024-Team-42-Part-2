@@ -1,5 +1,4 @@
-﻿using SuperbetBeclean.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SuperbetBeclean.Model;
 using SuperbetBeclean.Models;
+using SuperbetBeclean.Windows;
 
 namespace SuperbetBeclean.Pages
 {
@@ -23,17 +23,20 @@ namespace SuperbetBeclean.Pages
     /// </summary>
     public partial class ProfilePage : Page
     {
-        private Frame _mainFrame;
-        private MenuWindow _mainWindow;
+        private Frame mainFrame;
+        private MenuWindow mainWindow;
         public ProfilePage(Frame mainFrame, MenuWindow mainWindow)
         {
             InitializeComponent();
-            _mainFrame = mainFrame;
-            _mainWindow = mainWindow;
+            this.mainFrame = mainFrame;
+            this.mainWindow = mainWindow;
             User player = mainWindow.Player();
             DataContext = new ProfileViewModel(mainWindow);
             if (!string.IsNullOrEmpty(player.UserCurrentIconPath))
+            {
                 profilePageUserAvatar.ImageSource = new BitmapImage(new Uri(player.UserCurrentIconPath, UriKind.Absolute));
+            }
+
             profilePageUsernameTextBlock.Text = mainWindow.userName();
             profilePageChipsTextBlock.Text = mainWindow.userChips().ToString();
             profilePageDailyStreakTextBlock.Text = mainWindow.userStreak().ToString();
@@ -42,7 +45,7 @@ namespace SuperbetBeclean.Pages
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _mainFrame.NavigationService.GoBack();
+            mainFrame.NavigationService.GoBack();
         }
     }
 }
