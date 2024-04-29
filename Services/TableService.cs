@@ -287,7 +287,7 @@ namespace SuperbetBeclean.Services
             // Console.WriteLine("Generated hands: " + allHands.Count);
             foreach (List<Card> hand in allHands)
             {
-                Tuple<int, int> handValue = rankCalculator.getValue(hand);
+                Tuple<int, int> handValue = rankCalculator.GetValue(hand);
                 if (handValue.Item1 > maxHandValue.Item1 || (handValue.Item1 == maxHandValue.Item1 && handValue.Item2 > maxHandValue.Item2))
                 {
                     maxHandValue = handValue;

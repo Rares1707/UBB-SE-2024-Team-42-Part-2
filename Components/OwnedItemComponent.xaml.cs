@@ -1,5 +1,4 @@
-﻿using SuperbetBeclean.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SuperbetBeclean.Services;
 
 namespace SuperbetBeclean.Components
 {
@@ -20,7 +20,6 @@ namespace SuperbetBeclean.Components
     /// </summary>
     public partial class OwnedItemComponent : UserControl
     {
-
         public static readonly DependencyProperty OwnedImagePathProperty = DependencyProperty.Register(
             "OwnedImagePath", typeof(string), typeof(OwnedItemComponent), new PropertyMetadata(default(string)));
 
@@ -55,14 +54,13 @@ namespace SuperbetBeclean.Components
             InitializeComponent();
         }
 
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var itemName = OwnedItemName; // Access the ItemName property directly
-            DBService _dbService = new DBService();
-            var itemId = _dbService.GetIconIDByIconName(itemName);
+            DBService dbService = new DBService();
+            var itemId = dbService.GetIconIDByIconName(itemName);
             Console.WriteLine(OwnedUserId.ToString(), itemId);
-            _dbService.SetCurrentIcon(OwnedUserId, itemId);
+            dbService.SetCurrentIcon(OwnedUserId, itemId);
         }
     }
 }
