@@ -1,6 +1,6 @@
-﻿using SuperbetBeclean.Windows;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
+using SuperbetBeclean.Windows;
 
 public class ChatService
 {
@@ -10,26 +10,26 @@ public class ChatService
     {
         menuWindowChatWindowMap = new Dictionary<(MenuWindow, string), ChatWindow>();
     }
-    public void closeChat(MenuWindow _mainWindow)
+    public void CloseChat(MenuWindow mainWindow)
     {
         foreach (var entry in menuWindowChatWindowMap)
         {
             var key = entry.Key;
-            if (key.Item1 == _mainWindow)
+            if (key.Item1 == mainWindow)
             {
                 entry.Value.Close();
                 break;
             }
         }
     }
-    public void newChat(MenuWindow _mainWindow, string _tableType)
+    public void NewChat(MenuWindow mainWindow, string tableType)
     {
         foreach (Window window in Application.Current.Windows)
         {
-            if (window.GetType() == typeof(MenuWindow) && window == _mainWindow)
+            if (window.GetType() == typeof(MenuWindow) && window == mainWindow)
             {
                 MenuWindow menuWindow = (MenuWindow)window;
-                var key = (menuWindow, _tableType);
+                var key = (menuWindow, tableType);
 
                 // Check if a ChatWindow is already open for this MenuWindow and tableType
                 if (!menuWindowChatWindowMap.ContainsKey(key))
@@ -38,7 +38,7 @@ public class ChatService
                     chatWindow.Owner = menuWindow;
                     chatWindow.Closed += (s, args) => menuWindowChatWindowMap.Remove(key); // Remove from dictionary when closed
                     menuWindowChatWindowMap.Add(key, chatWindow); // Add to dictionary
-                    chatWindow.messagingBox.Text = _mainWindow.userName();
+                    chatWindow.messagingBox.Text = mainWindow.userName();
                     chatWindow.Show();
                 }
                 else
@@ -51,11 +51,11 @@ public class ChatService
         }
     }
 
-    public void NewMessage(string _message, ChatWindow thisWindow)
+    public void NewMessage(string message, ChatWindow thisWindow)
     {
-        string userName = "";
-        string tableType = "";
-        
+        string userName = string.Empty;
+        string tableType = string.Empty;
+
         // Find the userName and tableType corresponding to this window
         foreach (var entry in menuWindowChatWindowMap)
         {
@@ -77,7 +77,7 @@ public class ChatService
             if (key.Item2 == tableType)
             {
                 // Update the messagingBox in chatWindow with the new message
-                chatWindow.messagingBox.Text += " " + userName + " (" + tableType + "): " + _message;
+                chatWindow.messagingBox.Text += " " + userName + " (" + tableType + "): " + message;
             }
         }
     }

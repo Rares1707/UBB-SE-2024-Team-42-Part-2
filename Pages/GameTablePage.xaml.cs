@@ -66,7 +66,7 @@ namespace SuperbetBeclean.Pages
         }
         private void QuitBttn_Click(object sender, RoutedEventArgs e)
         {
-            chatService.closeChat(mainWindow);
+            chatService.CloseChat(mainWindow);
             mainFrame.NavigationService.GoBack();
             action = "Fold";
             mainWindow.disconnectUser(sender, e);
@@ -378,7 +378,7 @@ namespace SuperbetBeclean.Pages
 
         private void MsgBttn_Click(object sender, RoutedEventArgs e)
         {
-            chatService.newChat(mainWindow, tableType);
+            chatService.NewChat(mainWindow, tableType);
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
