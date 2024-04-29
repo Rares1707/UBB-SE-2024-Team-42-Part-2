@@ -10,16 +10,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets3", "assets3", "{4C7F
 		..\..\Lab 3\fire-emoji-402x512-8ma95d17.png = ..\..\Lab 3\fire-emoji-402x512-8ma95d17.png
 		..\..\Lab 3\gambling-table-luxury-casino-casino-table-generative-ai_527096-25850.jpg = ..\..\Lab 3\gambling-table-luxury-casino-casino-table-generative-ai_527096-25850.jpg
 		assets\greenbackgroundimg.jpg = assets\greenbackgroundimg.jpg
-		..\..\Lab 3\Money_Bag_Emoji_large.webp = ..\..\Lab 3\Money_Bag_Emoji_large.webp
 		..\..\Lab 3\interntable.webp = ..\..\Lab 3\interntable.webp
+		..\..\Lab 3\Money_Bag_Emoji_large.webp = ..\..\Lab 3\Money_Bag_Emoji_large.webp
 		..\..\Lab 3\Money_with_Wings_Emoji_grande.webp = ..\..\Lab 3\Money_with_Wings_Emoji_grande.webp
 		..\..\Lab 3\NA_Tyler1_2019_AS.webp = ..\..\Lab 3\NA_Tyler1_2019_AS.webp
 		..\..\Lab 3\png-transparent-trophy-emoji-cup-text-messaging-trophy-medal-emoticon-prize-transformed.png = ..\..\Lab 3\png-transparent-trophy-emoji-cup-text-messaging-trophy-medal-emoticon-prize-transformed.png
-		..\..\Lab 3\seminole-hard-rock-hotel-and-casino-opens-in-south-florida-50826091-58976edd5f9b5874ee378422.jpg = ..\..\Lab 3\seminole-hard-rock-hotel-and-casino-opens-in-south-florida-50826091-58976edd5f9b5874ee378422.jpg
 		..\..\Lab 3\RedBackground.jpg = ..\..\Lab 3\RedBackground.jpg
+		..\..\Lab 3\seminole-hard-rock-hotel-and-casino-opens-in-south-florida-50826091-58976edd5f9b5874ee378422.jpg = ..\..\Lab 3\seminole-hard-rock-hotel-and-casino-opens-in-south-florida-50826091-58976edd5f9b5874ee378422.jpg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA39ABF0-30C4-4B8A-ADA1-046BC0051C5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingBeclean", "TestingBeclean\TestingBeclean.csproj", "{D5A08C2C-19E1-45E9-8056-93042212F4D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{7212958B-43D9-4F97-A01B-3551F8C96D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7212958B-43D9-4F97-A01B-3551F8C96D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7212958B-43D9-4F97-A01B-3551F8C96D07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
