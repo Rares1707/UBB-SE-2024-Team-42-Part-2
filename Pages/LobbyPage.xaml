@@ -66,12 +66,12 @@
                     <ColumnDefinition Width="21*"/>
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="LeaderboardBttn" Style="{StaticResource RoundedButtonStyle}" Content="" Width="40" BorderBrush="White" HorizontalAlignment="Center" Cursor="Hand" Click="onClickLeaderboardButton" Margin="0,5,0,5">
+                <Button x:Name="LeaderboardBttn" Style="{StaticResource RoundedButtonStyle}" Content="" Width="40" BorderBrush="White" HorizontalAlignment="Center" Cursor="Hand" Click="OnClickLeaderboardButton" Margin="0,5,0,5">
                     <Button.Background>
                         <ImageBrush ImageSource="/assets/leaderboard.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="RefferalBttn" Style="{StaticResource RoundedButtonStyle}" Content="" Width="40" BorderBrush="White" Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Cursor="Hand" Click="onShopButtonClick" Margin="0,5,0,5">
+                <Button x:Name="RefferalBttn" Style="{StaticResource RoundedButtonStyle}" Content="" Width="40" BorderBrush="White" Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Cursor="Hand" Click="OnShopButtonClick" Margin="0,5,0,5">
                     <Button.Background>
                         <ImageBrush ImageSource="/assets/shopping-cart-white.png" TileMode="Tile"/>
                     </Button.Background>
@@ -86,7 +86,7 @@
                     </Button.Background>
                 </Button>
 
-                <Button x:Name="BackBttn" Style="{StaticResource HorizontalButtonStyle}" Content="Back" HorizontalAlignment="Center" Width="82" Background="White" BorderBrush="White" FontSize="16" Grid.Column="3" Cursor="Hand" Click="buttonLobbyBack" Margin="0,13,0,13"/>
+                <Button x:Name="BackBttn" Style="{StaticResource HorizontalButtonStyle}" Content="Back" HorizontalAlignment="Center" Width="82" Background="White" BorderBrush="White" FontSize="16" Grid.Column="3" Cursor="Hand" Click="ButtonLobbyBack" Margin="0,13,0,13"/>
             </Grid>
             <Grid Grid.Column="0" Background="WhiteSmoke" Width="275" Height="38" HorizontalAlignment="Center" Margin="0,6,0,6">
                 <TextBlock x:Name="PlayerNameTextBox" HorizontalAlignment="Left" Margin="50,3,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="157"/>

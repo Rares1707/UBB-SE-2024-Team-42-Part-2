@@ -18,10 +18,9 @@ namespace SuperbetBeclean
             MainFrame.Navigate(new LoginPage(MainFrame, this));
             Title = "Superbet Beclean - Poker";
         }
-        public void openNewWindow(string username)
+        public void OpenNewWindow(string username)
         {
             service.addWindow(username);
         }
-
     }
 }

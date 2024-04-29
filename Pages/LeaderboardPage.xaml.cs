@@ -10,17 +10,17 @@ namespace SuperbetBeclean.Pages
     /// </summary>
     public partial class LeaderboardPage : Page
     {
-        private Frame _mainFrame;
-        private List<string> _leaderBoardVector;
+        private Frame mainFrame;
+        private List<string> leaderBoardVector;
 
         public LeaderboardPage(Frame mainFrame, List<string> leaderBoardVector)
         {
             InitializeComponent();
-            _leaderBoardVector = leaderBoardVector;
-            _mainFrame = mainFrame;
+            this.leaderBoardVector = leaderBoardVector;
+            this.mainFrame = mainFrame;
 
             // Set the ItemsSource of the ListView to leaderBoardVector
-            listViewLeaderboard.ItemsSource = _leaderBoardVector;
+            listViewLeaderboard.ItemsSource = this.leaderBoardVector;
 
             // Subscribe to the Loaded event of the ListView
             listViewLeaderboard.Loaded += ListViewLeaderboard_Loaded;
@@ -32,7 +32,7 @@ namespace SuperbetBeclean.Pages
             for (int i = 0; i < 3 && i < listViewLeaderboard.Items.Count; i++)
             {
                 var item = listViewLeaderboard.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                if (item != null && i ==0)
+                if (item != null && i == 0)
                 {
                     item.Foreground = Brushes.Gold; // Change font color for the first place
                 }
@@ -47,9 +47,9 @@ namespace SuperbetBeclean.Pages
             }
         }
 
-        private void onClickLeaderboardBack(object sender, RoutedEventArgs e)
+        private void OnClickLeaderboardBack(object sender, RoutedEventArgs e)
         {
-            _mainFrame.NavigationService.GoBack();
+            mainFrame.NavigationService.GoBack();
         }
     }
 }

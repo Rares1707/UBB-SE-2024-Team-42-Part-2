@@ -48,66 +48,66 @@ namespace SuperbetBeclean.Windows
         async public Task < int > startTime(string table, int minBet, int maxBet)
         {
             int bet = 0;
-            bet = await gamePages[table].runTimer(minBet, maxBet);
+            bet = await gamePages[table].RunTimer(minBet, maxBet);
             return bet;
         }
 
         public void updateChips(string table, User player)
         {
-            gamePages[table].updateChips(player);
+            gamePages[table].UpdateChips(player);
         }
         public void resetCards(string table)
         {
-            gamePages[table].resetCards();
+            gamePages[table].ResetCards();
         }
 
         public void notifyUserCard(string table, User u, int card, string cardValue)
         {
-            gamePages[table].addUserCard(u == user, u.UserTablePlace, card, cardValue);
+            gamePages[table].AddUserCard(u == user, u.UserTablePlace, card, cardValue);
         }
 
         public void notifyTableCard(string table, int card, string cardValue)
         {
-            gamePages[table].addTableCard(card, cardValue);
+            gamePages[table].AddTableCard(card, cardValue);
         }
 
         public void showCards(string table, User player)
         {
-            gamePages[table].showCards(player);
+            gamePages[table].ShowCards(player);
         }
         public void notify(string table, User player, int tablePot)
         {
-            gamePages[table].updatePlayerMoney(player);
-            gamePages[table].updatePot(tablePot);
+            gamePages[table].UpdatePlayerMoney(player);
+            gamePages[table].UpdatePot(tablePot);
         }
         public void foldPlayer(string table, User player)
         {
-            gamePages[table].playerFold(player);
+            gamePages[table].PlayerFold(player);
         }
         public void showPlayer(string table, User player)
         {
-            gamePages[table].showPlayer(player);
+            gamePages[table].ShowPlayer(player);
         }
 
         public void hidePlayer(string table, User player)
         {
-            gamePages[table].hidePlayer(player);
+            gamePages[table].HidePlayer(player);
         }
         public void endTurn(string table, User player)
         {
-            gamePages[table].endTurn(player);
+            gamePages[table].EndTurn(player);
         }
         public void startRound(string table, User player)
         {
-            gamePages[table].startRound(player);
+            gamePages[table].StartRound(player);
         }
         public void resetPot(string table)
         {
-            gamePages[table].resetPot();
+            gamePages[table].ResetPot();
         }
         public void displayWinner(string table, User player, bool status)
         {
-            gamePages[table].displayWinner(player, status);
+            gamePages[table].DisplayWinner(player, status);
         }
         public User Player()
         {

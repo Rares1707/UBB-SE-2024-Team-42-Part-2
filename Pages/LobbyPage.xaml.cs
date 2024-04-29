@@ -46,23 +46,23 @@ namespace SuperbetBeclean.Pages
             SeniorPlayerCount.Text = _service.occupiedSenior().ToString() + "/8";
         }
 
-        private void buttonLobbyBack(object sender, System.Windows.RoutedEventArgs e)
+        private void ButtonLobbyBack(object sender, System.Windows.RoutedEventArgs e)
         {
             _mainFrame.NavigationService.GoBack();
         }
 
-        private void onClickLeaderboardButton(object sender, System.Windows.RoutedEventArgs e)
+        private void OnClickLeaderboardButton(object sender, System.Windows.RoutedEventArgs e)
         {
             List<string> strings;
             strings = dbService.GetLeaderboard();
             _mainFrame.Navigate(new LeaderboardPage(_mainFrame,strings));
         }
-        public string returnUserNameOfLobbyPage()
+        public string ReturnUserNameOfLobbyPage()
         {
            return _mainWindow.userName();
         }
-        private void onShopButtonClick(object sender, RoutedEventArgs e)
-        {   
+        private void OnShopButtonClick(object sender, RoutedEventArgs e)
+        {
             _mainFrame.Navigate(new ShopPage(_mainFrame, _mainWindow));
         }
 

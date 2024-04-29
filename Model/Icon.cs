@@ -8,23 +8,34 @@ namespace SuperbetBeclean.Model
 {
     public class Icon
     {
-        private int _iconID;
-        private string _iconName;
-        private int _iconPrice;
-        private string _iconPath;
+        private int iconID;
+        private string iconName;
+        private int iconPrice;
+        private string iconPath;
 
         public Icon(int iconID = 0, string iconName = "", int iconPrice = 0, string iconPath = "")
         {
-            _iconID = iconID;
-            _iconName = iconName;
-            _iconPrice = iconPrice;
-            _iconPath = iconPath;
+            this.iconID = iconID;
+            this.iconName = iconName;
+            this.iconPrice = iconPrice;
+            this.iconPath = iconPath;
         }
 
-        public int IconID { get { return _iconID; } set { _iconID = value;  } }
-        public string IconName { get { return _iconName; } set { _iconName = value; } }
-        public int IconPrice { get { return _iconPrice; } set { _iconPrice = value; } }
-        public string IconPath { get { return _iconPath; } set { _iconPath = value; } }
-
+        public int IconID
+        {
+            get { return iconID; } set { iconID = value;  }
+        }
+        public string IconName
+        {
+            get { return iconName; } set { iconName = value; }
+        }
+        public int IconPrice
+        {
+            get { return iconPrice; } set { iconPrice = value; }
+        }
+        public string IconPath
+        {
+            get { return iconPath; } set { iconPath = value; }
+        }
     }
 }

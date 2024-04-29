@@ -1,7 +1,4 @@
-﻿using SuperbetBeclean.Model;
-using SuperbetBeclean.Services;
-using SuperbetBeclean.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
@@ -17,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SuperbetBeclean.Model;
+using SuperbetBeclean.Services;
+using SuperbetBeclean.Windows;
 
 namespace SuperbetBeclean.Pages
 {
@@ -25,33 +25,31 @@ namespace SuperbetBeclean.Pages
     /// </summary>
     public partial class GameTablePage : Page
     {
-        private MenuWindow _mainWindow;
-        private Frame _mainFrame;
-        private MainService _service;
-        int timer = 0;
-        int playerBet = 0;
-        string action = "";
-        string _tableType;
-        ChatWindow _chatWindow;
-        private ChatService _chatService;
+        private MenuWindow mainWindow;
+        private Frame mainFrame;
+        private MainService service;
+        private int timer = 0;
+        private int playerBet = 0;
+        private string action = string.Empty;
+        private string tableType;
+        private ChatWindow chatWindow;
+        private ChatService chatService;
         public GameTablePage(Frame mainFrame, MenuWindow mainWindow, MainService service,string tableType)
         {
             InitializeComponent();
             Loaded += GameTablePage_Loaded;
-            _mainWindow = mainWindow;
-            _service = service;
-            _mainFrame = mainFrame;
-            PlayerNameTextBox.Text = _mainWindow.userName();
-            Uri uri = new Uri(_mainWindow.userIcon(), UriKind.Absolute);
+            this.mainWindow = mainWindow;
+            this.service = service;
+            this.mainFrame = mainFrame;
+            PlayerNameTextBox.Text = this.mainWindow.userName();
+            Uri uri = new Uri(this.mainWindow.userIcon(), UriKind.Absolute);
             PlayerIconImg.Source = new BitmapImage(uri);
-            PlayerLvlTextBox.Text = "Level: " + _mainWindow.userLevel().ToString();
-            PlayerChipsTextBox.Text = "Chips: " + _mainWindow.userChips().ToString();
-            _tableType= tableType;
-             _chatService = new ChatService();
-
-
+            PlayerLvlTextBox.Text = "Level: " + this.mainWindow.userLevel().ToString();
+            PlayerChipsTextBox.Text = "Chips: " + this.mainWindow.userChips().ToString();
+            this.tableType = tableType;
+             chatService = new ChatService();
         }
-        public void updateChips(User player)
+        public void UpdateChips(User player)
         {
             Application.Current.Dispatcher.Invoke(() => {
                 PlayerChipsTextBox.Text = player.UserChips.ToString();
@@ -66,20 +64,20 @@ namespace SuperbetBeclean.Pages
                 window.Height = 720;
             }
         }
-        
         private void QuitBttn_Click(object sender, RoutedEventArgs e)
         {
-            _chatService.closeChat(_mainWindow);
-            _mainFrame.NavigationService.GoBack();
+            chatService.closeChat(mainWindow);
+            mainFrame.NavigationService.GoBack();
             action = "Fold";
-            _mainWindow.disconnectUser(sender, e);
+            mainWindow.disconnectUser(sender, e);
         }
 
-        public void endTimer()
+        public void EndTimer()
         {
             timer = -1;
-            Application.Current.Dispatcher.Invoke(() => {
-                PlayerTimer.Text = "";
+            Application.Current.Dispatcher.Invoke(() => 
+            {
+                PlayerTimer.Text = string.Empty;
                 SliderBet.Maximum = 0;
                 MinValueBet.Content = "0";
                 SliderBet.Minimum = 0;
@@ -90,17 +88,19 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        public void endTurn(User player)
+        public void EndTurn(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Label playerBet = FindName("Player" + player.UserTablePlace + "Bet") as Label;
                 playerBet.Content = "-";
                 CurrentBetValue.Content = "-";
             });
         }
-        public void startRound(User player)
+        public void StartRound(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 PotValue.Content = "0";
                 CurrentBetValue.Content = "-";
                 Label playerStack = FindName("Player" + player.UserTablePlace + "Stack") as Label;
@@ -108,9 +108,10 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        public void showCards(User player)
+        public void ShowCards(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Label playerBet = FindName("Player" + player.UserTablePlace + "Bet") as Label;
                 playerBet.Content = "-";
                 Image playerCard1 = FindName("Player" + player.UserTablePlace + "Card1") as Image;
@@ -121,17 +122,18 @@ namespace SuperbetBeclean.Pages
                 playerCard2.Source = new BitmapImage(uri2);
             });
         }
-        public void resetPot()
+        public void ResetPot()
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 PotValue.Content = "0";
             });
         }
 
-        public void resetTimer(int minBet, int maxBet)
+        public void ResetTimer(int minBet, int maxBet)
         {
             timer = 20;
-            action = "";
+            action = string.Empty;
             playerBet = 0;
             SliderBet.Minimum = Math.Max(0, minBet);
             MinValueBet.Content = Math.Max(0, minBet).ToString();
@@ -142,38 +144,43 @@ namespace SuperbetBeclean.Pages
             PlayerTimer.Text = "Time: " + timer.ToString();
             PlayerTimer.Foreground = Brushes.White;
         }
-        public void decrementTimer()
+        public void DecrementTimer()
         {
             timer--;
-            if (timer == 5) 
+            if (timer == 5)
+            {
                 PlayerTimer.Foreground = Brushes.Red;
+            }
             PlayerTimer.Text = "Time: " + timer.ToString();
         }
 
-        public void resetCards()
+        public void ResetCards()
         {
-            for (int i=1;i<=8;i++)
+            for (int i = 1; i <= 8; i++)
             {
-                for (int j=1;j<=2;j++)
+                for (int j = 1; j <= 2; j++)
                 {
-                    Application.Current.Dispatcher.Invoke(() => {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
                         Image playerCard = FindName("Player" + i + "Card" + j) as Image;
                         playerCard.Visibility = Visibility.Hidden;
                     });
                 }
             }
-            for (int i=1;i<=5;i++)
+            for (int i = 1; i <= 5; i++)
             {
-                Application.Current.Dispatcher.Invoke(() => {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     Image playerCard = FindName("CardTable" + i) as Image;
                     playerCard.Visibility = Visibility.Hidden;
                 });
             }
         }
 
-        public void addUserCard(bool visible, int player, int card, string cardValue)
+        public void AddUserCard(bool visible, int player, int card, string cardValue)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Image playerCard = FindName("Player" + player + "Card" + card) as Image;
                 if (visible == false)
                 {
@@ -189,9 +196,10 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        public void playerFold(User player)
+        public void PlayerFold(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Image playerCard1 = FindName("Player" + player.UserTablePlace + "Card1") as Image;
                 Image playerCard2 = FindName("Player" + player.UserTablePlace + "Card2") as Image;
                 playerCard1.Visibility = Visibility.Hidden;
@@ -201,9 +209,10 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        public void showPlayer(User player)
+        public void ShowPlayer(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Border playerBorder = FindName("Player" + player.UserTablePlace + "Border") as Border;
                 TextBlock playerName = FindName("Player" + player.UserTablePlace + "NameTextBox") as TextBlock;
                 TextBlock playerLevel = FindName("Player" + player.UserTablePlace + "LvlTextBox") as TextBlock;
@@ -222,7 +231,7 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        public void hidePlayer(User player)
+        public void HidePlayer(User player)
         {
             Application.Current.Dispatcher.Invoke(() => {
 
@@ -230,19 +239,20 @@ namespace SuperbetBeclean.Pages
                 TextBlock playerName = FindName("Player" + player.UserTablePlace + "NameTextBox") as TextBlock;
                 TextBlock playerLevel = FindName("Player" + player.UserTablePlace + "LvlTextBox") as TextBlock;
                 playerBorder.Visibility = Visibility.Hidden;
-                playerName.Text = "";
-                playerLevel.Text = "";
+                playerName.Text = string.Empty;
+                playerLevel.Text = string.Empty;
                 Border playerMoney = FindName("Player" + player.UserTablePlace + "MoneyData") as Border;
                 Label playerStack = FindName("Player" + player.UserTablePlace + "Stack") as Label;
                 Label playerBet = FindName("Player" + player.UserTablePlace + "Bet") as Label;
                 playerMoney.Visibility = Visibility.Hidden;
-                playerStack.Content = "";
-                playerBet.Content = "";
+                playerStack.Content = string.Empty;
+                playerBet.Content = string.Empty;
             });
         }
-        public void addTableCard(int card, string cardValue)
+        public void AddTableCard(int card, string cardValue)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Image playerCard = FindName("CardTable" + card) as Image;
                 Uri uri = new Uri("/assets/cards/" + cardValue + ".png", UriKind.Relative);
                 playerCard.Source = new BitmapImage(uri);
@@ -250,32 +260,44 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        async public Task < int > runTimer(int minBet, int maxBet)
+        async public Task<int> RunTimer(int minBet, int maxBet)
         {
-            Application.Current.Dispatcher.Invoke(() => {
-                resetTimer(minBet, maxBet);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ResetTimer(minBet, maxBet);
             });
             while (timer != 0)
             {
-                if (action != "") break;
+                if (action != string.Empty)
+                {
+                    break;
+                }
                 await Task.Delay(1000);
-                Application.Current.Dispatcher.Invoke(() => {
-                    decrementTimer();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    DecrementTimer();
                 });
                 Console.WriteLine(timer.ToString());
             }
-            Application.Current.Dispatcher.Invoke(() => { 
-                endTimer(); 
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EndTimer();
             });
-            if (action == "") {
+            if (action == string.Empty)
+            {
                 action = "Fold";
                 playerBet = -1;
             }
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 if (action == "Fold")
+                {
                     CurrentBetValue.Content = "Folded";
+                }
                 else
+                {
                     CurrentBetValue.Content = playerBet.ToString();
+                }
             });
             return playerBet;
         }
@@ -296,16 +318,18 @@ namespace SuperbetBeclean.Pages
             action = "Fold";
             playerBet = -1;
         }
-        public void updatePot(int pot)
+        public void UpdatePot(int pot)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 PotValue.Content = pot.ToString();
             });
         }
 
-        public void updatePlayerMoney(User player)
+        public void UpdatePlayerMoney(User player)
         {
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
                 Border playerMoney = FindName("Player" + player.UserTablePlace + "MoneyData") as Border;
                 Label playerStack = FindName("Player" + player.UserTablePlace + "Stack") as Label;
                 Label playerBet = FindName("Player" + player.UserTablePlace + "Bet") as Label;
@@ -315,10 +339,12 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        public void displayWinner(User player, bool status) { 
+        public void DisplayWinner(User player, bool status)
+        {
             if (status)
             {
-                Application.Current.Dispatcher.Invoke(() => {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     Border playerBorder = FindName("Player" + player.UserTablePlace + "Border") as Border;
                     Grid playerGrid = FindName("Player" + player.UserTablePlace + "Grid") as Grid;
                     TextBlock playerName = FindName("Player" + player.UserTablePlace + "NameTextBox") as TextBlock;
@@ -331,7 +357,8 @@ namespace SuperbetBeclean.Pages
             }
             else
             {
-                Application.Current.Dispatcher.Invoke(() => {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     Border playerBorder = FindName("Player" + player.UserTablePlace + "Border") as Border;
                     Grid playerGrid = FindName("Player" + player.UserTablePlace + "Grid") as Grid;
                     TextBlock playerName = FindName("Player" + player.UserTablePlace + "NameTextBox") as TextBlock;
@@ -345,20 +372,18 @@ namespace SuperbetBeclean.Pages
         }
         private void ChallengesBttn_Click(object sender, RoutedEventArgs e)
         {
-            ChallengesWindow challengesWindow= new ChallengesWindow();
+            ChallengesWindow challengesWindow = new ChallengesWindow();
             challengesWindow.Show();
         }
 
         private void MsgBttn_Click(object sender, RoutedEventArgs e)
         {
-            _chatService.newChat(_mainWindow, _tableType);
-            
+            chatService.newChat(mainWindow, tableType);
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderValueBet.Content = Convert.ToInt32(SliderBet.Value).ToString();
         }
-        
     }
 }

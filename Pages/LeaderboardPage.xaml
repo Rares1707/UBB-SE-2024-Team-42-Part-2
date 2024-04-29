@@ -32,7 +32,7 @@
                FontSize="20" Foreground="#FFE33B0E" FontFamily="Yu Gothic UI Semibold"/>
         </Border>
         <!-- Back Button -->
-        <Button x:Name="buttonLeaderboardBack" Content="Back" HorizontalAlignment="Right" Margin="20" VerticalAlignment="Bottom" Width="104" Height="28" Foreground="White" Background="Black" Click="onClickLeaderboardBack">
+        <Button x:Name="buttonLeaderboardBack" Content="Back" HorizontalAlignment="Right" Margin="20" VerticalAlignment="Bottom" Width="104" Height="28" Foreground="White" Background="Black" Click="OnClickLeaderboardBack">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

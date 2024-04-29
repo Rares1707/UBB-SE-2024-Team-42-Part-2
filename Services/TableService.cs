@@ -53,9 +53,9 @@ namespace SuperbetBeclean.Services
 
         public Card getRandomCardAndRemoveIt()
         {
-            int index = random.Next(0, deck.getDeckSize());
-            Card card = deck.getCardFromIndex(index);
-            deck.removeCardFromIndex(index);
+            int index = random.Next(0, deck.GetDeckSize());
+            Card card = deck.GetCardFromIndex(index);
+            deck.RemoveCardFromIndex(index);
             return card;
         }
 

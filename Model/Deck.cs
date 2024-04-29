@@ -8,7 +8,10 @@ namespace SuperbetBeclean.Model
 {
     public class Deck
     {
-        const string HEART = "H", DIAMOND = "D", SPADE = "S", CLUB = "C";
+        private const string HEART = "H";
+        private const string DIAMOND = "D";
+        private const string SPADE = "S";
+        private const string CLUB = "C";
 
         private List<Card> deck;
 
@@ -17,14 +20,16 @@ namespace SuperbetBeclean.Model
             deck = new List<Card>();
 
             for (int cardValue = 2; cardValue <= 10; cardValue++)
-                addCardsForValue(cardValue.ToString());
+            {
+                AddCardsForValue(cardValue.ToString());
+            }
 
-            addCardsForValue("J");
-            addCardsForValue("Q");
-            addCardsForValue("K");
-            addCardsForValue("A");
+            AddCardsForValue("J");
+            AddCardsForValue("Q");
+            AddCardsForValue("K");
+            AddCardsForValue("A");
         }
-        public void addCardsForValue(string value)
+        public void AddCardsForValue(string value)
         {
             deck.Add(new Card(value, HEART));
             deck.Add(new Card(value, DIAMOND));
@@ -32,19 +37,18 @@ namespace SuperbetBeclean.Model
             deck.Add(new Card(value, CLUB));
         }
 
-        public void removeCardFromIndex(int index)
+        public void RemoveCardFromIndex(int index)
         {
             deck.RemoveAt(index);
         }
-        public Card getCardFromIndex(int index)
+        public Card GetCardFromIndex(int index)
         {
             return deck[index];
         }
 
-        public int getDeckSize()
+        public int GetDeckSize()
         {
             return deck.Count;
         }
-
     }
 }

@@ -28,7 +28,6 @@ namespace SuperbetBeclean.Components
         public static readonly DependencyProperty ItemNameProperty = DependencyProperty.Register(
             "ItemName", typeof(string), typeof(ShopItemComponent), new PropertyMetadata(default(string)));
 
-
         public static readonly DependencyProperty ShopUserIdProperty = DependencyProperty.Register(
                        "ShopUserId", typeof(int), typeof(ShopItemComponent), new PropertyMetadata(default(int)));
         // Properties for data binding

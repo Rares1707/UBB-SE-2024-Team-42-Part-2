@@ -29,7 +29,6 @@ namespace SuperbetBeclean.Components
         public static readonly DependencyProperty OwnedUserIdProperty = DependencyProperty.Register(
             "OwnedUserId", typeof(int), typeof(OwnedItemComponent), new PropertyMetadata(default(int)));
 
-
         // Properties for data binding
         public string OwnedImagePath
         {

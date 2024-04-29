@@ -8,7 +8,8 @@ namespace SuperbetBeclean.Model
 {
     public class Card
     {
-        private string value, suit;
+        private string value;
+        private string suit;
 
         public Card(string value, string suit)
         {
@@ -16,8 +17,17 @@ namespace SuperbetBeclean.Model
             this.suit = suit;
         }
 
-        public string Value { get { return value; } set { value = value; } }
-        public string Suit { get { return suit; } set { suit = value; } }
-        public string Info() { return value + suit; }
+        public string Value
+        {
+            get { return value; } set { this.value = value; }
+        }
+        public string Suit
+        {
+            get { return suit; } set { suit = value; }
+        }
+        public string Info()
+        {
+            return value + suit;
+        }
     }
 }

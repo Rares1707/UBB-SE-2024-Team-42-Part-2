@@ -40,7 +40,7 @@ namespace SuperbetBeclean.Pages
 
         private void onClickLoginButton(object sender, RoutedEventArgs e)
         {
-            _mainWindow.openNewWindow(inputNameLoginFirstPage.Text);
+            _mainWindow.OpenNewWindow(inputNameLoginFirstPage.Text);
             inputNameLoginFirstPage.Text = "";
         }
     }

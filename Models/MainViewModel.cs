@@ -1,6 +1,4 @@
-﻿using SuperbetBeclean.Model;
-using SuperbetBeclean.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,23 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SuperbetBeclean.Model;
+using SuperbetBeclean.Services;
 
 namespace SuperbetBeclean.Models
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private int _balance;
+        private int balance;
 
-        DBService _dbService;
+        private DBService dbService;
 
         public int Balance
         {
-            get { return _balance; }
+            get
+            {
+                return balance;
+            }
+
             set
             {
-                if (_balance != value)
+                if (balance != value)
                 {
-                    _balance = value;
+                    balance = value;
                     OnPropertyChanged(nameof(Balance));
                 }
             }
@@ -37,7 +41,7 @@ namespace SuperbetBeclean.Models
         {
             Balance = currentBalance;
             ShopItems = new List<ShopItem>();
-            _dbService = new DBService();
+            dbService = new DBService();
             LoadItems(userId);
         }
 
@@ -45,8 +49,8 @@ namespace SuperbetBeclean.Models
 
         private void LoadItems(int userId)
         {
-            List<ShopItem> ownedItems = _dbService.GetAllUserIconsByUserId(userId);
-            List<ShopItem> allItems = _dbService.GetShopItems();
+            List<ShopItem> ownedItems = dbService.GetAllUserIconsByUserId(userId);
+            List<ShopItem> allItems = dbService.GetShopItems();
 
             // Use a HashSet to store the names of owned items for fast lookup
             HashSet<string> ownedItemNames = new HashSet<string>();
@@ -76,7 +80,6 @@ namespace SuperbetBeclean.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
 }
 
 // TODO: Delete once the commands are implemented
@@ -91,6 +94,6 @@ public class PlaceholderCommand : ICommand
 
     public void Execute(object parameter)
     {
-
+        return;
     }
 }

@@ -8,25 +8,40 @@ namespace SuperbetBeclean.Model
 {
     public class Challenge
     {
-        private int _challengeID;
-        private string _challengeDescription;
-        private string _challengeRule;
-        private int _challengeAmount;
-        private int _challengeReward;
+        private int challengeID;
+        private string challengeDescription;
+        private string challengeRule;
+        private int challengeAmount;
+        private int challengeReward;
 
         public Challenge(int challengeID = 0,  string challengeDescription = "", string challengeRule = "", int challengeAmount = 0, int challengeReward = 0)
         {
-            _challengeID = challengeID;
-            _challengeDescription = challengeDescription;
-            _challengeRule = challengeRule;
-            _challengeAmount = challengeAmount;
-            _challengeReward = challengeReward;
+            this.challengeID = challengeID;
+            this.challengeDescription = challengeDescription;
+            this.challengeRule = challengeRule;
+            this.challengeAmount = challengeAmount;
+            this.challengeReward = challengeReward;
         }
 
-        public int ChallengeID { get { return _challengeID; } set { _challengeID = value; } }
-        public string ChallengeDescription { get { return _challengeDescription; } set { _challengeDescription = value; } }
-        public string ChallengeRule { get { return _challengeRule; } set { _challengeRule = value; } }
-        public int ChallengeAmount {  get { return _challengeAmount; } set { _challengeAmount = value; } }
-        public int ChallengeReward {  get { return _challengeReward; } set { _challengeReward = value; } }
+        public int ChallengeID
+        {
+            get { return challengeID; } set { challengeID = value; }
+        }
+        public string ChallengeDescription
+        {
+            get { return challengeDescription; } set { challengeDescription = value; }
+        }
+        public string ChallengeRule
+        {
+            get { return challengeRule; } set { challengeRule = value; }
+        }
+        public int ChallengeAmount
+        {
+            get { return challengeAmount; } set { challengeAmount = value; }
+        }
+        public int ChallengeReward
+        {
+            get { return challengeReward; } set { challengeReward = value; }
+        }
     }
 }

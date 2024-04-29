@@ -11,25 +11,25 @@ namespace SuperbetBeclean.Models
 {
     internal class ProfileViewModel
     {
-        DBService _dbService;
+        private DBService dbService;
 
-        MenuWindow _mainWindow;
+        private MenuWindow mainWindow;
         public List<ShopItem> OwnedItems { get; set; }
 
         public ProfileViewModel(MenuWindow mainWindow)
         {
-            _mainWindow = mainWindow;
+            this.mainWindow = mainWindow;
             OwnedItems = new List<ShopItem>();
-            _dbService = new DBService();
+            dbService = new DBService();
             LoadItems();
         }
 
         private void LoadItems()
         {
-            List<ShopItem> _ownedItems = _dbService.GetAllUserIconsByUserId(_mainWindow.userId());
-            foreach (var item in _ownedItems)
+            List<ShopItem> ownedItems = dbService.GetAllUserIconsByUserId(mainWindow.userId());
+            foreach (var item in ownedItems)
             {
-                item.UserId = _mainWindow.userId();
+                item.UserId = mainWindow.userId();
                 OwnedItems.Add(item);
             }
         }

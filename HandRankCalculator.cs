@@ -1,6 +1,6 @@
-﻿using SuperbetBeclean.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using SuperbetBeclean.Model;
 
 public class HandRankCalculator
 {
