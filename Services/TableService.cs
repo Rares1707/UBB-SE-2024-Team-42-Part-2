@@ -175,7 +175,7 @@ namespace SuperbetBeclean.Services
                         {
                             foreach (MenuWindow window in activePlayers)
                             {
-                                window.NotifyTableCard(tableType, cardNumber, communityCards[cardNumber].ToString());
+                                window.NotifyTableCard(tableType, cardNumber, communityCards[cardNumber].CompleteInformation());
                             }
                             await Task.Delay(400);
                         }
@@ -184,7 +184,7 @@ namespace SuperbetBeclean.Services
                     {
                         foreach (MenuWindow window in activePlayers)
                         {
-                            window.NotifyTableCard(tableType, 4, communityCards[4].ToString());
+                            window.NotifyTableCard(tableType, 4, communityCards[4].CompleteInformation());
                         }
                         await Task.Delay(400);
                     }
@@ -192,7 +192,7 @@ namespace SuperbetBeclean.Services
                     {
                         foreach (MenuWindow window in activePlayers)
                         {
-                            window.NotifyTableCard(tableType, 5, communityCards[5].ToString());
+                            window.NotifyTableCard(tableType, 5, communityCards[5].CompleteInformation());
                         }
                         await Task.Delay(400);
                     }

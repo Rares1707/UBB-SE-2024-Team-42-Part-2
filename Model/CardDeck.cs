@@ -16,15 +16,16 @@ namespace SuperbetBeclean.Model
 
             for (int cardValue = 2; cardValue <= 10; cardValue++)
             {
-                AddCardsForValue(cardValue.ToString());
+                AddAllCardsOfThisValue(cardValue.ToString());
             }
 
-            AddCardsForValue("J");
-            AddCardsForValue("Q");
-            AddCardsForValue("K");
-            AddCardsForValue("A");
+            AddAllCardsOfThisValue("J");
+            AddAllCardsOfThisValue("Q");
+            AddAllCardsOfThisValue("K");
+            AddAllCardsOfThisValue("A");
         }
-        public void AddCardsForValue(string value)
+
+        public void AddAllCardsOfThisValue(string value)
         {
             deck.Add(new PlayingCard(value, PlayingCard.HEART_SYMBOL));
             deck.Add(new PlayingCard(value, PlayingCard.DIAMOND_SYMBOL));

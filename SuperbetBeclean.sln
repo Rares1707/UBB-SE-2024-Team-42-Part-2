@@ -1,9 +1,8 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperbetBeclean", "SuperbetBeclean.csproj", "{7212958B-43D9-4F97-A01B-3551F8C96D07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperbetBeclean", "SuperbetBeclean.csproj", "{7212958B-43D9-4F97-A01B-3551F8C96D07}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets3", "assets3", "{4C7FE405-5A96-4238-8CD4-1ECFED750CEA}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets3", "assets3", "{4C7F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA39ABF0-30C4-4B8A-ADA1-046BC0051C5A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingBeclean", "TestingBeclean\TestingBeclean.csproj", "{D5A08C2C-19E1-45E9-8056-93042212F4D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingBeclean", "TestingBeclean\TestingBeclean.csproj", "{1F417F65-072D-41B7-89A8-58172AE490DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +32,10 @@ Global
 		{7212958B-43D9-4F97-A01B-3551F8C96D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7212958B-43D9-4F97-A01B-3551F8C96D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7212958B-43D9-4F97-A01B-3551F8C96D07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5A08C2C-19E1-45E9-8056-93042212F4D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F417F65-072D-41B7-89A8-58172AE490DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F417F65-072D-41B7-89A8-58172AE490DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F417F65-072D-41B7-89A8-58172AE490DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F417F65-072D-41B7-89A8-58172AE490DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

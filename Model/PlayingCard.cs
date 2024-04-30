@@ -30,7 +30,7 @@ namespace SuperbetBeclean.Model
         {
             get { return suit; } set { suit = value; }
         }
-        public override string ToString()
+        public string CompleteInformation()
         {
             return value + suit;
         }

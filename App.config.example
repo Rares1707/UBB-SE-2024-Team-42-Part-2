@@ -4,6 +4,6 @@
 		<add name="cn" connectionString="Add connection string to your database" />
 	</connectionStrings>
 	<startup>
-		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+		<supportedRuntime version="v8.0" sku=".NET,Version=v8.0" />
 	</startup>
 </configuration>
