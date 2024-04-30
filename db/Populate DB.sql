@@ -12,6 +12,9 @@ VALUES ('Arial', 10, 'Sans-serif'),
 INSERT INTO Icon (icon_name, icon_price, icon_path)
 VALUES ('demo_avatar', 5, '..assets/demo_avatar.jpg');
 
+UPDATE Icon
+SET icon_path = 'C:\MyStuff\COLLEGE\College_Projects\ISS\UBB-SE-2024-Team-42-Part-2\assets\demo_avatar.jpg'
+Where icon_name = 'demo_avatar'
 -- Title data
 INSERT INTO Title (title_name, title_price, title_content)
 VALUES ('Beginner', 0, 'Novice Gambler'),

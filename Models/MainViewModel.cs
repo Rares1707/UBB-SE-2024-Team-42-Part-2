@@ -16,7 +16,7 @@ namespace SuperbetBeclean.Models
     {
         private int balance;
 
-        private DBService dbService;
+        private IDBService dbService;
 
         public int Balance
         {

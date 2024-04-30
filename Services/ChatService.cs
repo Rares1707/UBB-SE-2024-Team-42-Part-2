@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using SuperbetBeclean.Windows;
+using SuperbetBeclean.Services;
 
-public class ChatService
+public class ChatService : IChatService
 {
     private static Dictionary<(MenuWindow, string), ChatWindow> menuWindowChatWindowMap;
 
@@ -10,6 +11,7 @@ public class ChatService
     {
         menuWindowChatWindowMap = new Dictionary<(MenuWindow, string), ChatWindow>();
     }
+
     public void CloseChat(MenuWindow mainWindow)
     {
         foreach (var entry in menuWindowChatWindowMap)

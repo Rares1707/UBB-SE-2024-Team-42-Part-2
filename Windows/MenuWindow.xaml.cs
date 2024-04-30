@@ -24,7 +24,7 @@ namespace SuperbetBeclean.Windows
     public partial class MenuWindow : Window
     {
         private User user;
-        private MainService service;
+        private IMainService service;
         private Dictionary<string, GameTablePage> gamePages;
 
         public MenuWindow(User u, MainService serv)

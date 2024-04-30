@@ -18,7 +18,7 @@ namespace SuperbetBeclean
         private string currentUserName;
         private List<string> requests;
         private SqlConnection sqlConnection;
-        private DBService dbService;
+        private IDBService dbService;
         private string connectionString;
         private LobbyPage lobbyPage;
         public string UserName;

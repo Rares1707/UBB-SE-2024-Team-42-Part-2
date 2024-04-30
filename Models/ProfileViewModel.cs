@@ -6,7 +6,7 @@ namespace SuperbetBeclean.Models
 {
     internal class ProfileViewModel
     {
-        private DBService dbService;
+        private IDBService dbService;
 
         private MenuWindow mainWindow;
         public List<ShopItem> OwnedItems { get; set; }
