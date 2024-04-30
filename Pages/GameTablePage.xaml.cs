@@ -117,9 +117,9 @@ namespace SuperbetBeclean.Pages
                 playerBet.Content = "-";
                 Image playerCard1 = FindName("Player" + player.UserTablePlace + "Card1") as Image;
                 Image playerCard2 = FindName("Player" + player.UserTablePlace + "Card2") as Image;
-                Uri uri1 = new Uri("/assets/cards/" + player.UserCurrentHand[0].Info() + ".png", UriKind.Relative);
+                Uri uri1 = new Uri("/assets/cards/" + player.UserCurrentHand[0].ToString() + ".png", UriKind.Relative);
                 playerCard1.Source = new BitmapImage(uri1);
-                Uri uri2 = new Uri("/assets/cards/" + player.UserCurrentHand[1].Info() + ".png", UriKind.Relative);
+                Uri uri2 = new Uri("/assets/cards/" + player.UserCurrentHand[1].ToString() + ".png", UriKind.Relative);
                 playerCard2.Source = new BitmapImage(uri2);
             });
         }

@@ -33,11 +33,11 @@ public class HandRankCalculator
         pows = new List<int>() { 1, 15, 225, 3375, 50625, 759375 }; /// Powers of 15
     }
 
-    private void HandSort(List<Card> hand)
+    private void HandSort(List<PlayingCard> hand)
     {
         hand.Sort((x, y) => cardValues[y.Value].CompareTo(cardValues[x.Value]));
     }
-    private bool IsRoyalFlush(List<Card> hand)
+    private bool IsRoyalFlush(List<PlayingCard> hand)
     {
         if (IsFlush(hand))
         {
@@ -52,12 +52,12 @@ public class HandRankCalculator
         }
         return false;
     }
-    private int HashRoyalFlush(List<Card> hand)
+    private int HashRoyalFlush(List<PlayingCard> hand)
     {
         return pows[0];
     }
 
-    private bool IsStraightFlush(List<Card> hand)
+    private bool IsStraightFlush(List<PlayingCard> hand)
     {
         if (IsStraight(hand) && IsFlush(hand))
         {
@@ -66,7 +66,7 @@ public class HandRankCalculator
         return false;
     }
 
-    private int HashStraightFlush(List<Card> hand)
+    private int HashStraightFlush(List<PlayingCard> hand)
     {
         if (hand[0].Value == "A" && hand[1].Value == "5")
         {
@@ -78,10 +78,10 @@ public class HandRankCalculator
         }
     }
 
-    private bool IsFourOfAKind(List<Card> hand)
+    private bool IsFourOfAKind(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -106,10 +106,10 @@ public class HandRankCalculator
         return true;
     }
 
-    private int HashFourOfAKind(List<Card> hand)
+    private int HashFourOfAKind(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -135,10 +135,10 @@ public class HandRankCalculator
         return result;
     }
 
-    private bool IsFullHouse(List<Card> hand)
+    private bool IsFullHouse(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -163,10 +163,10 @@ public class HandRankCalculator
         return true;
     }
 
-    private int HashFullHouse(List<Card> hand)
+    private int HashFullHouse(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -191,10 +191,10 @@ public class HandRankCalculator
         }
         return result;
     }
-    private bool IsFlush(List<Card> hand)
+    private bool IsFlush(List<PlayingCard> hand)
     {
         HashSet<string> suits = new HashSet<string>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             suits.Add(card.Suit);
         }
@@ -202,17 +202,17 @@ public class HandRankCalculator
         return suits.Count == 1;
     }
 
-    private int HashFlush(List<Card> hand)
+    private int HashFlush(List<PlayingCard> hand)
     {
         int result = 0, freebit = 4;
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             result += cardValues[card.Value] * pows[freebit--];
         }
         return result;
     }
 
-    private bool IsStraight(List<Card> hand)
+    private bool IsStraight(List<PlayingCard> hand)
     {
         bool isStraight = true;
         for (int i = 0; i < hand.Count - 1; i++)
@@ -225,7 +225,7 @@ public class HandRankCalculator
         return isStraight;
     }
 
-    private int HashStraight(List<Card> hand)
+    private int HashStraight(List<PlayingCard> hand)
     {
         if (hand[0].Value == "A" && hand[1].Value == "5")
         {
@@ -237,10 +237,10 @@ public class HandRankCalculator
         }
     }
 
-    private bool IsThreeOfAKind(List<Card> hand)
+    private bool IsThreeOfAKind(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -262,11 +262,11 @@ public class HandRankCalculator
         return false;
     }
 
-    private int HashThreeOfAKind(List<Card> hand)
+    private int HashThreeOfAKind(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
         int freebit = 1, result = 0;
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -277,7 +277,7 @@ public class HandRankCalculator
                 freq[card.Value] = INIT;
             }
         }
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq[card.Value] == TRIPS)
             {
@@ -292,10 +292,10 @@ public class HandRankCalculator
         return result;
     }
 
-    private bool IsTwoPairs(List<Card> hand)
+    private bool IsTwoPairs(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -309,11 +309,11 @@ public class HandRankCalculator
         return freq.Count == 3;
     }
 
-    private int HashTwoPairs(List<Card> hand)
+    private int HashTwoPairs(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
         int freebit = 2, result = 0;
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -324,7 +324,7 @@ public class HandRankCalculator
                 freq[card.Value] = INIT;
             }
         }
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq[card.Value] == PAIR)
             {
@@ -339,10 +339,10 @@ public class HandRankCalculator
         return result;
     }
 
-    private bool IsOnePair(List<Card> hand)
+    private bool IsOnePair(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -356,11 +356,11 @@ public class HandRankCalculator
         return freq.Count == 4;
     }
 
-    private int HashOnePair(List<Card> hand)
+    private int HashOnePair(List<PlayingCard> hand)
     {
         Dictionary<string, int> freq = new Dictionary<string, int>();
         int freebit = 2, result = 0;
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq.ContainsKey(card.Value))
             {
@@ -371,7 +371,7 @@ public class HandRankCalculator
                 freq[card.Value] = INIT;
             }
         }
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             if (freq[card.Value] == PAIR)
             {
@@ -386,17 +386,17 @@ public class HandRankCalculator
         return result;
     }
 
-    private int HashHighCard(List<Card> hand)
+    private int HashHighCard(List<PlayingCard> hand)
     {
         int freebit = 4, result = 0;
-        foreach (Card card in hand)
+        foreach (PlayingCard card in hand)
         {
             result += cardValues[card.Value] * pows[freebit--];
         }
         return result;
     }
 
-    public Tuple<int, int> GetValue(List<Card> hand)
+    public Tuple<int, int> GetValue(List<PlayingCard> hand)
     {
         HandSort(hand);
         if (IsRoyalFlush(hand))

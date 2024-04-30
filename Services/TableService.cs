@@ -27,12 +27,12 @@ namespace SuperbetBeclean.Services
         private int smallBlind;
         private int bigBlind;
         private List<MenuWindow> users;
-        private Deck deck; // all the cards that are not in the players hands
+        private CardDeck deck; // all the cards that are not in the players hands
         private DBService dbService;
         private Random random;
         private HandRankCalculator rankCalculator;
 
-        private Card[] communityCards;
+        private PlayingCard[] communityCards;
         private int[] freeSpace;
         public TableService(int buyIn, int smallBlind, int bigBlind, string tableType, DBService dbService)
         {
@@ -45,7 +45,7 @@ namespace SuperbetBeclean.Services
             this.smallBlind = smallBlind;
             this.bigBlind = bigBlind;
 
-            communityCards = new Card[6];
+            communityCards = new PlayingCard[6];
             freeSpace = new int[9];
 
             Task.Run(() => RunTable());
@@ -56,15 +56,15 @@ namespace SuperbetBeclean.Services
             this.dbService = dbService;
         }
 
-        public Card GetRandomCardAndRemoveIt()
+        public PlayingCard GetRandomCardAndRemoveIt()
         {
             int index = random.Next(0, deck.GetDeckSize());
-            Card card = deck.GetCardFromIndex(index);
+            PlayingCard card = deck.GetCardFromIndex(index);
             deck.RemoveCardFromIndex(index);
             return card;
         }
 
-        public Card GenerateCard()
+        public PlayingCard GenerateCard()
         {
             return GetRandomCardAndRemoveIt();
         }
@@ -126,14 +126,14 @@ namespace SuperbetBeclean.Services
                     await Task.Delay(5000);
                     continue;
                 }
-                deck = new Deck();
+                deck = new CardDeck();
 
                 await Task.Delay(1000);
                 /// give first card
                 foreach (MenuWindow playerWindow in activePlayers)
                 {
                     User player = playerWindow.Player();
-                    Card card = GenerateCard();
+                    PlayingCard card = GenerateCard();
                     player.UserCurrentHand[0] = card;
                     foreach (MenuWindow window in activePlayers)
                     {
@@ -145,7 +145,7 @@ namespace SuperbetBeclean.Services
                 foreach (MenuWindow playerWindow in activePlayers)
                 {
                     User player = playerWindow.Player();
-                    Card card = GenerateCard();
+                    PlayingCard card = GenerateCard();
                     player.UserCurrentHand[1] = card;
                     foreach (MenuWindow window in activePlayers)
                     {
@@ -155,7 +155,7 @@ namespace SuperbetBeclean.Services
                 }
                 for (int i = 1; i <= 5; i++)
                 {
-                    Card card = GenerateCard();
+                    PlayingCard card = GenerateCard();
                     communityCards[i] = card;
                 }
                 int tablePot = 0;
@@ -175,7 +175,7 @@ namespace SuperbetBeclean.Services
                         {
                             foreach (MenuWindow window in activePlayers)
                             {
-                                window.NotifyTableCard(tableType, cardNumber, communityCards[cardNumber].Info());
+                                window.NotifyTableCard(tableType, cardNumber, communityCards[cardNumber].ToString());
                             }
                             await Task.Delay(400);
                         }
@@ -184,7 +184,7 @@ namespace SuperbetBeclean.Services
                     {
                         foreach (MenuWindow window in activePlayers)
                         {
-                            window.NotifyTableCard(tableType, 4, communityCards[4].Info());
+                            window.NotifyTableCard(tableType, 4, communityCards[4].ToString());
                         }
                         await Task.Delay(400);
                     }
@@ -192,7 +192,7 @@ namespace SuperbetBeclean.Services
                     {
                         foreach (MenuWindow window in activePlayers)
                         {
-                            window.NotifyTableCard(tableType, 5, communityCards[5].Info());
+                            window.NotifyTableCard(tableType, 5, communityCards[5].ToString());
                         }
                         await Task.Delay(400);
                     }
@@ -308,14 +308,14 @@ namespace SuperbetBeclean.Services
             }
         }
 
-        private void GenerateHands(List<Card> currentHand, List<Card> possibleCards, int lastCard, int numberCards, List<List<Card>> allHands)
+        private void GenerateHands(List<PlayingCard> currentHand, List<PlayingCard> possibleCards, int lastCard, int numberCards, List<List<PlayingCard>> allHands)
         {
             for (int i = lastCard + 1; i < possibleCards.Count; i++)
             {
                 currentHand.Add(possibleCards[i]);
                 if (currentHand.Count == numberCards)
                 {
-                    List<Card> handCopy = new List<Card>(currentHand);
+                    List<PlayingCard> handCopy = new List<PlayingCard>(currentHand);
                     allHands.Add(handCopy);
                 }
                 else
@@ -326,14 +326,14 @@ namespace SuperbetBeclean.Services
             }
         }
 
-        public Tuple<int, int> DetermineMaxHand(List<Card> possibleCards)
+        public Tuple<int, int> DetermineMaxHand(List<PlayingCard> possibleCards)
         {
             Tuple<int, int> maxHandValue = new Tuple<int, int>(0, 0);
-            List<List<Card>> allHands = new List<List<Card>>();
-            List<Card> currentHand = new List<Card>();
+            List<List<PlayingCard>> allHands = new List<List<PlayingCard>>();
+            List<PlayingCard> currentHand = new List<PlayingCard>();
             GenerateHands(currentHand, possibleCards, -1, 5, allHands);
             // Console.WriteLine("Generated hands: " + allHands.Count);
-            foreach (List<Card> hand in allHands)
+            foreach (List<PlayingCard> hand in allHands)
             {
                 Tuple<int, int> handValue = rankCalculator.GetValue(hand);
                 if (handValue.Item1 > maxHandValue.Item1 || (handValue.Item1 == maxHandValue.Item1 && handValue.Item2 > maxHandValue.Item2))
@@ -353,7 +353,7 @@ namespace SuperbetBeclean.Services
             foreach (MenuWindow window in activePlayers)
             {
                 User player = window.Player();
-                List<Card> possibleCards = new List<Card>();
+                List<PlayingCard> possibleCards = new List<PlayingCard>();
                 for (int i = 1; i <= 5; i++)
                 {
                     possibleCards.Add(communityCards[i]);

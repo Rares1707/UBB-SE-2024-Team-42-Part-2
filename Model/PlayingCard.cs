@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace SuperbetBeclean.Model
 {
-    public class Card
+    public class PlayingCard
     {
         private string value;
         private string suit;
 
-        public Card(string value, string suit)
+        public const string HEART_SYMBOL = "H";
+        public const string DIAMOND_SYMBOL = "D";
+        public const string SPADE_SYMBOL = "S";
+        public const string CLUB_SYMBOL = "C";
+
+        public PlayingCard(string value, string suit)
         {
             this.value = value;
             this.suit = suit;
@@ -25,7 +30,7 @@ namespace SuperbetBeclean.Model
         {
             get { return suit; } set { suit = value; }
         }
-        public string Info()
+        public override string ToString()
         {
             return value + suit;
         }

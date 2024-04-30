@@ -20,7 +20,7 @@ namespace SuperbetBeclean.Model
         private int userTablePlace;
         private DateTime userLastLogin;
 
-        private Card[] userCurrentHand;
+        private PlayingCard[] userCurrentHand;
 
         public User(int userID = 0, string userName = "", int userCurrentFont = 0, int userCurrentTitle = 0, string userCurrentIconPath = "", int userCurrentTable = 0, int userChips = 0, int userStack = 0, int userStreak = 0, int userHandsPlayed = 0, int userLevel = 0, DateTime userLastLogin = default(DateTime))
         {
@@ -38,7 +38,7 @@ namespace SuperbetBeclean.Model
             this.userLastLogin = userLastLogin;
             userStatus = 0;
             userBet = 0;
-            userCurrentHand = new Card[2];
+            userCurrentHand = new PlayingCard[2];
             userTablePlace = 0;
         }
 
@@ -117,7 +117,7 @@ namespace SuperbetBeclean.Model
             get { return userTablePlace; }
             set { userTablePlace = value; }
         }
-        public Card[] UserCurrentHand
+        public PlayingCard[] UserCurrentHand
         {
             get { return userCurrentHand; }
             set { userCurrentHand = value; }

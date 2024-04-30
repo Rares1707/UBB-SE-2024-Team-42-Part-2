@@ -6,18 +6,13 @@ using System.Threading.Tasks;
 
 namespace SuperbetBeclean.Model
 {
-    public class Deck
+    public class CardDeck
     {
-        private const string HEART = "H";
-        private const string DIAMOND = "D";
-        private const string SPADE = "S";
-        private const string CLUB = "C";
+        private List<PlayingCard> deck;
 
-        private List<Card> deck;
-
-        public Deck()
+        public CardDeck()
         {
-            deck = new List<Card>();
+            deck = new List<PlayingCard>();
 
             for (int cardValue = 2; cardValue <= 10; cardValue++)
             {
@@ -31,17 +26,17 @@ namespace SuperbetBeclean.Model
         }
         public void AddCardsForValue(string value)
         {
-            deck.Add(new Card(value, HEART));
-            deck.Add(new Card(value, DIAMOND));
-            deck.Add(new Card(value, SPADE));
-            deck.Add(new Card(value, CLUB));
+            deck.Add(new PlayingCard(value, PlayingCard.HEART_SYMBOL));
+            deck.Add(new PlayingCard(value, PlayingCard.DIAMOND_SYMBOL));
+            deck.Add(new PlayingCard(value, PlayingCard.SPADE_SYMBOL));
+            deck.Add(new PlayingCard(value, PlayingCard.CLUB_SYMBOL));
         }
 
         public void RemoveCardFromIndex(int index)
         {
             deck.RemoveAt(index);
         }
-        public Card GetCardFromIndex(int index)
+        public PlayingCard GetCardFromIndex(int index)
         {
             return deck[index];
         }
