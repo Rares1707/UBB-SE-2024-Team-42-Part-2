@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SuperbetBeclean.Services;
 
 namespace SuperbetBeclean.Components
@@ -56,7 +46,7 @@ namespace SuperbetBeclean.Components
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var itemName = OwnedItemName; // Access the ItemName property directly
-            DBService dbService = new DBService();
+            IDBService dbService = new DBService();
             var itemId = dbService.GetIconIDByIconName(itemName);
             Console.WriteLine(OwnedUserId.ToString(), itemId);
             dbService.SetCurrentIcon(OwnedUserId, itemId);

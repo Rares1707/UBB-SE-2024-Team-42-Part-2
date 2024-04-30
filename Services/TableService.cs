@@ -8,7 +8,7 @@ using SuperbetBeclean.Windows;
 
 namespace SuperbetBeclean.Services
 {
-    public class TableService
+    public class TableService : ITableService
     {
         private string tableType;
         private static Mutex mutex;

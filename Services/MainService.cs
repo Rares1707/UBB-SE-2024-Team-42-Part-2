@@ -8,7 +8,7 @@ using SuperbetBeclean.Windows;
 
 namespace SuperbetBeclean.Services
 {
-    public class MainService
+    public class MainService : IMainService
     {
         private List<MenuWindow> openedUsersWindows;
         private SqlConnection sqlConnection;

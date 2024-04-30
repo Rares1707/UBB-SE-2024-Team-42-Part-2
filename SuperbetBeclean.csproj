@@ -105,6 +105,10 @@
     </Compile>
     <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\DBService.cs" />
+    <Compile Include="Services\IChatService.cs" />
+    <Compile Include="Services\IDBService.cs" />
+    <Compile Include="Services\IMainService.cs" />
+    <Compile Include="Services\ITableService.cs" />
     <Compile Include="Services\MainService.cs" />
     <Compile Include="Services\TableService.cs" />
     <Compile Include="Windows\ChallengesWindow.xaml.cs">

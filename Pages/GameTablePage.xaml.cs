@@ -27,14 +27,14 @@ namespace SuperbetBeclean.Pages
     {
         private MenuWindow mainWindow;
         private Frame mainFrame;
-        private MainService service;
+        private IMainService service;
         private int timer = 0;
         private int playerBet = 0;
         private string action = string.Empty;
         private string tableType;
         private ChatWindow chatWindow;
-        private ChatService chatService;
-        public GameTablePage(Frame mainFrame, MenuWindow mainWindow, MainService service, string tableType)
+        private IChatService chatService;
+        public GameTablePage(Frame mainFrame, MenuWindow mainWindow, IMainService service, string tableType)
         {
             InitializeComponent();
             Loaded += GameTablePage_Loaded;
@@ -47,7 +47,7 @@ namespace SuperbetBeclean.Pages
             PlayerLvlTextBox.Text = "Level: " + this.mainWindow.UserLevel().ToString();
             PlayerChipsTextBox.Text = "Chips: " + this.mainWindow.UserChips().ToString();
             this.tableType = tableType;
-             chatService = new ChatService();
+            chatService = new ChatService();
         }
         public void UpdateChips(User player)
         {

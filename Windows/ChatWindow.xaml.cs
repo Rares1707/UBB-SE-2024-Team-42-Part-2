@@ -20,8 +20,8 @@ namespace SuperbetBeclean.Windows
     /// </summary>
     public partial class ChatWindow : Window
     {
-        private ChatService chatService;
-        public ChatWindow(ChatService chatService)
+        private IChatService chatService;
+        public ChatWindow(IChatService chatService)
         {
             InitializeComponent();
             this.chatService = chatService;

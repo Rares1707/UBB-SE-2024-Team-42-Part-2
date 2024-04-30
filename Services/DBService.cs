@@ -12,7 +12,7 @@ using SuperbetBeclean.Models;
 
 namespace SuperbetBeclean.Services
 {
-    public class DBService
+    public class DBService : IDBService
     {
         private SqlConnection connection;
 
