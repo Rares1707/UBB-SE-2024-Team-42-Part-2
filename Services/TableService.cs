@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Numerics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using SuperbetBeclean.Model;
@@ -22,6 +26,8 @@ namespace SuperbetBeclean.Services
         private const int WAITING = 1;
         private const int FOLDED = 2;
         private const int PLAYING = 3;
+        private const int FIRSTCARD = 1;
+        private const int SECONDCARD = 2;
         private bool ended = false;
         private int buyIn;
         private int smallBlind;
@@ -69,6 +75,170 @@ namespace SuperbetBeclean.Services
             return GetRandomCardAndRemoveIt();
         }
 
+        private void ReloadPlayerStackWithChips(User player)
+        {
+            player.UserChips -= buyIn;
+            dbService.UpdateUserChips(player.UserID, player.UserChips);
+            player.UserStack = buyIn;
+            dbService.UpdateUserStack(player.UserID, player.UserStack);
+        }
+
+        private PlayingCard DealCard(User player, int index)
+        {
+            PlayingCard card = GenerateCard();
+            player.UserCurrentHand[index] = card;
+
+            return card;
+        }
+
+        private async void DealCardsToAllPlayers(Queue<MenuWindow> activePlayers)
+        {
+            // deals the first card to all players
+            foreach (MenuWindow playerWindow in activePlayers)
+            {
+                User player = playerWindow.Player();
+                PlayingCard card = DealCard(player, 0);
+                foreach (MenuWindow window in activePlayers)
+                {
+                    window.NotifyUserCard(tableType, player, FIRSTCARD, card.Value + card.Suit);
+                }
+                await Task.Delay(400);
+            }
+
+            // deals the second card to all players
+            foreach (MenuWindow playerWindow in activePlayers)
+            {
+                User player = playerWindow.Player();
+                PlayingCard card = DealCard(player, 1);
+                foreach (MenuWindow window in activePlayers)
+                {
+                    window.NotifyUserCard(tableType, player, SECONDCARD, card.Value + card.Suit);
+                }
+                await Task.Delay(400);
+            }
+        }
+
+        private void GenerateAllCardsForTheBoard()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                PlayingCard card = GenerateCard();
+                communityCards[i] = card;
+            }
+        }
+        private void StartRoundForAllPlayers(Queue<MenuWindow> activePlayers)
+        {
+            foreach (MenuWindow currentWindow in activePlayers)
+            {
+                User currentPlayer = currentWindow.Player();
+                foreach (MenuWindow otherWindow in activePlayers)
+                {
+                    User otherPlayer = otherWindow.Player();
+                    currentWindow.StartRound(tableType, otherPlayer);
+                }
+            }
+        }
+        private void ResetCardsForAllPlayers(Queue<MenuWindow> activePlayers)
+        {
+            foreach (MenuWindow window in activePlayers)
+            {
+                window.ResetCards(tableType);
+            }
+        }
+        private async void ShowFlopCards(Queue<MenuWindow> activePlayers)
+        {
+            for (int cardNumber = 1; cardNumber <= 3; cardNumber++)
+            {
+                foreach (MenuWindow window in activePlayers)
+                {
+                    window.NotifyTableCard(tableType, cardNumber, communityCards[cardNumber].CompleteInformation());
+                }
+                await Task.Delay(400);
+            }
+        }
+        private async void ShowTurnCards(Queue<MenuWindow> activePlayers)
+        {
+            foreach (MenuWindow window in activePlayers)
+            {
+                window.NotifyTableCard(tableType, 4, communityCards[4].CompleteInformation());
+            }
+            await Task.Delay(400);
+        }
+        private async void ShowRiverCards(Queue<MenuWindow> activePlayers)
+        {
+            foreach (MenuWindow window in activePlayers)
+            {
+                window.NotifyTableCard(tableType, 5, communityCards[5].CompleteInformation());
+            }
+            await Task.Delay(400);
+        }
+        private void NotifyBetChangesToAllPlayers(Queue<MenuWindow> activePlayers, User player, int tablePot)
+        {
+            foreach (MenuWindow window in activePlayers)
+            {
+                window.Notify(tableType, player, tablePot);
+            }
+        }
+        private void EndTurnOfAllPlayers(Queue<MenuWindow> activePlayers)
+        {
+            foreach (MenuWindow currentWindow in activePlayers)
+            {
+                User currentPlayer = currentWindow.Player();
+                foreach (MenuWindow otherWindow in activePlayers)
+                {
+                    User otherPlayer = otherWindow.Player();
+                    currentWindow.EndTurn(tableType, otherPlayer);
+                }
+                currentPlayer.UserBet = 0;
+            }
+        }
+        private void ShowTheCardsOfAllPlayers(Queue<MenuWindow> activePlayers)
+        {
+            foreach (MenuWindow currentWindow in activePlayers)
+            {
+                User currentPlayer = currentWindow.Player();
+                foreach (MenuWindow otherWindow in activePlayers)
+                {
+                    User otherPlayer = otherWindow.Player();
+                    currentWindow.ShowCards(tableType, otherPlayer);
+                }
+            }
+        }
+        private void FoldPlayer(User player, Queue<MenuWindow> activePlayers)
+        {
+            Console.WriteLine(player.UserName + " folded!");
+            player.UserStatus = WAITING;
+            player.UserBet = 0;
+            foreach (MenuWindow window in activePlayers)
+            {
+                window.FoldPlayer(tableType, player);
+            }
+        }
+        private async void DisplayWinner(Queue<MenuWindow> activePlayers, User winner)
+        {
+            for (int i = 1; i <= 6; i++)
+            {
+                foreach (MenuWindow menuWindow in activePlayers)
+                {
+                    if (i % 2 == 1)
+                    {
+                        menuWindow.DisplayWinner(tableType, winner, true);
+                    }
+                    else
+                    {
+                        menuWindow.DisplayWinner(tableType, winner, false);
+                    }
+                }
+                if (i == 5)
+                {
+                    await Task.Delay(2000);
+                }
+                else
+                {
+                    await Task.Delay(200);
+                }
+            }
+        }
         public async void RunTable()
         {
             while (true)
@@ -82,11 +252,13 @@ namespace SuperbetBeclean.Services
                     await Task.Delay(3000);
                     continue;
                 }
+
                 mutex.WaitOne();
-                // start new round with all players
-                Queue<MenuWindow> activePlayers = new Queue<MenuWindow>(users);
+                Queue<MenuWindow> allActivePlayers = new Queue<MenuWindow>(users);
                 mutex.ReleaseMutex();
-                foreach (MenuWindow menuWindow in activePlayers)
+
+                // get all the users ready
+                foreach (MenuWindow menuWindow in allActivePlayers)
                 {
                     User player = menuWindow.Player();
                     player.UserStatus = PLAYING;
@@ -100,69 +272,30 @@ namespace SuperbetBeclean.Services
                         }
                         else
                         {
-                            player.UserChips -= buyIn;
-                            dbService.UpdateUserChips(player.UserID, player.UserChips);
-                            player.UserStack = buyIn;
-                            dbService.UpdateUserStack(player.UserID, player.UserStack);
+                            ReloadPlayerStackWithChips(player);
                             menuWindow.UpdateChips(tableType, player);
                         }
                     }
                 }
-                foreach (MenuWindow currentWindow in activePlayers)
-                {
-                    User currentPlayer = currentWindow.Player();
-                    foreach (MenuWindow otherWindow in activePlayers)
-                    {
-                        User otherPlayer = otherWindow.Player();
-                        currentWindow.StartRound(tableType, otherPlayer);
-                    }
-                }
-                foreach (MenuWindow window in activePlayers)
-                {
-                    window.ResetCards(tableType);
-                }
-                if (activePlayers.Count < 2)
+                StartRoundForAllPlayers(allActivePlayers);
+                ResetCardsForAllPlayers(allActivePlayers);
+
+                if (allActivePlayers.Count < 2)
                 {
                     await Task.Delay(5000);
                     continue;
                 }
                 deck = new CardDeck();
-
                 await Task.Delay(1000);
-                /// give first card
-                foreach (MenuWindow playerWindow in activePlayers)
-                {
-                    User player = playerWindow.Player();
-                    PlayingCard card = GenerateCard();
-                    player.UserCurrentHand[0] = card;
-                    foreach (MenuWindow window in activePlayers)
-                    {
-                        window.NotifyUserCard(tableType, player, 1, card.Value + card.Suit);
-                    }
-                    await Task.Delay(400);
-                }
-                /// give second card
-                foreach (MenuWindow playerWindow in activePlayers)
-                {
-                    User player = playerWindow.Player();
-                    PlayingCard card = GenerateCard();
-                    player.UserCurrentHand[1] = card;
-                    foreach (MenuWindow window in activePlayers)
-                    {
-                        window.NotifyUserCard(tableType, player, 2, card.Value + card.Suit);
-                    }
-                    await Task.Delay(400);
-                }
-                for (int i = 1; i <= 5; i++)
-                {
-                    PlayingCard card = GenerateCard();
-                    communityCards[i] = card;
-                }
+
+                DealCardsToAllPlayers(allActivePlayers);
+                GenerateAllCardsForTheBoard();
+
                 int tablePot = 0;
-                int canBetPlayers = activePlayers.Count;
+                int numberOfPlayersThatCanBet = allActivePlayers.Count;
                 for (int turn = 0; turn <= 3; turn++)
                 {
-                    if (activePlayers.Count < 2)
+                    if (allActivePlayers.Count < 2)
                     {
                         break;
                     }
@@ -171,74 +304,54 @@ namespace SuperbetBeclean.Services
                     }
                     else if (turn == FLOP)
                     {
-                        for (int cardNumber = 1; cardNumber <= 3; cardNumber++)
-                        {
-                            foreach (MenuWindow window in activePlayers)
-                            {
-                                window.NotifyTableCard(tableType, cardNumber, communityCards[cardNumber].CompleteInformation());
-                            }
-                            await Task.Delay(400);
-                        }
+                        ShowFlopCards(allActivePlayers);
                     }
                     else if (turn == TURN)
                     {
-                        foreach (MenuWindow window in activePlayers)
-                        {
-                            window.NotifyTableCard(tableType, 4, communityCards[4].CompleteInformation());
-                        }
-                        await Task.Delay(400);
+                        ShowTurnCards(allActivePlayers);
                     }
                     else if (turn == RIVER)
                     {
-                        foreach (MenuWindow window in activePlayers)
-                        {
-                            window.NotifyTableCard(tableType, 5, communityCards[5].CompleteInformation());
-                        }
-                        await Task.Delay(400);
+                        ShowRiverCards(allActivePlayers);
                     }
                     bool turnEnded = false;
                     int currentBet = -1;
-                    int currentBetPlayer = -1;
+                    int idOfPlayerWithMaxBet = -1;
+
                     while (!turnEnded)
                     {
-                        if (canBetPlayers < 2)
+                        if (numberOfPlayersThatCanBet < 2)
                         {
                             break;
                         }
-                        MenuWindow currentWindow = activePlayers.Peek();
+                        MenuWindow currentWindow = allActivePlayers.Peek();
                         User player = currentWindow.Player();
 
                         if (player.UserStatus != PLAYING)
                         {
-                            activePlayers.Dequeue();
+                            allActivePlayers.Dequeue();
                             continue;
                         }
-                        if (player.UserID == currentBetPlayer)
+                        if (player.UserID == idOfPlayerWithMaxBet)
                         {
                             break;
                         }
                         if (player.UserStack == 0)
                         {
-                            canBetPlayers--;
-                            activePlayers.Enqueue(activePlayers.Dequeue());
+                            numberOfPlayersThatCanBet--;
+                            allActivePlayers.Enqueue(allActivePlayers.Dequeue());
                             continue;
                         }
                         int playerBet = await currentWindow.StartTime(tableType, Math.Min(currentBet, player.UserStack + player.UserBet), player.UserStack + player.UserBet);
                         if (playerBet == -1)
                         {
-                            activePlayers.Dequeue();
-                            Console.WriteLine(player.UserName + " folded!");
-                            player.UserStatus = WAITING;
-                            player.UserBet = 0;
-                            canBetPlayers--;
-                            foreach (MenuWindow window in activePlayers)
-                            {
-                                window.FoldPlayer(tableType, player);
-                            }
+                            FoldPlayer(player, allActivePlayers);
+                            allActivePlayers.Dequeue();
+                            numberOfPlayersThatCanBet--;
                         }
                         else
                         {
-                            activePlayers.Enqueue(activePlayers.Dequeue());
+                            allActivePlayers.Enqueue(allActivePlayers.Dequeue());
                             int extraBet = playerBet - player.UserBet;
                             player.UserStack -= extraBet;
                             tablePot += extraBet;
@@ -247,68 +360,28 @@ namespace SuperbetBeclean.Services
                             if (playerBet > currentBet)
                             {
                                 currentBet = playerBet;
-                                currentBetPlayer = player.UserID;
+                                idOfPlayerWithMaxBet = player.UserID;
                             }
                         }
-                        foreach (MenuWindow window in activePlayers)
-                        {
-                            window.Notify(tableType, player, tablePot);
-                        }
+                        NotifyBetChangesToAllPlayers(allActivePlayers, player, tablePot);
                     }
-                    foreach (MenuWindow currentWindow in activePlayers)
-                    {
-                        User currentPlayer = currentWindow.Player();
-                        foreach (MenuWindow otherWindow in activePlayers)
-                        {
-                            User otherPlayer = otherWindow.Player();
-                            currentWindow.EndTurn(tableType, otherPlayer);
-                        }
-                        currentPlayer.UserBet = 0;
-                    }
+                    EndTurnOfAllPlayers(allActivePlayers);
                 }
-                foreach (MenuWindow currentWindow in activePlayers)
-                {
-                    User currentPlayer = currentWindow.Player();
-                    foreach (MenuWindow otherWindow in activePlayers)
-                    {
-                        User otherPlayer = otherWindow.Player();
-                        currentWindow.ShowCards(tableType, otherPlayer);
-                    }
-                }
-                List<User> winners = DetermineWinners(activePlayers);
+                ShowTheCardsOfAllPlayers(allActivePlayers);
+
+                List<User> winners = DetermineWinners(allActivePlayers);
                 foreach (User winner in winners)
                 {
                     Console.WriteLine("Winner: " + winner.UserName);
                     winner.UserStack += Convert.ToInt32(tablePot / winners.Count);
                     dbService.UpdateUserStack(winner.UserID, winner.UserStack);
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        foreach (MenuWindow menuWindow in activePlayers)
-                        {
-                            if (i % 2 == 1)
-                            {
-                                menuWindow.DisplayWinner(tableType, winner, true);
-                            }
-                            else
-                            {
-                                menuWindow.DisplayWinner(tableType, winner, false);
-                            }
-                        }
-                        if (i == 5)
-                        {
-                            await Task.Delay(2000);
-                        }
-                        else
-                        {
-                            await Task.Delay(200);
-                        }
-                    }
+                    DisplayWinner(allActivePlayers, winner);
                 }
                 await Task.Delay(3000);
             }
         }
 
-        private void GenerateHands(List<PlayingCard> currentHand, List<PlayingCard> possibleCards, int lastCard, int numberCards, List<List<PlayingCard>> allHands)
+        private static void GenerateHands(List<PlayingCard> currentHand, List<PlayingCard> possibleCards, int lastCard, int numberCards, List<List<PlayingCard>> allHands)
         {
             for (int i = lastCard + 1; i < possibleCards.Count; i++)
             {

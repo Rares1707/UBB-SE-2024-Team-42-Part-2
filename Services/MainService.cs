@@ -18,6 +18,9 @@ namespace SuperbetBeclean.Services
         private const int INACTIVE = 0;
         private const int WAITING = 1;
         private const int PLAYING = 2;
+        private const string JUNIOR = "junior";
+        private const string INTERN = "intern";
+        private const string SENIOR = "senior";
         private ChatWindow chatWindowIntern;
         private ChatWindow chatWindowJuniorm;
         private ChatWindow chatWindowSenior;
@@ -28,13 +31,13 @@ namespace SuperbetBeclean.Services
         // Task internTask, juniorTask, seniorTask;
         public MainService()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+            connectionString = "Data Source=DESKTOP-TU0UN2P\\SQLEXPRESS;Initial Catalog=Team42;Integrated Security=true";
             sqlConnection = new SqlConnection(connectionString);
             dbService = new DBService(new SqlConnection(connectionString));
             openedUsersWindows = new List<MenuWindow>();
-            internTable = new TableService(5000, 50, 100, "intern", dbService);
-            juniorTable = new TableService(50000, 500, 1000, "junior", dbService);
-            seniorTable = new TableService(500000, 5000, 10000, "senior", dbService);
+            internTable = new TableService(5000, 50, 100, INTERN, dbService);
+            juniorTable = new TableService(50000, 500, 1000, JUNIOR, dbService);
+            seniorTable = new TableService(500000, 5000, 10000, SENIOR, dbService);
             // chatWindowIntern = new ChatWindow();
             // chatWindowJuniorm = new ChatWindow();
             // chatWindowSenior = new ChatWindow();
