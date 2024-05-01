@@ -78,36 +78,72 @@ namespace SuperbetBeclean.Services
             }
             dbService.UpdateUserLastLogin(newUser.UserID, DateTime.Now);
         }
+        private int GetIntFromReader(SqlDataReader reader, string columnName)
+        {
+            return reader.IsDBNull(reader.GetOrdinal(columnName)) ? 0 : reader.GetInt32(reader.GetOrdinal(columnName));
+        }
+        private string GetStringFromReader(SqlDataReader reader, string columnName)
+        {
+            return reader.IsDBNull(reader.GetOrdinal(columnName)) ? string.Empty : reader.GetString(reader.GetOrdinal(columnName));
+        }
+        private DateTime GetDateFromReader(SqlDataReader reader, string columnName)
+        {
+            return reader.IsDBNull(reader.GetOrdinal(columnName)) ? default : reader.GetDateTime(reader.GetOrdinal(columnName));
+        }
 
+        private User CreateUserFromReader(SqlDataReader reader)
+        {
+            int userID = GetIntFromReader(reader, "user_id");
+            string userName = GetStringFromReader(reader, "user_username");
+            int currentFont = GetIntFromReader(reader, "user_currentFont");
+            int currentTitle = GetIntFromReader(reader, "user_currentTitle");
+            string currentIconPath = reader.IsDBNull(reader.GetOrdinal("user_currentIcon")) ? ConfigurationManager.AppSettings["DEFAULT_ICON_PATH"] : dbService.GetIconPath(reader.GetInt32(reader.GetOrdinal("user_currentIcon")));
+            int currentTable = GetIntFromReader(reader, "user_currentTable");
+            int chips = GetIntFromReader(reader, "user_chips");
+            int stack = GetIntFromReader(reader, "user_stack");
+            int streak = GetIntFromReader(reader, "user_streak");
+            int handsPlayed = GetIntFromReader(reader, "user_handsPlayed");
+            int level = GetIntFromReader(reader, "user_level");
+            DateTime lastLogin = GetDateFromReader(reader, "user_lastLogin");
+            return new User(userID, userName, currentFont, currentTitle, currentIconPath, currentTable, chips, stack, streak, handsPlayed, level, lastLogin);
+        }
+        private void OpenUserWindow(User user)
+        {
+            MenuWindow menuWindow = new MenuWindow(user, this);
+            menuWindow.Show();
+            openedUsersWindows.Add(menuWindow);
+        }
+        private User FetchUser(SqlConnection sqlConnection, string userName)
+        {
+            using (SqlCommand command = new SqlCommand("EXEC getUser @username", sqlConnection))
+            {
+                command.Parameters.AddWithValue("@username", userName);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        User newUser = CreateUserFromReader(reader);
+                        reader.Close();
+                        return newUser;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
         public void AddWindow(string username)
         {
             sqlConnection.Open();
-            SqlCommand command = new SqlCommand("EXEC getUser @username", sqlConnection);
-            command.Parameters.AddWithValue("@username", username);
+            User user = FetchUser(sqlConnection, username);
             try
             {
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+                if (user != null)
                 {
-                    reader.Read();
-                    int userID = reader.IsDBNull(reader.GetOrdinal("user_id")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_id"));
-                    string userName = reader.IsDBNull(reader.GetOrdinal("user_username")) ? string.Empty : reader.GetString(reader.GetOrdinal("user_username"));
-                    int currentFont = reader.IsDBNull(reader.GetOrdinal("user_currentFont")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_currentFont"));
-                    int currentTitle = reader.IsDBNull(reader.GetOrdinal("user_currentTitle")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_currentTitle"));
-                    string currentIconPath = reader.IsDBNull(reader.GetOrdinal("user_currentIcon")) ? ConfigurationManager.AppSettings["DEFAULT_ICON_PATH"] : dbService.GetIconPath(reader.GetInt32(reader.GetOrdinal("user_currentIcon")));
-                    int currentTable = reader.IsDBNull(reader.GetOrdinal("user_currentTable")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_currentTable"));
-                    int chips = reader.IsDBNull(reader.GetOrdinal("user_chips")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_chips"));
-                    int stack = reader.IsDBNull(reader.GetOrdinal("user_stack")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_stack"));
-                    int streak = reader.IsDBNull(reader.GetOrdinal("user_streak")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_streak"));
-                    int handsPlayed = reader.IsDBNull(reader.GetOrdinal("user_handsPlayed")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_handsPlayed"));
-                    int level = reader.IsDBNull(reader.GetOrdinal("user_level")) ? 0 : reader.GetInt32(reader.GetOrdinal("user_level"));
-                    DateTime lastLogin = reader.IsDBNull(reader.GetOrdinal("user_handsPlayed")) ? default(DateTime) : reader.GetDateTime(reader.GetOrdinal("user_lastLogin"));
-                    User newUser = new User(userID, userName, currentFont, currentTitle, currentIconPath, currentTable, chips, stack, streak, handsPlayed, level, lastLogin);
-                    MenuWindow menuWindow = new MenuWindow(newUser, this);
-                    reader.Close();
-                    menuWindow.Show();
-                    NewUserLogin(newUser);
-                    openedUsersWindows.Add(menuWindow);
+                    OpenUserWindow(user);
+                    NewUserLogin(user);
                 }
                 else
                 {
