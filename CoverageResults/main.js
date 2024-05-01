@@ -222,13 +222,13 @@ var assemblies = [
     "name": "SuperbetBeclean",
     "classes": [
       { "name": "ChatService", "rp": "SuperbetBeclean_ChatService.html", "cl": 0, "ucl": 58, "cal": 58, "tl": 86, "cb": 0, "tb": 20, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "HandRankCalculator", "rp": "SuperbetBeclean_HandRankCalculator.html", "cl": 18, "ucl": 329, "cal": 347, "tl": 449, "cb": 0, "tb": 136, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "HandRankCalculator", "rp": "SuperbetBeclean_HandRankCalculator.html", "cl": 20, "ucl": 329, "cal": 349, "tl": 451, "cb": 0, "tb": 136, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "PlaceholderCommand", "rp": "SuperbetBeclean_PlaceholderCommand.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 99, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.App", "rp": "SuperbetBeclean_App.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 80, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SuperbetBeclean.Components.ChallengePanel", "rp": "SuperbetBeclean_ChallengePanel.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 182, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SuperbetBeclean.Components.ChallengePanelSymbols", "rp": "SuperbetBeclean_ChallengePanelSymbols.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 182, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SuperbetBeclean.Components.OwnedItemComponent", "rp": "SuperbetBeclean_OwnedItemComponent.html", "cl": 0, "ucl": 30, "cal": 30, "tl": 184, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SuperbetBeclean.Components.ShopItemComponent", "rp": "SuperbetBeclean_ShopItemComponent.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 195, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SuperbetBeclean.Components.ChallengePanel", "rp": "SuperbetBeclean_ChallengePanel.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 183, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SuperbetBeclean.Components.ChallengePanelSymbols", "rp": "SuperbetBeclean_ChallengePanelSymbols.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 183, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SuperbetBeclean.Components.OwnedItemComponent", "rp": "SuperbetBeclean_OwnedItemComponent.html", "cl": 0, "ucl": 30, "cal": 30, "tl": 185, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SuperbetBeclean.Components.ShopItemComponent", "rp": "SuperbetBeclean_ShopItemComponent.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 196, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.MainWindow", "rp": "SuperbetBeclean_MainWindow.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 38, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.Model.CardDeck", "rp": "SuperbetBeclean_CardDeck.html", "cl": 0, "ucl": 27, "cal": 27, "tl": 50, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.Model.Challenge", "rp": "SuperbetBeclean_Challenge.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 47, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
@@ -252,14 +252,14 @@ var assemblies = [
       { "name": "SuperbetBeclean.Properties.Settings", "rp": "SuperbetBeclean_Settings.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 30, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.RequestsWindow", "rp": "SuperbetBeclean_RequestsWindow.html", "cl": 0, "ucl": 96, "cal": 96, "tl": 235, "cb": 0, "tb": 24, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.Services.DBService", "rp": "SuperbetBeclean_DBService.html", "cl": 50, "ucl": 342, "cal": 392, "tl": 517, "cb": 4, "tb": 24, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SuperbetBeclean.Services.MainService", "rp": "SuperbetBeclean_MainService.html", "cl": 37, "ucl": 59, "cal": 96, "tl": 152, "cb": 4, "tb": 30, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SuperbetBeclean.Services.MainService", "rp": "SuperbetBeclean_MainService.html", "cl": 37, "ucl": 84, "cal": 121, "tl": 188, "cb": 4, "tb": 16, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.Services.TableService", "rp": "SuperbetBeclean_TableService.html", "cl": 30, "ucl": 368, "cal": 398, "tl": 522, "cb": 2, "tb": 122, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SuperbetBeclean.Windows.ChallengesWindow", "rp": "SuperbetBeclean_ChallengesWindow.html", "cl": 0, "ucl": 27, "cal": 27, "tl": 224, "cb": 0, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SuperbetBeclean.Windows.ChallengesWindow", "rp": "SuperbetBeclean_ChallengesWindow.html", "cl": 0, "ucl": 27, "cal": 27, "tl": 225, "cb": 0, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.Windows.ChatWindow", "rp": "SuperbetBeclean_ChatWindow.html", "cl": 0, "ucl": 33, "cal": 33, "tl": 127, "cb": 0, "tb": 11, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.Windows.MenuWindow", "rp": "SuperbetBeclean_MenuWindow.html", "cl": 0, "ucl": 92, "cal": 92, "tl": 170, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SuperbetBeclean.Windows.RulesWindow", "rp": "SuperbetBeclean_RulesWindow.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 112, "cb": 0, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "TestingBeclean.MainServiceTests.MainServiceTests", "rp": "SuperbetBeclean_MainServiceTests.html", "cl": 0, "ucl": 26, "cal": 26, "tl": 57, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "XamlGeneratedNamespace.GeneratedInternalTypeHelper", "rp": "SuperbetBeclean_GeneratedInternalTypeHelper.html", "cl": 0, "ucl": 19, "cal": 19, "tl": 61, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "XamlGeneratedNamespace.GeneratedInternalTypeHelper", "rp": "SuperbetBeclean_GeneratedInternalTypeHelper.html", "cl": 0, "ucl": 19, "cal": 19, "tl": 62, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -286,13 +286,7 @@ var riskHotspots = [
       { "value": 40, "exceeded": true },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "SuperbetBeclean.Services.MainService", "reportPath": "SuperbetBeclean_MainService.html", "methodName": "AddWindow(System.String)", "methodShortName": "AddWindow(...)", "fileIndex": 0, "line": 83,
-    "metrics": [
-      { "value": 702, "exceeded": true },
-      { "value": 26, "exceeded": false },
-    ]},
-  {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "GetValue(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "GetValue(...)", "fileIndex": 0, "line": 400,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "GetValue(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "GetValue(...)", "fileIndex": 0, "line": 402,
     "metrics": [
       { "value": 342, "exceeded": true },
       { "value": 18, "exceeded": false },
@@ -316,31 +310,31 @@ var riskHotspots = [
       { "value": 14, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsFourOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsFourOfAKind(...)", "fileIndex": 0, "line": 82,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsFourOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsFourOfAKind(...)", "fileIndex": 0, "line": 84,
     "metrics": [
       { "value": 156, "exceeded": true },
       { "value": 12, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsFullHouse(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsFullHouse(...)", "fileIndex": 0, "line": 139,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsFullHouse(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsFullHouse(...)", "fileIndex": 0, "line": 141,
     "metrics": [
       { "value": 156, "exceeded": true },
       { "value": 12, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashThreeOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashThreeOfAKind(...)", "fileIndex": 0, "line": 266,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashThreeOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashThreeOfAKind(...)", "fileIndex": 0, "line": 268,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashTwoPairs(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashTwoPairs(...)", "fileIndex": 0, "line": 313,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashTwoPairs(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashTwoPairs(...)", "fileIndex": 0, "line": 315,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashOnePair(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashOnePair(...)", "fileIndex": 0, "line": 360,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashOnePair(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashOnePair(...)", "fileIndex": 0, "line": 362,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
@@ -370,25 +364,25 @@ var riskHotspots = [
       { "value": 8, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashFourOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashFourOfAKind(...)", "fileIndex": 0, "line": 110,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashFourOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashFourOfAKind(...)", "fileIndex": 0, "line": 112,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashFullHouse(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashFullHouse(...)", "fileIndex": 0, "line": 167,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashFullHouse(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashFullHouse(...)", "fileIndex": 0, "line": 169,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsStraight(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsStraight(...)", "fileIndex": 0, "line": 216,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsStraight(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsStraight(...)", "fileIndex": 0, "line": 218,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsThreeOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsThreeOfAKind(...)", "fileIndex": 0, "line": 241,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsThreeOfAKind(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsThreeOfAKind(...)", "fileIndex": 0, "line": 243,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
@@ -430,7 +424,7 @@ var riskHotspots = [
       { "value": 7, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsRoyalFlush(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsRoyalFlush(...)", "fileIndex": 0, "line": 41,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsRoyalFlush(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsRoyalFlush(...)", "fileIndex": 0, "line": 43,
     "metrics": [
       { "value": 42, "exceeded": true },
       { "value": 6, "exceeded": false },
@@ -484,31 +478,31 @@ var riskHotspots = [
       { "value": 4, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsStraightFlush(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsStraightFlush(...)", "fileIndex": 0, "line": 61,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsStraightFlush(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsStraightFlush(...)", "fileIndex": 0, "line": 63,
     "metrics": [
       { "value": 20, "exceeded": true },
       { "value": 4, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashStraightFlush(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashStraightFlush(...)", "fileIndex": 0, "line": 70,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashStraightFlush(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashStraightFlush(...)", "fileIndex": 0, "line": 72,
     "metrics": [
       { "value": 20, "exceeded": true },
       { "value": 4, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashStraight(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashStraight(...)", "fileIndex": 0, "line": 229,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "HashStraight(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "HashStraight(...)", "fileIndex": 0, "line": 231,
     "metrics": [
       { "value": 20, "exceeded": true },
       { "value": 4, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsTwoPairs(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsTwoPairs(...)", "fileIndex": 0, "line": 296,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsTwoPairs(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsTwoPairs(...)", "fileIndex": 0, "line": 298,
     "metrics": [
       { "value": 20, "exceeded": true },
       { "value": 4, "exceeded": false },
     ]},
   {
-    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsOnePair(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsOnePair(...)", "fileIndex": 0, "line": 343,
+    "assembly": "SuperbetBeclean", "class": "HandRankCalculator", "reportPath": "SuperbetBeclean_HandRankCalculator.html", "methodName": "IsOnePair(System.Collections.Generic.List`1<SuperbetBeclean.Model.PlayingCard>)", "methodShortName": "IsOnePair(...)", "fileIndex": 0, "line": 345,
     "metrics": [
       { "value": 20, "exceeded": true },
       { "value": 4, "exceeded": false },
