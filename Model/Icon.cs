@@ -13,9 +13,12 @@ namespace SuperbetBeclean.Model
         private int iconPrice;
         private string iconPath;
 
+        private const int DEFAULT_ICON_ID = 0;
+        private const string DEFAULT_ICON_NAME = "";
+        private const int DEFAULT_ICON_PRICE = 0;
+        private const string DEFAULT_ICON_PATH = "";
 
-
-        public Icon(int iconID = 0, string iconName = "", int iconPrice = 0, string iconPath = "")
+        public Icon(int iconID = DEFAULT_ICON_ID, string iconName = DEFAULT_ICON_NAME, int iconPrice = DEFAULT_ICON_PRICE, string iconPath = DEFAULT_ICON_PATH)
         {
             this.iconID = iconID;
             this.iconName = iconName;

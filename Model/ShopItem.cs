@@ -23,9 +23,9 @@ namespace SuperbetBeclean.Models
         }
 
         // Method to show a message when buying the item
-        public void Buy()
+        /*public void Buy()
         {
             MessageBox.Show($"You have bought {Name} for {Price} chips.");
-        }
+        }*/
     }
 }
