@@ -2,7 +2,6 @@
 using SuperbetBeclean.Models;
 using SuperbetBeclean.Services;
 
-
 namespace TestingBeclean
 {
     public class TestsDomain
@@ -10,7 +9,6 @@ namespace TestingBeclean
         [SetUp]
         public void Setup()
         {
-
         }
 
         [Test]
@@ -231,17 +229,17 @@ namespace TestingBeclean
         [Test]
         public void TestShopItem_IsEqualToWhatWasPassedInTheConstructor_True()
         {
-            int Id = 1;
-            string ImagePath = "imagePath";
-            string Name = "name";
-            int Price = 1;
+            int id = 1;
+            string imagePath = "imagePath";
+            string name = "name";
+            int price = 1;
 
-            ShopItem shopItem = new ShopItem(Id, ImagePath, Name, Price);
+            ShopItem shopItem = new ShopItem(id, imagePath, name, price);
 
-            Assert.That(shopItem.Id, Is.EqualTo(Id));
-            Assert.That(shopItem.ImagePath, Is.EqualTo(ImagePath));
-            Assert.That(shopItem.Name, Is.EqualTo(Name));
-            Assert.That(shopItem.Price, Is.EqualTo(Price));
+            Assert.That(shopItem.Id, Is.EqualTo(id));
+            Assert.That(shopItem.ImagePath, Is.EqualTo(imagePath));
+            Assert.That(shopItem.Name, Is.EqualTo(name));
+            Assert.That(shopItem.Price, Is.EqualTo(price));
         }
 
         [Test]
@@ -401,7 +399,7 @@ namespace TestingBeclean
             challenge.ChallengeID = 1;
             Assert.That(challenge.ChallengeID, Is.EqualTo(1));
         }
-        
+
         [Test]
         public void TestChallengeDescriptionGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -465,7 +463,7 @@ namespace TestingBeclean
             challenge.ChallengeReward = 1;
             Assert.That(challenge.ChallengeReward, Is.EqualTo(1));
         }
-      
+
         [Test]
         public void TestPlayingCardValueGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -497,7 +495,7 @@ namespace TestingBeclean
             playingCard.Suit = "suit";
             Assert.That(playingCard.Suit, Is.EqualTo("suit"));
         }
-        
+
         [Test]
         public void TestUserIDGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -505,6 +503,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserID, Is.EqualTo(user1.UserID));
         }
+
         [Test]
         public void TestUserIDSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -512,6 +511,7 @@ namespace TestingBeclean
             user.UserID = 1;
             Assert.That(user.UserID, Is.EqualTo(1));
         }
+
         [Test]
         public void TestUserNameGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -519,6 +519,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserName, Is.EqualTo(user1.UserName));
         }
+
         [Test]
         public void TestUserNameSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -526,6 +527,7 @@ namespace TestingBeclean
             user.UserName = "userName";
             Assert.That(user.UserName, Is.EqualTo("userName"));
         }
+
         [Test]
         public void TestUserCurrentFontGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -533,6 +535,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserCurrentFont, Is.EqualTo(user1.UserCurrentFont));
         }
+
         [Test]
         public void TestUserCurrentFontSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -548,6 +551,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserCurrentTitle, Is.EqualTo(user1.UserCurrentTitle));
         }
+
         [Test]
         public void TestUserCurrentTitleSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -555,6 +559,7 @@ namespace TestingBeclean
             user.UserCurrentTitle = 2;
             Assert.That(user.UserCurrentTitle, Is.EqualTo(2));
         }
+
         [Test]
         public void TestUserCurrentIconPathGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -562,6 +567,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserCurrentIconPath, Is.EqualTo(user1.UserCurrentIconPath));
         }
+
         [Test]
         public void TestUserCurrentIconPathSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -569,6 +575,7 @@ namespace TestingBeclean
             user.UserCurrentIconPath = "userCurrentIconPath";
             Assert.That(user.UserCurrentIconPath, Is.EqualTo("userCurrentIconPath"));
         }
+
         [Test]
         public void TestUserCurrentTableGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -576,6 +583,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserCurrentTable, Is.EqualTo(user1.UserCurrentTable));
         }
+
         [Test]
         public void TestUserCurrentTableSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -583,6 +591,7 @@ namespace TestingBeclean
             user.UserCurrentTable = 3;
             Assert.That(user.UserCurrentTable, Is.EqualTo(3));
         }
+
         [Test]
         public void TestUserChipsGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -590,6 +599,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserChips, Is.EqualTo(user1.UserChips));
         }
+
         [Test]
         public void TestUserChipsSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -597,6 +607,7 @@ namespace TestingBeclean
             user.UserChips = 4;
             Assert.That(user.UserChips, Is.EqualTo(4));
         }
+
         [Test]
         public void TestUserStackGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -604,6 +615,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserStack, Is.EqualTo(user1.UserStack));
         }
+
         [Test]
         public void TestUserStackSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -611,6 +623,7 @@ namespace TestingBeclean
             user.UserStack = 5;
             Assert.That(user.UserStack, Is.EqualTo(5));
         }
+
         [Test]
         public void TestUserStreakGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -618,6 +631,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserStreak, Is.EqualTo(user1.UserStreak));
         }
+
         [Test]
         public void TestUserStreakSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -625,6 +639,7 @@ namespace TestingBeclean
             user.UserStreak = 6;
             Assert.That(user.UserStreak, Is.EqualTo(6));
         }
+
         [Test]
         public void TestUserHandsPlayedGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -632,6 +647,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserHandsPlayed, Is.EqualTo(user1.UserHandsPlayed));
         }
+
         [Test]
         public void TestUserHandsPlayedSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -639,6 +655,7 @@ namespace TestingBeclean
             user.UserHandsPlayed = 7;
             Assert.That(user.UserHandsPlayed, Is.EqualTo(7));
         }
+
         [Test]
         public void TestUserLevelGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -646,6 +663,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserLevel, Is.EqualTo(user1.UserLevel));
         }
+
         [Test]
         public void TestUserLevelSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -653,6 +671,7 @@ namespace TestingBeclean
             user.UserLevel = 8;
             Assert.That(user.UserLevel, Is.EqualTo(8));
         }
+
         [Test]
         public void TestUserLastLogInGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -660,6 +679,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserLastLogin, Is.EqualTo(user1.UserLastLogin));
         }
+
         [Test]
         public void TestUserLastLogInSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -667,7 +687,6 @@ namespace TestingBeclean
             User user = new User();
             user.UserLastLogin = current_time;
             Assert.That(user.UserLastLogin, Is.EqualTo(current_time));
-
         }
 
         [Test]
@@ -677,6 +696,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserStatus, Is.EqualTo(user1.UserStatus));
         }
+
         [Test]
         public void TestUserStatusSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -684,6 +704,7 @@ namespace TestingBeclean
             user.UserStatus = 1;
             Assert.That(user.UserStatus, Is.EqualTo(1));
         }
+
         [Test]
         public void TestUserBetGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -691,6 +712,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserBet, Is.EqualTo(user1.UserBet));
         }
+
         [Test]
         public void TestUserBetSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -698,6 +720,7 @@ namespace TestingBeclean
             user.UserBet = 2;
             Assert.That(user.UserBet, Is.EqualTo(2));
         }
+
         [Test]
         public void TestUserCurrentHandGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -705,6 +728,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserCurrentHand, Is.EqualTo(user1.UserCurrentHand));
         }
+
         [Test]
         public void TestUserCurrentHandSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -712,6 +736,7 @@ namespace TestingBeclean
             user.UserCurrentHand = new PlayingCard[2];
             Assert.That(user.UserCurrentHand, Is.EqualTo(new PlayingCard[2]));
         }
+
         [Test]
         public void TestUserTablePlaceGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -719,6 +744,7 @@ namespace TestingBeclean
             User user1 = new User();
             Assert.That(user.UserTablePlace, Is.EqualTo(user1.UserTablePlace));
         }
+
         [Test]
         public void TestUserTablePlaceSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -726,16 +752,5 @@ namespace TestingBeclean
             user.UserTablePlace = 3;
             Assert.That(user.UserTablePlace, Is.EqualTo(3));
         }
-
-
-
-
-
-
-
-
-
-
-
-    } 
+    }
 }
