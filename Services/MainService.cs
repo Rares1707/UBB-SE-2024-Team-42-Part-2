@@ -12,7 +12,7 @@ namespace SuperbetBeclean.Services
     {
         private List<MenuWindow> openedUsersWindows;
         private SqlConnection sqlConnection;
-        private DataBaseService dbService;
+        private DBService dbService;
         private const int FULL = 8;
         private const int EMPTY = 0;
         private const int INACTIVE = 0;
@@ -33,7 +33,7 @@ namespace SuperbetBeclean.Services
         {
             connectionString = "Data Source=DESKTOP-TU0UN2P\\SQLEXPRESS;Initial Catalog=Team42;Integrated Security=true";
             sqlConnection = new SqlConnection(connectionString);
-            dbService = new DataBaseService(new SqlConnection(connectionString));
+            dbService = new DBService(new SqlConnection(connectionString));
             openedUsersWindows = new List<MenuWindow>();
             internTable = new TableService(5000, 50, 100, INTERN, dbService);
             juniorTable = new TableService(50000, 500, 1000, JUNIOR, dbService);

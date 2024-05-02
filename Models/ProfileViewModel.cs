@@ -6,7 +6,7 @@ namespace SuperbetBeclean.Models
 {
     internal class ProfileViewModel
     {
-        private IDataBaseService dbService;
+        private IDBService dbService;
 
         private MenuWindow mainWindow;
         public List<ShopItem> OwnedItems { get; set; }
@@ -15,7 +15,7 @@ namespace SuperbetBeclean.Models
         {
             this.mainWindow = mainWindow;
             OwnedItems = new List<ShopItem>();
-            dbService = new DataBaseService();
+            dbService = new DBService();
             LoadItems();
         }
 
