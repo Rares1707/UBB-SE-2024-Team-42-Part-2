@@ -16,20 +16,22 @@ public class HandRankCalculator
 
     public HandRankCalculator()
     {
-        cardValues = new Dictionary<string, int>();
-        cardValues.Add("2", 2);
-        cardValues.Add("3", 3);
-        cardValues.Add("4", 4);
-        cardValues.Add("5", 5);
-        cardValues.Add("6", 6);
-        cardValues.Add("7", 7);
-        cardValues.Add("8", 8);
-        cardValues.Add("9", 9);
-        cardValues.Add("10", 10);
-        cardValues.Add("J", 11);
-        cardValues.Add("Q", 12);
-        cardValues.Add("K", 13);
-        cardValues.Add("A", 14);
+        cardValues = new Dictionary<string, int>
+        {
+            { "2", 2 },
+            { "3", 3 },
+            { "4", 4 },
+            { "5", 5 },
+            { "6", 6 },
+            { "7", 7 },
+            { "8", 8 },
+            { "9", 9 },
+            { "10", 10 },
+            { "J", 11 },
+            { "Q", 12 },
+            { "K", 13 },
+            { "A", 14 }
+        };
         pows = new List<int>() { 1, 15, 225, 3375, 50625, 759375 }; /// Powers of 15
     }
 

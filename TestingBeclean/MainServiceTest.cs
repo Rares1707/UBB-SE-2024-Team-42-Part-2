@@ -9,6 +9,7 @@ namespace TestingBeclean.MainServiceTests
         private IMainService mainService;
         private User userToday;
         private User userFiveDaysFromNow;
+
         [SetUp]
         public void Setup()
         {
