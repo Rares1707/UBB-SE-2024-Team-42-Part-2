@@ -43,13 +43,13 @@ namespace SuperbetBeclean.Components
             InitializeComponent();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs clickEvent)
         {
             var itemName = OwnedItemName; // Access the ItemName property directly
-            IDBService dbService = new DBService();
-            var itemId = dbService.GetIconIDByIconName(itemName);
+            IDataBaseService databaseService = new DataBaseService();
+            var itemId = databaseService.GetIconIDByIconName(itemName);
             Console.WriteLine(OwnedUserId.ToString(), itemId);
-            dbService.SetCurrentIcon(OwnedUserId, itemId);
+            databaseService.SetCurrentIcon(OwnedUserId, itemId);
         }
     }
 }

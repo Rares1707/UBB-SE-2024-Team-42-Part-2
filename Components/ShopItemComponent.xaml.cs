@@ -54,12 +54,12 @@ namespace SuperbetBeclean.Components
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs routedEvent)
         {
             var itemName = ItemName; // Access the ItemName property directly
-            IDBService dbService = new DBService();
-            var itemId = dbService.GetIconIDByIconName(itemName);
-            dbService.CreateUserIcon(ShopUserId, itemId);
+            IDataBaseService databaseService = new DataBaseService();
+            var itemId = databaseService.GetIconIDByIconName(itemName);
+            databaseService.CreateUserIcon(ShopUserId, itemId);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace SuperbetBeclean.Pages
             listViewLeaderboard.Loaded += ListViewLeaderboard_Loaded;
         }
 
-        private void ListViewLeaderboard_Loaded(object sender, RoutedEventArgs e)
+        private void ListViewLeaderboard_Loaded(object sender, RoutedEventArgs routedEvent)
         {
             // Set font color for the first three items
             for (int i = 0; i < 3 && i < listViewLeaderboard.Items.Count; i++)
@@ -47,7 +47,7 @@ namespace SuperbetBeclean.Pages
             }
         }
 
-        private void OnClickLeaderboardBack(object sender, RoutedEventArgs e)
+        private void OnClickLeaderboardBack(object sender, RoutedEventArgs routedEvent)
         {
             mainFrame.NavigationService.GoBack();
         }

@@ -27,19 +27,19 @@ namespace SuperbetBeclean.Pages
     {
         private MenuWindow mainWindow;
         private Frame mainFrame;
-        private IMainService service;
+        private IMainService mainService;
         private int timer = 0;
         private int playerBet = 0;
         private string action = string.Empty;
         private string tableType;
         private ChatWindow chatWindow;
         private IChatService chatService;
-        public GameTablePage(Frame mainFrame, MenuWindow mainWindow, IMainService service, string tableType)
+        public GameTablePage(Frame mainFrame, MenuWindow mainWindow, IMainService mainService, string tableType)
         {
             InitializeComponent();
             Loaded += GameTablePage_Loaded;
             this.mainWindow = mainWindow;
-            this.service = service;
+            this.mainService = mainService;
             this.mainFrame = mainFrame;
             PlayerNameTextBox.Text = this.mainWindow.UserName();
             Uri uri = new Uri(this.mainWindow.UserIcon(), UriKind.Absolute);
@@ -56,7 +56,7 @@ namespace SuperbetBeclean.Pages
                 PlayerChipsTextBox.Text = player.UserChips.ToString();
             });
         }
-        private void GameTablePage_Loaded(object sender, RoutedEventArgs e)
+        private void GameTablePage_Loaded(object sender, RoutedEventArgs routedEvent)
         {
             Window window = Window.GetWindow(this);
             if (window != null)
@@ -65,12 +65,12 @@ namespace SuperbetBeclean.Pages
                 window.Height = 720;
             }
         }
-        private void QuitBttn_Click(object sender, RoutedEventArgs e)
+        private void QuitBttn_Click(object sender, RoutedEventArgs routedEvent)
         {
             chatService.CloseChat(mainWindow);
             mainFrame.NavigationService.GoBack();
             action = "Fold";
-            mainWindow.DisconnectUser(sender, e);
+            mainWindow.DisconnectUser(sender, routedEvent);
         }
 
         public void EndTimer()
@@ -371,18 +371,18 @@ namespace SuperbetBeclean.Pages
                 });
             }
         }
-        private void ChallengesBttn_Click(object sender, RoutedEventArgs e)
+        private void ChallengesBttn_Click(object sender, RoutedEventArgs routedEvent)
         {
             ChallengesWindow challengesWindow = new ChallengesWindow();
             challengesWindow.Show();
         }
 
-        private void MsgBttn_Click(object sender, RoutedEventArgs e)
+        private void MsgBttn_Click(object sender, RoutedEventArgs routedEvent)
         {
             chatService.NewChat(mainWindow, tableType);
         }
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> routedProperty)
         {
             SliderValueBet.Content = Convert.ToInt32(SliderBet.Value).ToString();
         }

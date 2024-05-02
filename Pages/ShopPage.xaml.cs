@@ -29,7 +29,7 @@ namespace SuperbetBeclean.Pages
             this.mainFrame = mainFrame;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs routedEvent)
         {
             mainFrame.NavigationService.GoBack();
         }
