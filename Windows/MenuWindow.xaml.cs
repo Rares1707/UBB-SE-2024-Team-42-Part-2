@@ -27,13 +27,13 @@ namespace SuperbetBeclean.Windows
         private IMainService service;
         private Dictionary<string, GameTablePage> gamePages;
 
-        public MenuWindow(User user, MainService serv)
+        public MenuWindow(User u, MainService serv)
         {
             InitializeComponent();
             this.service = serv;
-            this.user = user;
-            this.Title = this.user.UserName;
-            MenuFrame.Navigate(new MainMenu(MenuFrame, this, serv, this.user));
+            this.user = u;
+            this.Title = user.UserName;
+            MenuFrame.Navigate(new MainMenu(MenuFrame, this, serv, user));
             gamePages = new Dictionary<string, GameTablePage>();
             gamePages.Add("intern", new GameTablePage(MenuFrame, this, service, "intern"));
             gamePages.Add("junior", new GameTablePage(MenuFrame, this, service, "junior"));
@@ -61,9 +61,9 @@ namespace SuperbetBeclean.Windows
             gamePages[table].ResetCards();
         }
 
-        public void NotifyUserCard(string table, User user, int card, string cardValue)
+        public void NotifyUserCard(string table, User u, int card, string cardValue)
         {
-            gamePages[table].AddUserCard(user == this.user, user.UserTablePlace, card, cardValue);
+            gamePages[table].AddUserCard(u == user, u.UserTablePlace, card, cardValue);
         }
 
         public void NotifyTableCard(string table, int card, string cardValue)

@@ -4,7 +4,7 @@ using SuperbetBeclean.Models;
 
 namespace SuperbetBeclean.Services
 {
-    public interface IDataBaseService
+    public interface IDBService
     {
         void OpenConnection();
         void CloseConnection();
