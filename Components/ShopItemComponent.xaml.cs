@@ -57,7 +57,7 @@ namespace SuperbetBeclean.Components
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var itemName = ItemName; // Access the ItemName property directly
-            IDBService dbService = new DBService();
+            IDataBaseService dbService = new DataBaseService();
             var itemId = dbService.GetIconIDByIconName(itemName);
             dbService.CreateUserIcon(ShopUserId, itemId);
         }

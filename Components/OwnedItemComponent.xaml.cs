@@ -46,7 +46,7 @@ namespace SuperbetBeclean.Components
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var itemName = OwnedItemName; // Access the ItemName property directly
-            IDBService dbService = new DBService();
+            IDataBaseService dbService = new DataBaseService();
             var itemId = dbService.GetIconIDByIconName(itemName);
             Console.WriteLine(OwnedUserId.ToString(), itemId);
             dbService.SetCurrentIcon(OwnedUserId, itemId);

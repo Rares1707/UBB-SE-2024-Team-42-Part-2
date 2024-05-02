@@ -20,7 +20,7 @@ namespace SuperbetBeclean.Pages
         private MenuWindow mainWindow;
         private MainService service;
         private SqlConnection sqlConnection;
-        private DBService dbService;
+        private DataBaseService dbService;
         private string connectionString;
         private User user;
         public LobbyPage(Frame mainFrame, MenuWindow menuWindow, MainService service, User u)
@@ -28,7 +28,7 @@ namespace SuperbetBeclean.Pages
             connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            dbService = new DBService(new SqlConnection(connectionString));
+            dbService = new DataBaseService(new SqlConnection(connectionString));
             InitializeComponent();
             this.mainFrame = mainFrame;
             mainWindow = menuWindow;

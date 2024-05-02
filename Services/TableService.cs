@@ -40,7 +40,7 @@ namespace SuperbetBeclean.Services
 
         private PlayingCard[] communityCards;
         private int[] freeSpace;
-        public TableService(int buyIn, int smallBlind, int bigBlind, string tableType, DBService dbService)
+        public TableService(int buyIn, int smallBlind, int bigBlind, string tableType, DataBaseService dbService)
         {
             this.databaseService = dbService;
             this.tableType = tableType;
@@ -78,9 +78,9 @@ namespace SuperbetBeclean.Services
         private void ReloadPlayerStackWithChips(User player)
         {
             player.UserChips -= buyIn;
-            dbService.UpdateUserChips(player.UserID, player.UserChips);
+            databaseService.UpdateUserChips(player.UserID, player.UserChips);
             player.UserStack = buyIn;
-            dbService.UpdateUserStack(player.UserID, player.UserStack);
+            databaseService.UpdateUserStack(player.UserID, player.UserStack);
         }
 
         private PlayingCard DealCard(User player, int index)
@@ -374,7 +374,7 @@ namespace SuperbetBeclean.Services
                 {
                     Console.WriteLine("Winner: " + winner.UserName);
                     winner.UserStack += Convert.ToInt32(tablePot / winners.Count);
-                    dbService.UpdateUserStack(winner.UserID, winner.UserStack);
+                    databaseService.UpdateUserStack(winner.UserID, winner.UserStack);
                     DisplayWinner(allActivePlayers, winner);
                 }
                 await Task.Delay(3000);

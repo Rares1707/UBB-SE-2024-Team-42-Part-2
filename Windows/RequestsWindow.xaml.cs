@@ -18,7 +18,7 @@ namespace SuperbetBeclean
         private string currentUserName;
         private List<string> requests;
         private SqlConnection sqlConnection;
-        private IDBService dbService;
+        private IDataBaseService dbService;
         private string connectionString;
         private LobbyPage lobbyPage;
         public string UserName;
@@ -29,7 +29,7 @@ namespace SuperbetBeclean
             connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            dbService = new DBService(new SqlConnection(connectionString)); // Initialize the database service
+            dbService = new DataBaseService(new SqlConnection(connectionString)); // Initialize the database service
             this.currentUserName = currentUserName;
             this.lobbyPage = lobbyPage;
             // Call a method to load and display requests

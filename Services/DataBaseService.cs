@@ -12,16 +12,16 @@ using SuperbetBeclean.Models;
 
 namespace SuperbetBeclean.Services
 {
-    public class DBService : IDBService
+    public class DataBaseService : IDataBaseService
     {
         private SqlConnection connection;
 
-        public DBService()
+        public DataBaseService()
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString);
         }
 
-        public DBService(SqlConnection connection)
+        public DataBaseService(SqlConnection connection)
         {
             this.connection = connection;
         }

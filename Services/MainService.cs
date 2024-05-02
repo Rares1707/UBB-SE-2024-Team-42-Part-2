@@ -31,7 +31,7 @@ namespace SuperbetBeclean.Services
         // Task internTask, juniorTask, seniorTask;
         public MainService()
         {
-            connectionString = "Data Source=DESKTOP-TU0UN2P\\SQLEXPRESS;Initial Catalog=Team42;Integrated Security=true";
+            connectionString = "Data Source=CamFrigLaCluj;Initial Catalog=Team42Part2DB;Integrated Security=True";
             sqlConnection = new SqlConnection(connectionString);
             databaseService = new DataBaseService(new SqlConnection(connectionString));
             openedUsersWindows = new List<MenuWindow>();
