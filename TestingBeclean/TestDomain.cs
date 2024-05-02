@@ -26,6 +26,7 @@ namespace TestingBeclean
             Icon icon1 = new Icon();
             Assert.That(icon.IconID, Is.EqualTo(icon1.IconID));
         }
+
         [Test]
         public void TestIconSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -41,6 +42,7 @@ namespace TestingBeclean
             Icon icon1 = new Icon();
             Assert.That(icon.IconName, Is.EqualTo(icon1.IconName));
         }
+
         [Test]
         public void TestIconNameSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -48,6 +50,7 @@ namespace TestingBeclean
             icon.IconName = "icon1";
             Assert.That(icon.IconName, Is.EqualTo("icon1"));
         }
+
         [Test]
         public void TestIconPriceGetter_IsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -55,6 +58,7 @@ namespace TestingBeclean
             Icon icon1 = new Icon();
             Assert.That(icon.IconPrice, Is.EqualTo(icon1.IconPrice));
         }
+
         [Test]
         public void TestIconPriceSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -86,6 +90,7 @@ namespace TestingBeclean
             Font font1 = new Font();
             Assert.That(font.FontID, Is.EqualTo(font1.FontID));
         }
+
         [Test]
         public void TestFontSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -93,6 +98,7 @@ namespace TestingBeclean
             font.FontID = 1;
             Assert.That(font.FontID, Is.EqualTo(1));
         }
+
         [Test]
         public void TestFontNameGetter_IsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -148,6 +154,7 @@ namespace TestingBeclean
             Challenge challenge1 = new Challenge();
             Assert.That(challenge.ChallengeID, Is.EqualTo(challenge1.ChallengeID));
         }
+
         [Test]
         public void TestChallengeSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -268,6 +275,7 @@ namespace TestingBeclean
             table.TableName = "tableName";
             Assert.That(table.TableName, Is.EqualTo("tableName"));
         }
+
         [Test]
         public void TestTableBuyInGetter_IsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -275,6 +283,7 @@ namespace TestingBeclean
             Table table1 = new Table();
             Assert.That(table.TableBuyIn, Is.EqualTo(table1.TableBuyIn));
         }
+
         [Test]
         public void TestTableBuyInSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -282,6 +291,7 @@ namespace TestingBeclean
             table.TableBuyIn = 1;
             Assert.That(table.TableBuyIn, Is.EqualTo(1));
         }
+
         [Test]
         public void TestTablePlayerLimitGetter_IsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -305,6 +315,7 @@ namespace TestingBeclean
             Title table1 = new Title();
             Assert.That(table.TitleID, Is.EqualTo(table1.TitleID));
         }
+
         [Test]
         public void TestTitleIdSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -336,6 +347,7 @@ namespace TestingBeclean
             Title table1 = new Title();
             Assert.That(table.TitlePrice, Is.EqualTo(table1.TitlePrice));
         }
+
         [Test]
         public void TestTitlePriceSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -343,6 +355,7 @@ namespace TestingBeclean
             table.TitlePrice = 1;
             Assert.That(table.TitlePrice, Is.EqualTo(1));
         }
+
         [Test]
         public void TestTitleContentGetter_IsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -350,6 +363,7 @@ namespace TestingBeclean
             Title table1 = new Title();
             Assert.That(table.TitleContent, Is.EqualTo(table1.TitleContent));
         }
+
         [Test]
         public void TestTitleContentSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -363,6 +377,7 @@ namespace TestingBeclean
             CardDeck cardDeck = new CardDeck();
             Assert.That(cardDeck.GetDeckSize(), Is.EqualTo(52));
         }
+
         [Test]
         public void TestCardDeck_RemoveCardFromIndex_IsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -378,6 +393,7 @@ namespace TestingBeclean
             Challenge challenge1 = new Challenge();
             Assert.That(challenge.ChallengeID, Is.EqualTo(challenge1.ChallengeID));
         }
+
         [Test]
         public void TestChallengeIDSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -393,6 +409,7 @@ namespace TestingBeclean
             Challenge challenge1 = new Challenge();
             Assert.That(challenge.ChallengeDescription, Is.EqualTo(challenge1.ChallengeDescription));
         }
+
         [Test]
         public void TestChallengeDescriptionSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -400,6 +417,7 @@ namespace TestingBeclean
             challenge.ChallengeDescription = "challengeDescription";
             Assert.That(challenge.ChallengeDescription, Is.EqualTo("challengeDescription"));
         }
+
         [Test]
         public void TestChallengeRuleGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -407,6 +425,7 @@ namespace TestingBeclean
             Challenge challenge1 = new Challenge();
             Assert.That(challenge.ChallengeRule, Is.EqualTo(challenge1.ChallengeRule));
         }
+
         [Test]
         public void TestChallengeRuleSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -414,6 +433,7 @@ namespace TestingBeclean
             challenge.ChallengeRule = "challengeRule";
             Assert.That(challenge.ChallengeRule, Is.EqualTo("challengeRule"));
         }
+
         [Test]
         public void TestChallengeAmountGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -421,6 +441,7 @@ namespace TestingBeclean
             Challenge challenge1 = new Challenge();
             Assert.That(challenge.ChallengeAmount, Is.EqualTo(challenge1.ChallengeAmount));
         }
+
         [Test]
         public void TestChallengeAmountSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -428,6 +449,7 @@ namespace TestingBeclean
             challenge.ChallengeAmount = 1;
             Assert.That(challenge.ChallengeAmount, Is.EqualTo(1));
         }
+
         [Test]
         public void TestChallengeRewardGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -435,6 +457,7 @@ namespace TestingBeclean
             Challenge challenge1 = new Challenge();
             Assert.That(challenge.ChallengeReward, Is.EqualTo(challenge1.ChallengeReward));
         }
+
         [Test]
         public void TestChallengeRewardSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -450,6 +473,7 @@ namespace TestingBeclean
             PlayingCard playingCard1 = new PlayingCard("value", "suit");
             Assert.That(playingCard.Value, Is.EqualTo(playingCard1.Value));
         }
+
         [Test]
         public void TestPlayingCardValueSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {
@@ -457,6 +481,7 @@ namespace TestingBeclean
             playingCard.Value = "value";
             Assert.That(playingCard.Value, Is.EqualTo("value"));
         }
+
         [Test]
         public void TestPlayingCardSuitGetterIsEqualToWhatWasPassedInTheConstructor_True()
         {
@@ -464,6 +489,7 @@ namespace TestingBeclean
             PlayingCard playingCard1 = new PlayingCard("value", "suit");
             Assert.That(playingCard.Suit, Is.EqualTo(playingCard1.Suit));
         }
+
         [Test]
         public void TestPlayingCardSuitSetterSetToADifferentValue_TheGetterIsEqualToThatValue()
         {

@@ -12,7 +12,7 @@ namespace SuperbetBeclean.Services
     {
         private List<MenuWindow> openedUsersWindows;
         private SqlConnection sqlConnection;
-        private DataBaseService dbService;
+        private DataBaseService databaseService;
         private const int FULL = 8;
         private const int EMPTY = 0;
         private const int INACTIVE = 0;
@@ -33,11 +33,11 @@ namespace SuperbetBeclean.Services
         {
             connectionString = "Data Source=DESKTOP-TU0UN2P\\SQLEXPRESS;Initial Catalog=Team42;Integrated Security=true";
             sqlConnection = new SqlConnection(connectionString);
-            dbService = new DataBaseService(new SqlConnection(connectionString));
+            databaseService = new DataBaseService(new SqlConnection(connectionString));
             openedUsersWindows = new List<MenuWindow>();
-            internTable = new TableService(5000, 50, 100, INTERN, dbService);
-            juniorTable = new TableService(50000, 500, 1000, JUNIOR, dbService);
-            seniorTable = new TableService(500000, 5000, 10000, SENIOR, dbService);
+            internTable = new TableService(5000, 50, 100, INTERN, databaseService);
+            juniorTable = new TableService(50000, 500, 1000, JUNIOR, databaseService);
+            seniorTable = new TableService(500000, 5000, 10000, SENIOR, databaseService);
             // chatWindowIntern = new ChatWindow();
             // chatWindowJuniorm = new ChatWindow();
             // chatWindowSenior = new ChatWindow();
@@ -72,11 +72,11 @@ namespace SuperbetBeclean.Services
                     newUser.UserStreak = 1;
                 }
                 newUser.UserChips += newUser.UserStreak * 5000;
-                dbService.UpdateUserChips(newUser.UserID, newUser.UserChips);
-                dbService.UpdateUserStreak(newUser.UserID, newUser.UserStreak);
+                databaseService.UpdateUserChips(newUser.UserID, newUser.UserChips);
+                databaseService.UpdateUserStreak(newUser.UserID, newUser.UserStreak);
                 MessageBox.Show("Congratulations, you got your daily bonus!\n" + "Streak: " + newUser.UserStreak + " Bonus: " + (5000 * newUser.UserStreak).ToString());
             }
-            dbService.UpdateUserLastLogin(newUser.UserID, DateTime.Now);
+            databaseService.UpdateUserLastLogin(newUser.UserID, DateTime.Now);
         }
         private int GetIntFromReader(SqlDataReader reader, string columnName)
         {
@@ -97,7 +97,7 @@ namespace SuperbetBeclean.Services
             string userName = GetStringFromReader(reader, "user_username");
             int currentFont = GetIntFromReader(reader, "user_currentFont");
             int currentTitle = GetIntFromReader(reader, "user_currentTitle");
-            string currentIconPath = reader.IsDBNull(reader.GetOrdinal("user_currentIcon")) ? ConfigurationManager.AppSettings["DEFAULT_ICON_PATH"] : dbService.GetIconPath(reader.GetInt32(reader.GetOrdinal("user_currentIcon")));
+            string currentIconPath = reader.IsDBNull(reader.GetOrdinal("user_currentIcon")) ? ConfigurationManager.AppSettings["DEFAULT_ICON_PATH"] : databaseService.GetIconPath(reader.GetInt32(reader.GetOrdinal("user_currentIcon")));
             int currentTable = GetIntFromReader(reader, "user_currentTable");
             int chips = GetIntFromReader(reader, "user_chips");
             int stack = GetIntFromReader(reader, "user_stack");
@@ -166,9 +166,9 @@ namespace SuperbetBeclean.Services
             seniorTable.DisconnectUser(window);
 
             player.UserChips += player.UserStack;
-            dbService.UpdateUserChips(player.UserID, player.UserChips);
+            databaseService.UpdateUserChips(player.UserID, player.UserChips);
             player.UserStack = EMPTY;
-            dbService.UpdateUserStack(player.UserID, player.UserStack);
+            databaseService.UpdateUserStack(player.UserID, player.UserStack);
         }
         public int JoinInternTable(MenuWindow window)
         {
