@@ -28,6 +28,25 @@ namespace SuperbetBeclean.Services
         private TableService juniorTable;
         private TableService seniorTable;
         private string connectionString;
+
+        private const int INTERN_BUY_IN = 500;
+        private const int JUNIOR_BUY_IN = 5000;
+        private const int SENIOR_BUY_IN = 50000;
+
+        private const int INTERN_SMALL_BLIND = 50;
+        private const int INTERN_BIG_BLIND = 100;
+
+        private const int JUNIOR_SMALL_BLIND = 500;
+        private const int JUNIOR_BIG_BLIND = 1000;
+
+        private const int SENIOR_SMALL_BLIND = 5000;
+        private const int SENIOR_BIG_BLIND = 10000;
+
+        private const int DAILY_LOGIN_STREAK_MULTIPLIER = 5000;
+
+        private const int INITIAL_STREAK = 1;
+        private const int DAYS_BETWEEN_LOGIN_BONUSES = 1;
+
         // Task internTask, juniorTask, seniorTask;
         public MainService()
         {
@@ -35,9 +54,9 @@ namespace SuperbetBeclean.Services
             sqlConnection = new SqlConnection(connectionString);
             databaseService = new DataBaseService(new SqlConnection(connectionString));
             openedUsersWindows = new List<MenuWindow>();
-            internTable = new TableService(5000, 50, 100, INTERN, databaseService);
-            juniorTable = new TableService(50000, 500, 1000, JUNIOR, databaseService);
-            seniorTable = new TableService(500000, 5000, 10000, SENIOR, databaseService);
+            internTable = new TableService(INTERN_BUY_IN, INTERN_SMALL_BLIND, INTERN_BIG_BLIND, INTERN, databaseService);
+            juniorTable = new TableService(JUNIOR_BUY_IN, JUNIOR_SMALL_BLIND, JUNIOR_BIG_BLIND, JUNIOR, databaseService);
+            seniorTable = new TableService(SENIOR_BUY_IN, SENIOR_SMALL_BLIND, SENIOR_BIG_BLIND, SENIOR, databaseService);
             // chatWindowIntern = new ChatWindow();
             // chatWindowJuniorm = new ChatWindow();
             // chatWindowSenior = new ChatWindow();
@@ -63,24 +82,25 @@ namespace SuperbetBeclean.Services
             if (DateTime.Now.Date != newUser.UserLastLogin.Date)
             {
                 var diffDates = DateTime.Now.Date - newUser.UserLastLogin.Date;
-                if (diffDates.Days == 1)
+                if (diffDates.Days == DAYS_BETWEEN_LOGIN_BONUSES)
                 {
                     newUser.UserStreak++;
                 }
                 else
                 {
-                    newUser.UserStreak = 1;
+                    newUser.UserStreak = INITIAL_STREAK;
                 }
-                newUser.UserChips += newUser.UserStreak * 5000;
+                newUser.UserChips += newUser.UserStreak * DAILY_LOGIN_STREAK_MULTIPLIER;
                 databaseService.UpdateUserChips(newUser.UserID, newUser.UserChips);
                 databaseService.UpdateUserStreak(newUser.UserID, newUser.UserStreak);
-                MessageBox.Show("Congratulations, you got your daily bonus!\n" + "Streak: " + newUser.UserStreak + " Bonus: " + (5000 * newUser.UserStreak).ToString());
+                MessageBox.Show("Congratulations, you got your daily bonus!\n" + "Streak: " + newUser.UserStreak + " Bonus: " + (DAILY_LOGIN_STREAK_MULTIPLIER * newUser.UserStreak).ToString());
             }
             databaseService.UpdateUserLastLogin(newUser.UserID, DateTime.Now);
         }
         private int GetIntFromReader(SqlDataReader reader, string columnName)
         {
-            return reader.IsDBNull(reader.GetOrdinal(columnName)) ? 0 : reader.GetInt32(reader.GetOrdinal(columnName));
+            const int DEFAULT_VALUE = 0;
+            return reader.IsDBNull(reader.GetOrdinal(columnName)) ? DEFAULT_VALUE : reader.GetInt32(reader.GetOrdinal(columnName));
         }
         private string GetStringFromReader(SqlDataReader reader, string columnName)
         {
