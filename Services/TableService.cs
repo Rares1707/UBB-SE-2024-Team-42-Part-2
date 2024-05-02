@@ -62,17 +62,12 @@ namespace SuperbetBeclean.Services
             this.databaseService = dbService;
         }
 
-        public PlayingCard GetRandomCardAndRemoveIt()
+        public PlayingCard GenerateCard()
         {
             int index = random.Next(0, deck.GetDeckSize());
             PlayingCard card = deck.GetCardFromIndex(index);
             deck.RemoveCardFromIndex(index);
             return card;
-        }
-
-        public PlayingCard GenerateCard()
-        {
-            return GetRandomCardAndRemoveIt();
         }
 
         private void ReloadPlayerStackWithChips(User player)

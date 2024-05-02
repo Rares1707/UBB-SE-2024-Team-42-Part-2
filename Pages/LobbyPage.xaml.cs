@@ -23,7 +23,7 @@ namespace SuperbetBeclean.Pages
         private DataBaseService dbService;
         private string connectionString;
         private User user;
-        public LobbyPage(Frame mainFrame, MenuWindow menuWindow, MainService service, User u)
+        public LobbyPage(Frame mainFrame, MenuWindow menuWindow, MainService service, User user)
         {
             connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
@@ -33,13 +33,13 @@ namespace SuperbetBeclean.Pages
             this.mainFrame = mainFrame;
             mainWindow = menuWindow;
             this.service = service;
-            user = u;
+            this.user = user;
             PlayerNameTextBox.Text = menuWindow.UserName();
             PlayerLevelTextBox.Text = "Level: " + menuWindow.UserLevel().ToString();
             PlayerChipsTextBox.Text = "Chips: " + menuWindow.UserChips().ToString();
-            if (!string.IsNullOrEmpty(u.UserCurrentIconPath))
+            if (!string.IsNullOrEmpty(user.UserCurrentIconPath))
             {
-                PlayerIconImg.Source = new BitmapImage(new Uri(u.UserCurrentIconPath, UriKind.Absolute));
+                PlayerIconImg.Source = new BitmapImage(new Uri(user.UserCurrentIconPath, UriKind.Absolute));
             }
             InternPlayerCount.Text = this.service.OccupiedIntern().ToString() + "/8";
             JuniorPlayerCount.Text = this.service.OccupiedJunior().ToString() + "/8";

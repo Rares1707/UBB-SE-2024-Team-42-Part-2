@@ -6,7 +6,7 @@ namespace SuperbetBeclean.Models
 {
     internal class ProfileViewModel
     {
-        private IDataBaseService dbService;
+        private IDataBaseService databaseService;
 
         private MenuWindow mainWindow;
         public List<ShopItem> OwnedItems { get; set; }
@@ -15,13 +15,13 @@ namespace SuperbetBeclean.Models
         {
             this.mainWindow = mainWindow;
             OwnedItems = new List<ShopItem>();
-            dbService = new DataBaseService();
+            databaseService = new DataBaseService();
             LoadItems();
         }
 
         private void LoadItems()
         {
-            List<ShopItem> ownedItems = dbService.GetAllUserIconsByUserId(mainWindow.UserId());
+            List<ShopItem> ownedItems = databaseService.GetAllUserIconsByUserId(mainWindow.UserId());
             foreach (var item in ownedItems)
             {
                 item.UserId = mainWindow.UserId();

@@ -28,12 +28,22 @@ namespace SuperbetBeclean.Pages
         private MenuWindow mainWindow;
         private Frame mainFrame;
         private IMainService service;
-        private int timer = 0;
-        private int playerBet = 0;
+
+        private const int TIMER_STARTING_VALUE = 0;
+        private const int TIMER_ENDED_VALUE = -1;
+        private int timer = TIMER_STARTING_VALUE;
+
+        private const int PLAYER_INITIAL_BET = 0;
+        private int playerBet = PLAYER_INITIAL_BET;
+
+        private const int WINDOW_WIDTH = 920;
+        private const int WINDOW_HEIGHT = 720;
+
         private string action = string.Empty;
         private string tableType;
-        private ChatWindow chatWindow;
+        // private ChatWindow chatWindow;
         private IChatService chatService;
+
         public GameTablePage(Frame mainFrame, MenuWindow mainWindow, IMainService service, string tableType)
         {
             InitializeComponent();
@@ -49,6 +59,7 @@ namespace SuperbetBeclean.Pages
             this.tableType = tableType;
             chatService = new ChatService();
         }
+
         public void UpdateChips(User player)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -56,16 +67,18 @@ namespace SuperbetBeclean.Pages
                 PlayerChipsTextBox.Text = player.UserChips.ToString();
             });
         }
+
         private void GameTablePage_Loaded(object sender, RoutedEventArgs e)
         {
             Window window = Window.GetWindow(this);
             if (window != null)
             {
-                window.Width = 920;
-                window.Height = 720;
+                window.Width = WINDOW_WIDTH;
+                window.Height = WINDOW_HEIGHT;
             }
         }
-        private void QuitBttn_Click(object sender, RoutedEventArgs e)
+
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
             chatService.CloseChat(mainWindow);
             mainFrame.NavigationService.GoBack();
@@ -75,7 +88,7 @@ namespace SuperbetBeclean.Pages
 
         public void EndTimer()
         {
-            timer = -1;
+            timer = TIMER_ENDED_VALUE;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 PlayerTimer.Text = string.Empty;
@@ -123,6 +136,7 @@ namespace SuperbetBeclean.Pages
                 playerCard2.Source = new BitmapImage(uri2);
             });
         }
+
         public void ResetPot()
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -131,20 +145,21 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        public void ResetTimer(int minBet, int maxBet)
+        public void ResetTimer(int minimumBet, int maximumBet)
         {
             timer = 20;
             action = string.Empty;
             playerBet = 0;
-            SliderBet.Minimum = Math.Max(0, minBet);
-            MinValueBet.Content = Math.Max(0, minBet).ToString();
+            SliderBet.Minimum = Math.Max(0, minimumBet);
+            MinValueBet.Content = Math.Max(0, minimumBet).ToString();
             SliderBet.Value = SliderBet.Minimum;
             SliderValueBet.Content = MinValueBet.Content;
-            SliderBet.Maximum = maxBet;
-            MaxValueBet.Content = maxBet.ToString();
+            SliderBet.Maximum = maximumBet;
+            MaxValueBet.Content = maximumBet.ToString();
             PlayerTimer.Text = "Time: " + timer.ToString();
             PlayerTimer.Foreground = Brushes.White;
         }
+
         public void DecrementTimer()
         {
             timer--;
@@ -261,11 +276,11 @@ namespace SuperbetBeclean.Pages
             });
         }
 
-        async public Task<int> RunTimer(int minBet, int maxBet)
+        async public Task<int> RunTimer(int minimumBet, int maximumBet)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                ResetTimer(minBet, maxBet);
+                ResetTimer(minimumBet, maximumBet);
             });
             while (timer != 0)
             {
@@ -303,18 +318,18 @@ namespace SuperbetBeclean.Pages
             return playerBet;
         }
 
-        private void CallBtn_Click(object sender, RoutedEventArgs e)
+        private void CallButton_Click(object sender, RoutedEventArgs e)
         {
             action = "Call";
             playerBet = Convert.ToInt32(SliderBet.Minimum);
         }
 
-        private void RaiseBttn_Click(object sender, RoutedEventArgs e)
+        private void RaiseButton_Click(object sender, RoutedEventArgs e)
         {
             action = "Raise";
             playerBet = Convert.ToInt32(SliderBet.Value);
         }
-        private void FoldBttn_Click(object sender, RoutedEventArgs e)
+        private void FoldButton_Click(object sender, RoutedEventArgs e)
         {
             action = "Fold";
             playerBet = -1;
@@ -371,13 +386,13 @@ namespace SuperbetBeclean.Pages
                 });
             }
         }
-        private void ChallengesBttn_Click(object sender, RoutedEventArgs e)
+        private void ChallengesButton_Click(object sender, RoutedEventArgs e)
         {
             ChallengesWindow challengesWindow = new ChallengesWindow();
             challengesWindow.Show();
         }
 
-        private void MsgBttn_Click(object sender, RoutedEventArgs e)
+        private void MessageButton_Click(object sender, RoutedEventArgs e)
         {
             chatService.NewChat(mainWindow, tableType);
         }
