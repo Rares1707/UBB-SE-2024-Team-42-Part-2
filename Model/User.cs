@@ -33,6 +33,7 @@ namespace SuperbetBeclean.Model
         private const int DEFAULT_USER_STATUS = 0;
         private const int DEFAULT_USER_BET = 0;
         private const int DEFAULT_USER_TABLE_PLACE = 0;
+        private const int STARTING_HAND_SIZE = 2;
 
         private PlayingCard[] userCurrentHand;
 
@@ -63,7 +64,7 @@ namespace SuperbetBeclean.Model
             this.userLastLogin = userLastLogin;
             userStatus = DEFAULT_USER_STATUS;
             userBet = DEFAULT_USER_BET;
-            userCurrentHand = new PlayingCard[2];
+            userCurrentHand = new PlayingCard[STARTING_HAND_SIZE];
             userTablePlace = DEFAULT_USER_TABLE_PLACE;
         }
 

@@ -13,7 +13,13 @@ namespace SuperbetBeclean.Model
         private int titlePrice;
         private string titleContent;
 
-        public Title(int titleID = 0, string titleName = "", int titlePrice = 0, string titleContent = "")
+        private const int DEFAULT_TITLE_ID = 0;
+        private const string DEFAULT_TITLE_NAME = "";
+        private const int DEFAULT_TITLE_PRICE = 0;
+        private const string DEFAULT_TITLE_CONTENT = "";
+
+        public Title(int titleID = DEFAULT_TITLE_ID, string titleName = DEFAULT_TITLE_NAME,
+            int titlePrice = DEFAULT_TITLE_PRICE, string titleContent = DEFAULT_TITLE_CONTENT)
         {
             this.titleID = titleID;
             this.titleName = titleName;
