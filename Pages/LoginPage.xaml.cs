@@ -18,14 +18,14 @@ namespace SuperbetBeclean.Pages
             this.mainFrame = mainFrame;
             this.mainWindow = mainWindow;
         }
-        private void OnTextBoxGotFocus(object sender, RoutedEventArgs e)
+        private void OnTextBoxGotFocus(object sender, RoutedEventArgs routedEvent)
         {
             // Clear the text when the TextBox gets focus
             TextBox textBox = sender as TextBox;
             textBox.Text = string.Empty;
         }
 
-        private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
+        private void OnTextBoxLostFocus(object sender, RoutedEventArgs routedEvent)
         {
             // Restore the placeholder text if the TextBox loses focus and is empty
             TextBox textBox = sender as TextBox;
@@ -35,7 +35,7 @@ namespace SuperbetBeclean.Pages
             }
         }
 
-        private void OnClickLoginButton(object sender, RoutedEventArgs e)
+        private void OnClickLoginButton(object sender, RoutedEventArgs routedEvent)
         {
             mainWindow.OpenNewWindow(inputNameLoginFirstPage.Text);
             inputNameLoginFirstPage.Text = string.Empty;

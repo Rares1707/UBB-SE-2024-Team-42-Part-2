@@ -18,7 +18,7 @@ namespace SuperbetBeclean
         private string currentUserName;
         private List<string> requests;
         private SqlConnection sqlConnection;
-        private IDBService dbService;
+        private IDataBaseService databaseService;
         private string connectionString;
         private LobbyPage lobbyPage;
         public string UserName;
@@ -29,17 +29,17 @@ namespace SuperbetBeclean
             connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            dbService = new DBService(new SqlConnection(connectionString)); // Initialize the database service
+            databaseService = new DataBaseService(new SqlConnection(connectionString)); // Initialize the database service
             this.currentUserName = currentUserName;
             this.lobbyPage = lobbyPage;
             // Call a method to load and display requests
             LoadRequests();
-            chipsInRequestPage.Text = dbService.GetChipsByUserId(dbService.GetUserIdByUserName(currentUserName)).ToString();
+            chipsInRequestPage.Text = databaseService.GetChipsByUserId(databaseService.GetUserIdByUserName(currentUserName)).ToString();
         }
 
         private void LoadRequests()
         {
-            requests = dbService.GetAllRequestsByToUserID(dbService.GetUserIdByUserName(currentUserName)); // Get requests from the database
+            requests = databaseService.GetAllRequestsByToUserID(databaseService.GetUserIdByUserName(currentUserName)); // Get requests from the database
             RequestsStackPanel.Children.Clear();
             // Create and add request items dynamically
             foreach (string requestInfo in requests)
@@ -63,66 +63,66 @@ namespace SuperbetBeclean
             }
         }
 
-        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        private void AcceptButton_Click(object sender, RoutedEventArgs routedEvent)
         {
             // Handle accept button click event
         }
 
-        private void DeclineButton_Click(object sender, RoutedEventArgs e)
+        private void DeclineButton_Click(object sender, RoutedEventArgs routedEvent)
         {
             // Handle decline button click event
         }
         // Accept all
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs routedEvent)
         {
-            List<Tuple<int, int>> requests = dbService.GetAllRequestsByToUserIDSimplified(dbService.GetUserIdByUserName(currentUserName));
+            List<Tuple<int, int>> requests = databaseService.GetAllRequestsByToUserIDSimplified(databaseService.GetUserIdByUserName(currentUserName));
 
             foreach (Tuple<int, int> request in requests)
             {
                 int fromUserID = request.Item1;
                 int toUserID = request.Item2;
-                int numberChips = dbService.GetChipsByUserId(fromUserID) + 3000;
-                dbService.UpdateUserChips(fromUserID, dbService.GetChipsByUserId(fromUserID) + 3000);
+                int numberChips = databaseService.GetChipsByUserId(fromUserID) + 3000;
+                databaseService.UpdateUserChips(fromUserID, databaseService.GetChipsByUserId(fromUserID) + 3000);
 
                 foreach (Window window in Application.Current.Windows)
                 {
                     if (window.GetType() == typeof(RequestsWindow))
                     {
                         RequestsWindow requestWindow = (RequestsWindow)window;
-                        if (requestWindow.UserName == dbService.GetUserNameByUserId(fromUserID))
+                        if (requestWindow.UserName == databaseService.GetUserNameByUserId(fromUserID))
                         {
                             // _lobbyPage.PlayerChipsTextBox.Text = _dbService.GetChipsByUserId(fromUserID).ToString();
-                            requestWindow.chipsInRequestPage.Text = dbService.GetChipsByUserId(fromUserID).ToString();
-                            requestWindow.lobbyPage.PlayerChipsTextBox.Text = dbService.GetChipsByUserId(fromUserID).ToString();
+                            requestWindow.chipsInRequestPage.Text = databaseService.GetChipsByUserId(fromUserID).ToString();
+                            requestWindow.lobbyPage.PlayerChipsTextBox.Text = databaseService.GetChipsByUserId(fromUserID).ToString();
                         }
                     }
                 }
             }
-            dbService.DeleteRequestsByUserId(dbService.GetUserIdByUserName(currentUserName));
+            databaseService.DeleteRequestsByUserId(databaseService.GetUserIdByUserName(currentUserName));
             LoadRequests();
         }
         // Decline all
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs routedEvent)
         {
-            dbService.DeleteRequestsByUserId(dbService.GetUserIdByUserName(currentUserName));
+            databaseService.DeleteRequestsByUserId(databaseService.GetUserIdByUserName(currentUserName));
             LoadRequests();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs routedEvent)
         {
-            if (dbService.GetChipsByUserId(dbService.GetUserIdByUserName(currentUserName)) == 0)
+            if (databaseService.GetChipsByUserId(databaseService.GetUserIdByUserName(currentUserName)) == 0)
             {
                 try
                 {
                     string playerToSend = playerToSendRequest.Text;
-                    if (dbService.GetUserIdByUserName(playerToSend) == -1)
+                    if (databaseService.GetUserIdByUserName(playerToSend) == -1)
                     {
                         MessageBox.Show("Can't find the specified player.");
                         return;
                     }
-                    int firstPlayerID = dbService.GetUserIdByUserName(currentUserName);
-                    int secondPlayerID = dbService.GetUserIdByUserName(playerToSend);
-                    dbService.CreateRequest(firstPlayerID, secondPlayerID);
+                    int firstPlayerID = databaseService.GetUserIdByUserName(currentUserName);
+                    int secondPlayerID = databaseService.GetUserIdByUserName(playerToSend);
+                    databaseService.CreateRequest(firstPlayerID, secondPlayerID);
                 }
                 catch
                 {
@@ -135,7 +135,7 @@ namespace SuperbetBeclean
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click_3(object sender, RoutedEventArgs routedEvent)
         {
             this.Close();
         }
