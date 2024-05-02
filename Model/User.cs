@@ -19,10 +19,35 @@ namespace SuperbetBeclean.Model
         private int userBet;
         private int userTablePlace;
         private DateTime userLastLogin;
+        private const int DEFAULT_USER_ID = 0;
+        private const string DEFAULT_USER_NAME = "";
+        private const int DEFAULT_USER_CURRENT_FONT = 0;
+        private const int DEFAULT_USER_CURRENT_TITLE = 0;
+        private const string DEFAULT_USER_CURRENT_ICON_PATH = "";
+        private const int DEFAULT_USER_CURRENT_TABLE = 0;
+        private const int DEFAULT_USER_CHIPS = 0;
+        private const int DEFAULT_USER_STACK = 0;
+        private const int DEFAULT_USER_STREAK = 0;
+        private const int DEFAULT_USER_HANDS_PLAYED = 0;
+        private const int DEFAULT_USER_LEVEL = 0;
+        private const int DEFAULT_USER_STATUS = 0;
+        private const int DEFAULT_USER_BET = 0;
+        private const int DEFAULT_USER_TABLE_PLACE = 0;
 
         private PlayingCard[] userCurrentHand;
 
-        public User(int userID = 0, string userName = "", int userCurrentFont = 0, int userCurrentTitle = 0, string userCurrentIconPath = "", int userCurrentTable = 0, int userChips = 0, int userStack = 0, int userStreak = 0, int userHandsPlayed = 0, int userLevel = 0, DateTime userLastLogin = default(DateTime))
+        public User(int userID = DEFAULT_USER_ID,
+            string userName = DEFAULT_USER_NAME,
+            int userCurrentFont = DEFAULT_USER_CURRENT_FONT,
+            int userCurrentTitle = DEFAULT_USER_CURRENT_TITLE,
+            string userCurrentIconPath = DEFAULT_USER_CURRENT_ICON_PATH,
+            int userCurrentTable = DEFAULT_USER_CURRENT_TABLE,
+            int userChips = DEFAULT_USER_CHIPS,
+            int userStack = DEFAULT_USER_STACK,
+            int userStreak = DEFAULT_USER_STREAK,
+            int userHandsPlayed = DEFAULT_USER_HANDS_PLAYED,
+            int userLevel = DEFAULT_USER_LEVEL,
+            DateTime userLastLogin = default(DateTime))
         {
             this.userID = userID;
             this.userName = userName;
@@ -36,10 +61,10 @@ namespace SuperbetBeclean.Model
             this.userHandsPlayed = userHandsPlayed;
             this.userLevel = userLevel;
             this.userLastLogin = userLastLogin;
-            userStatus = 0;
-            userBet = 0;
+            userStatus = DEFAULT_USER_STATUS;
+            userBet = DEFAULT_USER_BET;
             userCurrentHand = new PlayingCard[2];
-            userTablePlace = 0;
+            userTablePlace = DEFAULT_USER_TABLE_PLACE;
         }
 
         public int UserID

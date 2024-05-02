@@ -14,7 +14,17 @@ namespace SuperbetBeclean.Model
         private int challengeAmount;
         private int challengeReward;
 
-        public Challenge(int challengeID = 0,  string challengeDescription = "", string challengeRule = "", int challengeAmount = 0, int challengeReward = 0)
+        private const int DEFAULT_CHALLENGE_ID = 0;
+        private const string DEFAULT_CHALLENGE_DESCRIPTION = "";
+        private const string DEFAULT_CHALLENGE_RULE = "";
+        private const int DEFAULT_CHALLENGE_AMOUNT = 0;
+        private const int DEFAULT_CHALLENGE_REWARD = 0;
+
+        public Challenge(int challengeID = DEFAULT_CHALLENGE_ID,
+            string challengeDescription = DEFAULT_CHALLENGE_DESCRIPTION,
+            string challengeRule = DEFAULT_CHALLENGE_RULE,
+            int challengeAmount = DEFAULT_CHALLENGE_AMOUNT,
+            int challengeReward = DEFAULT_CHALLENGE_REWARD)
         {
             this.challengeID = challengeID;
             this.challengeDescription = challengeDescription;
