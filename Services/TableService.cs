@@ -33,16 +33,17 @@ namespace SuperbetBeclean.Services
         private int smallBlind;
         private int bigBlind;
         private List<MenuWindow> users;
-        private CardDeck deck; // all the cards that are not in the players hands
+        private CardDeck deck;
         private DataBaseService databaseService;
         private Random random;
         private HandRankCalculator rankCalculator;
 
         private PlayingCard[] communityCards;
         private int[] freeSpace;
-        public TableService(int buyIn, int smallBlind, int bigBlind, string tableType, DataBaseService dbService)
+
+        public TableService(int buyIn, int smallBlind, int bigBlind, string tableType, DataBaseService databaseService)
         {
-            this.databaseService = dbService;
+            this.databaseService = databaseService;
             this.tableType = tableType;
             users = new List<MenuWindow>();
             rankCalculator = new HandRankCalculator();
@@ -59,7 +60,7 @@ namespace SuperbetBeclean.Services
             mutex = new Mutex();
 
             random = new Random();
-            this.databaseService = dbService;
+            this.databaseService = databaseService;
         }
 
         public PlayingCard GetRandomCardAndRemoveIt()
@@ -126,6 +127,7 @@ namespace SuperbetBeclean.Services
                 communityCards[i] = card;
             }
         }
+
         private void StartRoundForAllPlayers(Queue<MenuWindow> activePlayers)
         {
             foreach (MenuWindow currentWindow in activePlayers)
@@ -239,6 +241,7 @@ namespace SuperbetBeclean.Services
                 }
             }
         }
+
         public async void RunTable()
         {
             while (true)
