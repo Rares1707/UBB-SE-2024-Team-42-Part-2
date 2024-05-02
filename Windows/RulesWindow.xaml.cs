@@ -33,7 +33,7 @@ namespace SuperbetBeclean.Windows
             LoadHtmlContent();
         }
 
-        private void CloseButtonRulesWindow_Click(object sender, RoutedEventArgs e)
+        private void CloseButtonRulesWindow_Click(object sender, RoutedEventArgs routedEvent)
         {
             this.Close();
         }

@@ -27,20 +27,20 @@ namespace SuperbetBeclean.Windows
         private IMainService service;
         private Dictionary<string, GameTablePage> gamePages;
 
-        public MenuWindow(User user, MainService serv)
+        public MenuWindow(User user, MainService service)
         {
             InitializeComponent();
-            this.service = serv;
+            this.service = service;
             this.user = user;
             this.Title = this.user.UserName;
-            MenuFrame.Navigate(new MainMenu(MenuFrame, this, serv, this.user));
+            MenuFrame.Navigate(new MainMenu(MenuFrame, this, service, this.user));
             gamePages = new Dictionary<string, GameTablePage>();
-            gamePages.Add("intern", new GameTablePage(MenuFrame, this, service, "intern"));
-            gamePages.Add("junior", new GameTablePage(MenuFrame, this, service, "junior"));
-            gamePages.Add("senior", new GameTablePage(MenuFrame, this, service, "senior"));
+            gamePages.Add("intern", new GameTablePage(MenuFrame, this, this.service, "intern"));
+            gamePages.Add("junior", new GameTablePage(MenuFrame, this, this.service, "junior"));
+            gamePages.Add("senior", new GameTablePage(MenuFrame, this, this.service, "senior"));
             Closed += DisconnectUser;
         }
-        public void DisconnectUser(object sender, System.EventArgs e)
+        public void DisconnectUser(object sender, System.EventArgs systemEvent)
         {
             service.DisconnectUser(this);
         }
