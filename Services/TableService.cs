@@ -34,7 +34,7 @@ namespace SuperbetBeclean.Services
         private int bigBlind;
         private List<MenuWindow> users;
         private CardDeck deck; // all the cards that are not in the players hands
-        private DBService dbService;
+        private DataBaseService databaseService;
         private Random random;
         private HandRankCalculator rankCalculator;
 
@@ -42,7 +42,7 @@ namespace SuperbetBeclean.Services
         private int[] freeSpace;
         public TableService(int buyIn, int smallBlind, int bigBlind, string tableType, DBService dbService)
         {
-            this.dbService = dbService;
+            this.databaseService = dbService;
             this.tableType = tableType;
             users = new List<MenuWindow>();
             rankCalculator = new HandRankCalculator();
@@ -59,7 +59,7 @@ namespace SuperbetBeclean.Services
             mutex = new Mutex();
 
             random = new Random();
-            this.dbService = dbService;
+            this.databaseService = dbService;
         }
 
         public PlayingCard GetRandomCardAndRemoveIt()
@@ -355,7 +355,7 @@ namespace SuperbetBeclean.Services
                             int extraBet = playerBet - player.UserBet;
                             player.UserStack -= extraBet;
                             tablePot += extraBet;
-                            dbService.UpdateUserStack(player.UserID, player.UserStack);
+                            databaseService.UpdateUserStack(player.UserID, player.UserStack);
                             player.UserBet = playerBet;
                             if (playerBet > currentBet)
                             {
@@ -477,10 +477,10 @@ namespace SuperbetBeclean.Services
             }
 
             player.UserChips -= buyIn;
-            dbService.UpdateUserChips(player.UserID, player.UserChips);
+            databaseService.UpdateUserChips(player.UserID, player.UserChips);
 
             player.UserStack = buyIn;
-            dbService.UpdateUserStack(player.UserID, player.UserStack);
+            databaseService.UpdateUserStack(player.UserID, player.UserStack);
 
             player.UserStatus = WAITING;
             for (int i = 1; i <= FULL; i++)
