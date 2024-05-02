@@ -15,6 +15,10 @@ namespace SuperbetBeclean.Services
     public class DataBaseService : IDataBaseService
     {
         private SqlConnection connection;
+        private const int FIRST_USER_RANK = 1;
+        private const int MAXIMUM_VARCHAR_SIZE = -1;
+        private const int DEFAULT_VARCHAR_SIZE = 255;
+        private const int CONVERSION_ERROR_VALUE = -1;
 
         public DataBaseService()
         {
@@ -51,7 +55,7 @@ namespace SuperbetBeclean.Services
             CloseConnection();
         }
 
-        public void UpdateUser(int id, string username, int currentFont, int currentTitle, int currentIcon, int currentTable, int chips, int stack, int streak, int handsPlayed, int level, DateTime lastLogin)
+        public void UpdateUser(int id, string username, int currentFont, int currentTitle, int currentIcon, int currentTable, int chipsCount, int chipStack, int streakCount, int handsPlayed, int level, DateTime lastLogin)
         {
             SqlParameter[] parameters =
             {
@@ -61,9 +65,9 @@ namespace SuperbetBeclean.Services
                 new SqlParameter("@currentTitle", SqlDbType.Int) { Value = currentTitle },
                 new SqlParameter("@currentIcon", SqlDbType.Int) { Value = currentIcon },
                 new SqlParameter("@currentTable", SqlDbType.Int) { Value = currentTable },
-                new SqlParameter("@chips", SqlDbType.Int) { Value = chips },
-                new SqlParameter("@stack", SqlDbType.Int) { Value = stack },
-                new SqlParameter("@streak", SqlDbType.Int) { Value = streak },
+                new SqlParameter("@chips", SqlDbType.Int) { Value = chipsCount },
+                new SqlParameter("@stack", SqlDbType.Int) { Value = chipStack },
+                new SqlParameter("@streak", SqlDbType.Int) { Value = streakCount },
                 new SqlParameter("@handsPlayed", SqlDbType.Int) { Value = handsPlayed },
                 new SqlParameter("@level", SqlDbType.Int) { Value = level },
                 new SqlParameter("@lastLogin", SqlDbType.DateTime) { Value = lastLogin }
@@ -166,8 +170,8 @@ namespace SuperbetBeclean.Services
             SqlParameter[] parameters =
             {
                 new SqlParameter("@challenge_id", SqlDbType.Int) { Value = challengeId },
-                new SqlParameter("@challenge_description", SqlDbType.VarChar, -1) { Value = description },
-                new SqlParameter("@challenge_rule", SqlDbType.VarChar, -1) { Value = rule },
+                new SqlParameter("@challenge_description", SqlDbType.VarChar, MAXIMUM_VARCHAR_SIZE) { Value = description },
+                new SqlParameter("@challenge_rule", SqlDbType.VarChar, MAXIMUM_VARCHAR_SIZE) { Value = rule },
                 new SqlParameter("@challenge_amount", SqlDbType.Int) { Value = amount },
                 new SqlParameter("@challenge_reward", SqlDbType.Int) { Value = reward }
             };
@@ -179,9 +183,9 @@ namespace SuperbetBeclean.Services
             SqlParameter[] parameters =
             {
                 new SqlParameter("@font_id", SqlDbType.Int) { Value = fontId },
-                new SqlParameter("@font_name", SqlDbType.VarChar, 255) { Value = fontName },
+                new SqlParameter("@font_name", SqlDbType.VarChar, DEFAULT_VARCHAR_SIZE) { Value = fontName },
                 new SqlParameter("@font_price", SqlDbType.Int) { Value = fontPrice },
-                new SqlParameter("@font_type", SqlDbType.VarChar, 255) { Value = fontType }
+                new SqlParameter("@font_type", SqlDbType.VarChar, DEFAULT_VARCHAR_SIZE) { Value = fontType }
             };
             ExecuteNonQuery("updateFont", parameters);
         }
@@ -191,9 +195,9 @@ namespace SuperbetBeclean.Services
             SqlParameter[] parameters =
             {
                 new SqlParameter("@icon_id", SqlDbType.Int) { Value = iconId },
-                new SqlParameter("@icon_name", SqlDbType.VarChar, 255) { Value = iconName },
+                new SqlParameter("@icon_name", SqlDbType.VarChar, DEFAULT_VARCHAR_SIZE) { Value = iconName },
                 new SqlParameter("@icon_price", SqlDbType.Int) { Value = iconPrice },
-                new SqlParameter("@icon_path", SqlDbType.VarChar, 255) { Value = iconPath }
+                new SqlParameter("@icon_path", SqlDbType.VarChar, DEFAULT_VARCHAR_SIZE) { Value = iconPath }
             };
             ExecuteNonQuery("updateIcon", parameters);
         }
@@ -203,9 +207,9 @@ namespace SuperbetBeclean.Services
             SqlParameter[] parameters =
             {
                 new SqlParameter("@title_id", SqlDbType.Int) { Value = titleId },
-                new SqlParameter("@title_name", SqlDbType.VarChar, 255) { Value = titleName },
+                new SqlParameter("@title_name", SqlDbType.VarChar, DEFAULT_VARCHAR_SIZE) { Value = titleName },
                 new SqlParameter("@title_price", SqlDbType.Int) { Value = titlePrice },
-                new SqlParameter("@title_content", SqlDbType.VarChar, 255) { Value = titleContent }
+                new SqlParameter("@title_content", SqlDbType.VarChar, DEFAULT_VARCHAR_SIZE) { Value = titleContent }
             };
             ExecuteNonQuery("updateTitle", parameters);
         }
@@ -242,7 +246,7 @@ namespace SuperbetBeclean.Services
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    int rank = 1; // Initialize rank counter
+                    int rank = FIRST_USER_RANK;
                     while (reader.Read())
                     {
                         string username = reader["user_username"] as string;
@@ -328,13 +332,13 @@ namespace SuperbetBeclean.Services
 
         public int GetIconIDByIconName(string iconName)
         {
-            int iconId = -1;
+            int iconId = CONVERSION_ERROR_VALUE;
 
             OpenConnection();
             using (SqlCommand command = new SqlCommand("getIconIDByIconName", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@icon_name", SqlDbType.VarChar, 255) { Value = iconName });
+                command.Parameters.Add(new SqlParameter("@icon_name", SqlDbType.VarChar, DEFAULT_VARCHAR_SIZE) { Value = iconName });
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -460,15 +464,16 @@ namespace SuperbetBeclean.Services
             return username;
         }
 
+        private const int NAME_MAX_LENGTH = 128;
         public int GetUserIdByUserName(string username)
         {
-            int userId = -1;
+            int userId = CONVERSION_ERROR_VALUE;
 
             OpenConnection();
             using (SqlCommand command = new SqlCommand("getUserIdByUserName", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@name", SqlDbType.VarChar, 128) { Value = username });
+                command.Parameters.Add(new SqlParameter("@name", SqlDbType.VarChar, NAME_MAX_LENGTH) { Value = username });
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -483,7 +488,7 @@ namespace SuperbetBeclean.Services
         }
         public int GetChipsByUserId(int userId)
         {
-            int chips = -1;
+            int chips = CONVERSION_ERROR_VALUE;
 
             OpenConnection();
             using (SqlCommand command = new SqlCommand("getChipsByUserId", connection))
