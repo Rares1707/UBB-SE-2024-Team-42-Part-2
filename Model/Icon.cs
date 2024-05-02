@@ -13,6 +13,8 @@ namespace SuperbetBeclean.Model
         private int iconPrice;
         private string iconPath;
 
+
+
         public Icon(int iconID = 0, string iconName = "", int iconPrice = 0, string iconPath = "")
         {
             this.iconID = iconID;
