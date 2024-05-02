@@ -61,9 +61,9 @@ namespace SuperbetBeclean.Windows
             gamePages[table].ResetCards();
         }
 
-        public void NotifyUserCard(string table, User user, int card, string cardValue)
+        public void NotifyUserCard(string table, User u, int card, string cardValue)
         {
-            gamePages[table].AddUserCard(user == this.user, user.UserTablePlace, card, cardValue);
+            gamePages[table].AddUserCard(u == user, u.UserTablePlace, card, cardValue);
         }
 
         public void NotifyTableCard(string table, int card, string cardValue)

@@ -20,53 +20,53 @@ namespace SuperbetBeclean.Pages
         private MenuWindow mainWindow;
         private MainService service;
         private SqlConnection sqlConnection;
-        private DataBaseService databaseService;
+        private DBService dbService;
         private string connectionString;
         private User user;
-        public LobbyPage(Frame mainFrame, MenuWindow menuWindow, MainService service, User user)
+        public LobbyPage(Frame mainFrame, MenuWindow menuWindow, MainService service, User u)
         {
             connectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            databaseService = new DataBaseService(new SqlConnection(connectionString));
+            dbService = new DBService(new SqlConnection(connectionString));
             InitializeComponent();
             this.mainFrame = mainFrame;
             mainWindow = menuWindow;
             this.service = service;
-            this.user = user;
+            user = u;
             PlayerNameTextBox.Text = menuWindow.UserName();
             PlayerLevelTextBox.Text = "Level: " + menuWindow.UserLevel().ToString();
             PlayerChipsTextBox.Text = "Chips: " + menuWindow.UserChips().ToString();
-            if (!string.IsNullOrEmpty(user.UserCurrentIconPath))
+            if (!string.IsNullOrEmpty(u.UserCurrentIconPath))
             {
-                PlayerIconImg.Source = new BitmapImage(new Uri(user.UserCurrentIconPath, UriKind.Absolute));
+                PlayerIconImg.Source = new BitmapImage(new Uri(u.UserCurrentIconPath, UriKind.Absolute));
             }
             InternPlayerCount.Text = this.service.OccupiedIntern().ToString() + "/8";
             JuniorPlayerCount.Text = this.service.OccupiedJunior().ToString() + "/8";
             SeniorPlayerCount.Text = this.service.OccupiedSenior().ToString() + "/8";
         }
 
-        private void ButtonLobbyBack(object sender, System.Windows.RoutedEventArgs routedEvent)
+        private void ButtonLobbyBack(object sender, System.Windows.RoutedEventArgs e)
         {
             mainFrame.NavigationService.GoBack();
         }
 
-        private void OnClickLeaderboardButton(object sender, System.Windows.RoutedEventArgs routedEvent)
+        private void OnClickLeaderboardButton(object sender, System.Windows.RoutedEventArgs e)
         {
-            List<string> leaderBoardStrings;
-            leaderBoardStrings = databaseService.GetLeaderboard();
-            mainFrame.Navigate(new LeaderboardPage(mainFrame, leaderBoardStrings));
+            List<string> strings;
+            strings = dbService.GetLeaderboard();
+            mainFrame.Navigate(new LeaderboardPage(mainFrame, strings));
         }
         public string ReturnUserNameOfLobbyPage()
         {
             return mainWindow.UserName();
         }
-        private void OnShopButtonClick(object sender, RoutedEventArgs routedEvent)
+        private void OnShopButtonClick(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(new ShopPage(mainFrame, mainWindow));
         }
 
-        private void OnClickInternButton(object sender, System.Windows.RoutedEventArgs routedEvent)
+        private void OnClickInternButton(object sender, System.Windows.RoutedEventArgs e)
         {
             int response = service.JoinInternTable(mainWindow);
             if (response == 1)
@@ -83,7 +83,7 @@ namespace SuperbetBeclean.Pages
             }
         }
 
-        private void OnClickJuniorBttn(object sender, System.Windows.RoutedEventArgs routedEvent)
+        private void OnClickJuniorBttn(object sender, System.Windows.RoutedEventArgs e)
         {
             int response = service.JoinJuniorTable(mainWindow);
             if (response == 1)
@@ -100,7 +100,7 @@ namespace SuperbetBeclean.Pages
             }
         }
 
-        private void OnClickSeniorButton(object sender, System.Windows.RoutedEventArgs routedEvent)
+        private void OnClickSeniorButton(object sender, System.Windows.RoutedEventArgs e)
         {
             int response = service.JoinSeniorTable(mainWindow);
             if (response == 1)
@@ -116,12 +116,12 @@ namespace SuperbetBeclean.Pages
                 MessageBox.Show("Sorry, you don't have enough money.");
             }
         }
-        private void PlayerIconImg_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs mouseButtonEvent)
+        private void PlayerIconImg_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             mainFrame.Navigate(new ProfilePage(mainFrame, mainWindow));
         }
 
-        private void ShopBttn_Click(object sender, RoutedEventArgs routedEvent)
+        private void ShopBttn_Click(object sender, RoutedEventArgs e)
         {
             string currentUserName = mainWindow.UserName();
             RequestsWindow requestWindow = new RequestsWindow(currentUserName, this, mainWindow.UserName());

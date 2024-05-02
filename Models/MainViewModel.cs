@@ -16,7 +16,7 @@ namespace SuperbetBeclean.Models
     {
         private int balance;
 
-        private IDataBaseService dbService;
+        private IDBService dbService;
 
         public int Balance
         {
@@ -41,7 +41,7 @@ namespace SuperbetBeclean.Models
         {
             Balance = currentBalance;
             ShopItems = new List<ShopItem>();
-            dbService = new DataBaseService();
+            dbService = new DBService();
             LoadItems(userId);
         }
 

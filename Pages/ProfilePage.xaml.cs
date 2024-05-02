@@ -43,7 +43,7 @@ namespace SuperbetBeclean.Pages
             profilePageLevelTextBlock.Text = mainWindow.UserLevel().ToString() + ": ";
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEvent)
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             mainFrame.NavigationService.GoBack();
         }
