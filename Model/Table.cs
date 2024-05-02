@@ -13,6 +13,10 @@ namespace SuperbetBeclean.Model
         private int tableBuyIn;
         private int tablePlayerLimit;
 
+        public Table()
+        {
+        }
+
         public Table(int tableID, string tableName, int tableBuyIn, int tablePlayerLimit)
         {
             this.tableID = tableID;
