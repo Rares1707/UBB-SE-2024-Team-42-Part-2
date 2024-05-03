@@ -233,6 +233,7 @@ namespace TestingBeclean
             string imagePath = "imagePath";
             string name = "name";
             int price = 1;
+            int expectedIdFromUnInitializedShopItemUserID = 0;
 
             ShopItem shopItem = new ShopItem(id, imagePath, name, price);
 
@@ -240,6 +241,8 @@ namespace TestingBeclean
             Assert.That(shopItem.ImagePath, Is.EqualTo(imagePath));
             Assert.That(shopItem.Name, Is.EqualTo(name));
             Assert.That(shopItem.Price, Is.EqualTo(price));
+            Assert.That(shopItem.Price, Is.EqualTo(price));
+            Assert.That(shopItem.UserId, Is.EqualTo(expectedIdFromUnInitializedShopItemUserID));
         }
 
         [Test]
@@ -248,6 +251,22 @@ namespace TestingBeclean
             Table table = new Table();
             Table table1 = new Table();
             Assert.That(table.TableID, Is.EqualTo(table1.TableID));
+        }
+
+        [Test]
+        public void TestTableConstructor_AreConstructorValuesCorrect_ReturnsTrue()
+        {
+            int tableId = 1;
+            string tableName = "table";
+            int tableBuyIn = 100;
+            int tablePlayerLimit = 10;
+
+            Table table = new Table(tableId, tableName, tableBuyIn, tablePlayerLimit);
+
+            Assert.That(table.TableID, Is.EqualTo(tableId));
+            Assert.That(table.TableName, Is.EqualTo(tableName));
+            Assert.That(table.TableBuyIn, Is.EqualTo(tableBuyIn));
+            Assert.That(table.TablePlayerLimit, Is.EqualTo(tablePlayerLimit));
         }
 
         [Test]
@@ -385,6 +404,22 @@ namespace TestingBeclean
         }
 
         [Test]
+        public void TestCardDeck_GetCardFromIndex_ShowsProperCard_ReturnsTrue()
+        {
+            CardDeck cardDeck = new CardDeck();
+            PlayingCard cardTest = new ("2", "H");
+            PlayingCard cardFromDeck = cardDeck.GetCardFromIndex(0);
+
+            string cardTestValue = cardTest.Value;
+            string cardTestSuit = cardTest.Suit;
+            string cardFromDeckValue = cardFromDeck.Value;
+            string cardFromDeckSuit = cardFromDeck.Suit;
+
+            Assert.That(cardTestValue, Is.EqualTo(cardFromDeckValue));
+            Assert.That(cardTestSuit, Is.EqualTo(cardFromDeckSuit));
+        }
+
+        [Test]
         public void TestChallengeIDGetter_IsEqualToWhatWasPassedInTheConstructor_True()
         {
             Challenge challenge = new Challenge();
@@ -494,6 +529,15 @@ namespace TestingBeclean
             PlayingCard playingCard = new PlayingCard("value", "suit");
             playingCard.Suit = "suit";
             Assert.That(playingCard.Suit, Is.EqualTo("suit"));
+        }
+
+        [Test]
+        public void TestPlayingCard_CompleteInformation_ReturnsTrue()
+        {
+            PlayingCard playingCard = new PlayingCard("10", "H");
+            string completeInformationAboutCard = playingCard.CompleteInformation();
+
+            Assert.That(completeInformationAboutCard, Is.EqualTo("10H"));
         }
 
         [Test]
