@@ -1,4 +1,5 @@
-﻿using SuperbetBeclean.Model;
+﻿using System.Data.SqlClient;
+using SuperbetBeclean.Model;
 using SuperbetBeclean.Windows;
 
 namespace SuperbetBeclean.Services
@@ -14,5 +15,10 @@ namespace SuperbetBeclean.Services
         int JoinInternTable(MenuWindow window);
         int JoinJuniorTable(MenuWindow window);
         int JoinSeniorTable(MenuWindow window);
+        User FetchUser(SqlConnection sqlConnection, string userName);
+        User CreateUserFromReader(SqlDataReader reader);
+        DateTime GetDateFromReader(SqlDataReader reader, string columnName);
+        string GetStringFromReader(SqlDataReader reader, string columnName);
+        int GetIntFromReader(SqlDataReader reader, string columnName);
     }
 }
