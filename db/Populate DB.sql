@@ -10,11 +10,8 @@ VALUES ('Arial', 10, 'Sans-serif'),
 
 -- Icon data
 INSERT INTO Icon (icon_name, icon_price, icon_path)
-VALUES ('demo_avatar', 5, '..assets/demo_avatar.jpg');
+VALUES ('demo_avatar', 5, 'C:\Users\danla\Source\Repos\UBB-SE-2024-Team-42-Part-2\assets\demo_avatar.jpg');
 
-UPDATE Icon
-SET icon_path = 'C:\Users\Rafael\Desktop\UbbWork\HomeWorks\SemestruIV\ISS\lab2\UBB-SE-2024-Team-42-Part-2\assets\demo_avatar.jpg'
-Where icon_name = 'demo_avatar'
 -- Title data
 INSERT INTO Title (title_name, title_price, title_content)
 VALUES ('Beginner', 0, 'Novice Gambler'),
@@ -47,13 +44,15 @@ VALUES ('Win 5 hands in a row', 'Consecutive wins', 5, 100),
 
 -- Users data
 INSERT INTO Users (user_username, user_currentFont, user_currentTitle, user_currentIcon, user_currentTable, user_chips, user_stack, user_streak, user_handsPlayed, user_level, user_lastLogin)
-VALUES ('player1', 1, 1, 1, 1, 1000, 500, 3, 200, 10, '2024-04-28'),
-       ('player2', 2, 2, 1, 2, 500, 250, 1, 50, 5, '2024-04-27'),
-       ('player3', 3, 3, 1, 3, 2000, 1000, 7, 500, 15, '2024-04-26'),
-	   ('player4', 4, 4, 1, 4, 1500, 750, 5, 300, 12, '2024-04-27'),
-       ('player5', 3, 6, 1, 3, 2500, 1250, 10, 700, 20, '2024-04-26'),
-       ('player6', 2, 5, 1, 2, 1800, 900, 6, 400, 15, '2024-04-28'),
-       ('player7', 1, 3, 1, 1, 3000, 1500, 8, 1000, 25, '2024-04-29');
+VALUES ('player1', 1, 1, 1, 1, 100000, 500, 3, 200, 10, '2024-04-28'),
+       ('player2', 2, 2, 1, 2, 50000, 250, 1, 50, 5, '2024-04-27'),
+       ('player3', 3, 3, 1, 3, 20000, 1000, 7, 500, 15, '2024-04-26'),
+	   ('player4', 4, 4, 1, 4, 150000, 750, 5, 300, 12, '2024-04-27'),
+       ('player5', 3, 6, 1, 3, 250000, 1250, 10, 700, 20, '2024-04-26'),
+       ('player6', 2, 5, 1, 2, 180000, 900, 6, 400, 15, '2024-04-28'),
+       ('player7', 1, 3, 1, 1, 30000, 1500, 8, 1000, 25, '2024-04-29'),
+	   ('player8', 1, null, 1, 1, 10, 0, 0, 0 , 1, '2024-04-29'),
+	   ('player9', 1, 1, 1, 1, 0, 0, 0, 0 , 1, null);
 
 -- Request data
 INSERT INTO Request (request_fromUser, request_toUser, request_date)

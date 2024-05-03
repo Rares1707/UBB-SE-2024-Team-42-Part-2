@@ -50,7 +50,7 @@ namespace SuperbetBeclean.Services
         // Task internTask, juniorTask, seniorTask;
         public MainService()
         {
-            connectionString = "Data Source=DESKTOP-2F4KVKB;Initial Catalog=ISSDataBase2;Integrated Security=True";
+            connectionString = "Data Source= DESKTOP-F6HM4JS; Initial Catalog = Team42; Integrated Security = True;";
             sqlConnection = new SqlConnection(connectionString);
             databaseService = new DataBaseService(new SqlConnection(connectionString));
             openedUsersWindows = new List<MenuWindow>();
@@ -97,21 +97,21 @@ namespace SuperbetBeclean.Services
             }
             databaseService.UpdateUserLastLogin(newUser.UserID, DateTime.Now);
         }
-        private int GetIntFromReader(SqlDataReader reader, string columnName)
+        public int GetIntFromReader(SqlDataReader reader, string columnName)
         {
             const int DEFAULT_VALUE = 0;
             return reader.IsDBNull(reader.GetOrdinal(columnName)) ? DEFAULT_VALUE : reader.GetInt32(reader.GetOrdinal(columnName));
         }
-        private string GetStringFromReader(SqlDataReader reader, string columnName)
+        public string GetStringFromReader(SqlDataReader reader, string columnName)
         {
             return reader.IsDBNull(reader.GetOrdinal(columnName)) ? string.Empty : reader.GetString(reader.GetOrdinal(columnName));
         }
-        private DateTime GetDateFromReader(SqlDataReader reader, string columnName)
+        public DateTime GetDateFromReader(SqlDataReader reader, string columnName)
         {
             return reader.IsDBNull(reader.GetOrdinal(columnName)) ? default : reader.GetDateTime(reader.GetOrdinal(columnName));
         }
 
-        private User CreateUserFromReader(SqlDataReader reader)
+        public User CreateUserFromReader(SqlDataReader reader)
         {
             int userID = GetIntFromReader(reader, "user_id");
             string userName = GetStringFromReader(reader, "user_username");
@@ -133,7 +133,7 @@ namespace SuperbetBeclean.Services
             menuWindow.Show();
             openedUsersWindows.Add(menuWindow);
         }
-        private User FetchUser(SqlConnection sqlConnection, string userName)
+        public User FetchUser(SqlConnection sqlConnection, string userName)
         {
             using (SqlCommand command = new SqlCommand("EXEC getUser @username", sqlConnection))
             {
