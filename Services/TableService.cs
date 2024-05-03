@@ -87,7 +87,7 @@ namespace SuperbetBeclean.Services
             return card;
         }
 
-        private async void DealCardsToAllPlayers(Queue<MenuWindow> activePlayers)
+        private async void DealInitialCards(Queue<MenuWindow> activePlayers)
         {
             // deals the first card to all players
             foreach (MenuWindow playerWindow in activePlayers)
@@ -112,6 +112,8 @@ namespace SuperbetBeclean.Services
                 }
                 await Task.Delay(400);
             }
+
+            GenerateAllCardsForTheBoard();
         }
 
         private void GenerateAllCardsForTheBoard()
@@ -236,15 +238,36 @@ namespace SuperbetBeclean.Services
                 }
             }
         }
+        private void PreparePlayersForRound(Queue<MenuWindow> allActivePlayers)
+        {
+            foreach (MenuWindow menuWindow in allActivePlayers)
+            {
+                User player = menuWindow.Player();
+                player.UserStatus = player.UserStack == 0 ? INACTIVE : PLAYING;
+
+                if (player.UserStatus == INACTIVE)
+                {
+                    if (player.UserChips < buyIn)
+                    {
+                        DisconnectUser(menuWindow);
+                    }
+                    else
+                    {
+                        ReloadPlayerStackWithChips(player);
+                        menuWindow.UpdateChips(tableType, player);
+                    }
+                }
+                else
+                {
+                    player.UserBet = 0;
+                }
+            }
+        }
 
         public async void RunTable()
         {
-            while (true)
+            while (!ended)
             {
-                if (ended)
-                {
-                    break;
-                }
                 if (IsEmpty())
                 {
                     await Task.Delay(3000);
@@ -255,26 +278,7 @@ namespace SuperbetBeclean.Services
                 Queue<MenuWindow> allActivePlayers = new Queue<MenuWindow>(users);
                 mutex.ReleaseMutex();
 
-                // get all the users ready
-                foreach (MenuWindow menuWindow in allActivePlayers)
-                {
-                    User player = menuWindow.Player();
-                    player.UserStatus = PLAYING;
-                    player.UserBet = 0;
-                    if (player.UserStack == 0)
-                    {
-                        if (player.UserChips < buyIn)
-                        {
-                            player.UserStatus = INACTIVE;
-                            DisconnectUser(menuWindow);
-                        }
-                        else
-                        {
-                            ReloadPlayerStackWithChips(player);
-                            menuWindow.UpdateChips(tableType, player);
-                        }
-                    }
-                }
+                PreparePlayersForRound(allActivePlayers);
                 StartRoundForAllPlayers(allActivePlayers);
                 ResetCardsForAllPlayers(allActivePlayers);
 
@@ -286,21 +290,18 @@ namespace SuperbetBeclean.Services
                 deck = new CardDeck();
                 await Task.Delay(1000);
 
-                DealCardsToAllPlayers(allActivePlayers);
-                GenerateAllCardsForTheBoard();
+                DealInitialCards(allActivePlayers);
 
                 int tablePot = 0;
                 int numberOfPlayersThatCanBet = allActivePlayers.Count;
-                for (int turn = 0; turn <= 3; turn++)
+                for (int turn = PREFLOP; turn <= RIVER; turn++)
                 {
                     if (allActivePlayers.Count < 2)
                     {
                         break;
                     }
-                    if (turn == PREFLOP)
-                    {
-                    }
-                    else if (turn == FLOP)
+
+                    if (turn == FLOP)
                     {
                         ShowFlopCards(allActivePlayers);
                     }
@@ -312,16 +313,12 @@ namespace SuperbetBeclean.Services
                     {
                         ShowRiverCards(allActivePlayers);
                     }
-                    bool turnEnded = false;
+
                     int currentBet = -1;
                     int idOfPlayerWithMaxBet = -1;
 
-                    while (!turnEnded)
+                    while (numberOfPlayersThatCanBet >= 2)
                     {
-                        if (numberOfPlayersThatCanBet < 2)
-                        {
-                            break;
-                        }
                         MenuWindow currentWindow = allActivePlayers.Peek();
                         User player = currentWindow.Player();
 
@@ -330,17 +327,21 @@ namespace SuperbetBeclean.Services
                             allActivePlayers.Dequeue();
                             continue;
                         }
+
                         if (player.UserID == idOfPlayerWithMaxBet)
                         {
                             break;
                         }
+
                         if (player.UserStack == 0)
                         {
                             numberOfPlayersThatCanBet--;
                             allActivePlayers.Enqueue(allActivePlayers.Dequeue());
                             continue;
                         }
+
                         int playerBet = await currentWindow.StartTime(tableType, Math.Min(currentBet, player.UserStack + player.UserBet), player.UserStack + player.UserBet);
+
                         if (playerBet == -1)
                         {
                             FoldPlayer(player, allActivePlayers);
@@ -355,12 +356,14 @@ namespace SuperbetBeclean.Services
                             tablePot += extraBet;
                             databaseService.UpdateUserStack(player.UserID, player.UserStack);
                             player.UserBet = playerBet;
+
                             if (playerBet > currentBet)
                             {
                                 currentBet = playerBet;
                                 idOfPlayerWithMaxBet = player.UserID;
                             }
                         }
+
                         NotifyBetChangesToAllPlayers(allActivePlayers, player, tablePot);
                     }
                     EndTurnOfAllPlayers(allActivePlayers);
