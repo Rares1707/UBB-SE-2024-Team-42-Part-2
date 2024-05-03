@@ -49,11 +49,11 @@ namespace TestingBeclean
             Assert.That(this.icon.IconID, Is.EqualTo(this.icon1.IconID));
         }
 
-        [Test]
-        public void TestIconSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase(1)]
+        public void TestIconSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(int newId)
         {
-            this.icon.IconID = 1;
-            Assert.That(this.icon.IconID, Is.EqualTo(1));
+            this.icon.IconID = newId;
+            Assert.That(this.icon.IconID, Is.EqualTo(newId));
         }
 
         [Test]
@@ -62,11 +62,11 @@ namespace TestingBeclean
             Assert.That(this.icon.IconName, Is.EqualTo(this.icon1.IconName));
         }
 
-        [Test]
-        public void TestIconNameSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase("icon1")]
+        public void TestIconNameSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(string iconName)
         {
-            this.icon.IconName = "icon1";
-            Assert.That(this.icon.IconName, Is.EqualTo("icon1"));
+            this.icon.IconName = iconName;
+            Assert.That(this.icon.IconName, Is.EqualTo(iconName));
         }
 
         [Test]
@@ -75,11 +75,11 @@ namespace TestingBeclean
             Assert.That(this.icon.IconPrice, Is.EqualTo(this.icon1.IconPrice));
         }
 
-        [Test]
-        public void TestIconPriceSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase(1)]
+        public void TestIconPriceSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(int newPrice)
         {
-            this.icon.IconPrice = 1;
-            Assert.That(this.icon.IconPrice, Is.EqualTo(1));
+            this.icon.IconPrice = newPrice;
+            Assert.That(this.icon.IconPrice, Is.EqualTo(newPrice));
         }
 
         [Test]
@@ -88,11 +88,11 @@ namespace TestingBeclean
             Assert.That(this.icon.IconPath, Is.EqualTo(this.icon1.IconPath));
         }
 
-        [Test]
-        public void TestIconPathSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase("iconPath")]
+        public void TestIconPathSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(string newPath)
         {
-            this.icon.IconPath = "iconPath";
-            Assert.That(this.icon.IconPath, Is.EqualTo("iconPath"));
+            this.icon.IconPath = newPath;
+            Assert.That(this.icon.IconPath, Is.EqualTo(newPath));
         }
 
         [Test]
@@ -101,11 +101,11 @@ namespace TestingBeclean
             Assert.That(this.font.FontID, Is.EqualTo(this.font1.FontID));
         }
 
-        [Test]
-        public void TestFontSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase(1)]
+        public void TestFontSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(int newFontId)
         {
-            this.font.FontID = 1;
-            Assert.That(this.font.FontID, Is.EqualTo(1));
+            this.font.FontID = newFontId;
+            Assert.That(this.font.FontID, Is.EqualTo(newFontId));
         }
 
         [Test]
@@ -114,11 +114,11 @@ namespace TestingBeclean
             Assert.That(this.font.FontName, Is.EqualTo(this.font1.FontName));
         }
 
-        [Test]
-        public void TestFontNameSetter_IsEqualToWhatWasPassedInTheConstructor_True()
+        [TestCase("font1")]
+        public void TestFontNameSetter_IsEqualToWhatWasPassedInTheConstructor_True(string newFontName)
         {
-            this.font.FontName = "font1";
-            Assert.That(this.font.FontName, Is.EqualTo("font1"));
+            this.font.FontName = newFontName;
+            Assert.That(this.font.FontName, Is.EqualTo(newFontName));
         }
 
         [Test]
@@ -127,11 +127,11 @@ namespace TestingBeclean
             Assert.That(this.font.FontPrice, Is.EqualTo(this.font1.FontPrice));
         }
 
-        [Test]
-        public void TestFontPriceSetter_IsEqualToWhatWasPassedInTheConstructor_True()
+        [TestCase(1)]
+        public void TestFontPriceSetter_IsEqualToWhatWasPassedInTheConstructor_True(int newFontPrice)
         {
-            this.font.FontPrice = 1;
-            Assert.That(this.font.FontPrice, Is.EqualTo(1));
+            this.font.FontPrice = newFontPrice;
+            Assert.That(this.font.FontPrice, Is.EqualTo(newFontPrice));
         }
 
         [Test]
@@ -140,11 +140,11 @@ namespace TestingBeclean
             Assert.That(this.font.FontType, Is.EqualTo(this.font1.FontType));
         }
 
-        [Test]
-        public void TestFontTypeSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase("fontType")]
+        public void TestFontTypeSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(string newFontType)
         {
-            this.font.FontType = "fontType";
-            Assert.That(this.font.FontType, Is.EqualTo("fontType"));
+            this.font.FontType = newFontType;
+            Assert.That(this.font.FontType, Is.EqualTo(newFontType));
         }
 
         [Test]
@@ -153,11 +153,11 @@ namespace TestingBeclean
             Assert.That(this.challenge.ChallengeID, Is.EqualTo(this.challenge1.ChallengeID));
         }
 
-        [Test]
-        public void TestChallengeSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase(1)]
+        public void TestChallengeSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(int newChallengeId)
         {
-            this.challenge.ChallengeID = 1;
-            Assert.That(this.challenge.ChallengeID, Is.EqualTo(1));
+            this.challenge.ChallengeID = newChallengeId;
+            Assert.That(this.challenge.ChallengeID, Is.EqualTo(newChallengeId));
         }
 
         [Test]
@@ -166,12 +166,11 @@ namespace TestingBeclean
             Assert.That(this.challenge.ChallengeDescription, Is.EqualTo(this.challenge1.ChallengeDescription));
         }
 
-        [Test]
-
-        public void TestChallengeDescriptionSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase("challenge1")]
+        public void TestChallengeDescriptionSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(string newChallengeDesc)
         {
-            this.challenge.ChallengeDescription = "challenge1";
-            Assert.That(this.challenge.ChallengeDescription, Is.EqualTo("challenge1"));
+            this.challenge.ChallengeDescription = newChallengeDesc;
+            Assert.That(this.challenge.ChallengeDescription, Is.EqualTo(newChallengeDesc));
         }
 
         [Test]
@@ -180,11 +179,11 @@ namespace TestingBeclean
             Assert.That(this.challenge.ChallengeRule, Is.EqualTo(this.challenge1.ChallengeRule));
         }
 
-        [Test]
-        public void TestChallengeRuleSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase("challengeRule")]
+        public void TestChallengeRuleSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(string newChallengeRule)
         {
-            this.challenge.ChallengeRule = "challengeRule";
-            Assert.That(this.challenge.ChallengeRule, Is.EqualTo("challengeRule"));
+            this.challenge.ChallengeRule = newChallengeRule;
+            Assert.That(this.challenge.ChallengeRule, Is.EqualTo(newChallengeRule));
         }
 
         [Test]
@@ -193,11 +192,11 @@ namespace TestingBeclean
             Assert.That(this.challenge.ChallengeAmount, Is.EqualTo(this.challenge1.ChallengeAmount));
         }
 
-        [Test]
-        public void TestChallengeAmountSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase(1)]
+        public void TestChallengeAmountSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(int newChallengeAmmount)
         {
-            this.challenge.ChallengeAmount = 1;
-            Assert.That(this.challenge.ChallengeAmount, Is.EqualTo(1));
+            this.challenge.ChallengeAmount = newChallengeAmmount;
+            Assert.That(this.challenge.ChallengeAmount, Is.EqualTo(newChallengeAmmount));
         }
 
         [Test]
@@ -206,30 +205,23 @@ namespace TestingBeclean
             Assert.That(this.challenge.ChallengeReward, Is.EqualTo(this.challenge1.ChallengeReward));
         }
 
-        [Test]
-        public void TestChallengeRewardSetter_SetToADifferentValue_TheGetterIsEqualToThatValue()
+        [TestCase(1)]
+        public void TestChallengeRewardSetter_SetToADifferentValue_TheGetterIsEqualToThatValue(int newChallengeReward)
         {
-            this.challenge.ChallengeReward = 1;
-            Assert.That(this.challenge.ChallengeReward, Is.EqualTo(1));
+            this.challenge.ChallengeReward = newChallengeReward;
+            Assert.That(this.challenge.ChallengeReward, Is.EqualTo(newChallengeReward));
         }
 
-        [Test]
-        public void TestShopItem_IsEqualToWhatWasPassedInTheConstructor_True()
+        [TestCase(1, "imagePath", "name", 1, 0)]
+        public void TestShopItem_IsEqualToWhatWasPassedInTheConstructor_True(int newId, string newImagePath, string newName, int newPrice, int expectedId)
         {
-            int id = 1;
-            string imagePath = "imagePath";
-            string name = "name";
-            int price = 1;
-            int expectedIdFromUnInitializedShopItemUserID = 0;
+            ShopItem shopItem = new ShopItem(newId, newImagePath, newName, newPrice);
 
-            ShopItem shopItem = new ShopItem(id, imagePath, name, price);
-
-            Assert.That(shopItem.Id, Is.EqualTo(id));
-            Assert.That(shopItem.ImagePath, Is.EqualTo(imagePath));
-            Assert.That(shopItem.Name, Is.EqualTo(name));
-            Assert.That(shopItem.Price, Is.EqualTo(price));
-            Assert.That(shopItem.Price, Is.EqualTo(price));
-            Assert.That(shopItem.UserId, Is.EqualTo(expectedIdFromUnInitializedShopItemUserID));
+            Assert.That(shopItem.Id, Is.EqualTo(newId));
+            Assert.That(shopItem.ImagePath, Is.EqualTo(newImagePath));
+            Assert.That(shopItem.Name, Is.EqualTo(newName));
+            Assert.That(shopItem.Price, Is.EqualTo(newPrice));
+            Assert.That(shopItem.UserId, Is.EqualTo(expectedId));
         }
 
         [Test]
